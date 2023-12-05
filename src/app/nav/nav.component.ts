@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
+
 
 @Component({
   selector: 'app-nav',
@@ -7,5 +10,9 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
-  openLoginWindow(){}
+  constructor(private dialogRef:MatDialog) {}
+
+  openDialog(){
+    this.dialogRef.open(LoginComponent);
+  }
 }
