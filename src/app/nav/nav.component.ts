@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { SignUpComponent } from '../sign-up/sign-up.component';
 
 
 @Component({
@@ -12,7 +13,11 @@ export class NavComponent {
 
   constructor(private dialogRef:MatDialog) {}
 
-  openDialog(){
+  openLoginDialog(){
     this.dialogRef.open(LoginComponent);
+  }
+
+  openRegDialog(){
+    this.dialogRef.open(SignUpComponent);
   }
 }
