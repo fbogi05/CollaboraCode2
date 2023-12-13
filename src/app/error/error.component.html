@@ -1,18 +1,18 @@
 <div class="flex h-screen items-center justify-center">
   <div
-    class="bg-slate-200 border-r-4 h-fit py-6 px-8 rounded-xl shadow-xl shadow-gray-300"
+    class="bg-slate-200 border-r-4 h-full w-full sm:h-fit sm:w-fit py-6 px-8 rounded-xl shadow-xl shadow-gray-300"
   >
     <h1 class="text-center mb-2 text-lg font-semibold">
       Az oldal amit keresel nem található!
     </h1>
-    <h2 class="text-gray-600">
+    <h2 class="text-gray-600 text-center sm:text-left">
       Az oldal {{ redirectionTime }}mp múlva automatikusan átirányít a
       kezdőlapra.
     </h2>
-    <h2 class="mb-2 text-gray-600">
+    <h2 class="mb-2 text-gray-600 text-center sm:text-left">
       Ha ez mégsem történne meg, kattints az alábbi linkre:
     </h2>
-    <a routerLink="/home" class="text-blue-500 font-medium hover:underline"
+    <a routerLink="/home" class="block text-blue-500 text-center sm:text-left font-medium hover:underline"
       >Vissza a kezdőlapra</a
     >
   </div>

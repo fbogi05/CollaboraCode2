@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./error.component.css'],
 })
 export class ErrorComponent {
-  redirectionTime = 9;
+  redirectionTime = 5;
 
   constructor(private router: Router) {
-    this.redirectAfter();
+    this.redirect();
   }
 
-  redirectAfter() {
+  redirect() {
     let interval = setInterval(() => {
       this.redirectionTime--;
       if (this.redirectionTime === 0) {
