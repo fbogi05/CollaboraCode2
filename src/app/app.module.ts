@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HomeAfterComponent } from './home-after/home-after.component';
+import { FooterComponent } from './footer/footer.component';
+import { HomeBeforeComponent } from './home-before/home-before.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     SignUpComponent,
     LoginComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    HomeAfterComponent,
+    FooterComponent,
+    HomeBeforeComponent
   ],
   imports: [
     BrowserModule,
