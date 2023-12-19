@@ -10,3 +10,8 @@ body, html {
   .hatter{
     background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
   }
+
+  .grafika{
+    width: 900px;
+    margin: 0 auto;
+  }
