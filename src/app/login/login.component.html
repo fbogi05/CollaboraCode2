@@ -1,11 +1,42 @@
-<form action="return false">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name="username">
+<form
+  class="from-blue-800 to-sky-300 bg-gradient-to-br min-h-screen flex flex-col items-center justify-evenly"
+>
+  <h1 class="text-xl text-center text-white my-4">
+    Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
+  </h1>
+  <div class="flex flex-col gap-4">
+    <div class="form-group flex flex-col">
+      <label for="username" class="text-white">Felhasználónév</label>
+      <input
+        type="text"
+        class="form-control rounded-sm pl-2"
+        id="username"
+        name="username"
+      />
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
+    <div class="form-group flex flex-col">
+      <label for="password" class="text-white">Jelszó</label>
+      <input
+        type="password"
+        class="form-control rounded-sm pl-2"
+        id="password"
+        name="password"
+      />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button
+      type="button"
+      class="flex self-center from-blue-700 to-sky-500 bg-gradient-to-br text-white w-fit py-2 px-4 rounded-lg"
+      (click)="login()"
+    >
+      Bejelentkezés
+    </button>
+  </div>
+  <div class="text-center flex flex-col items-center bg-white bg-opacity-70 text-blue-700 rounded-md px-2 py-4 font-semibold my-4">
+    <p class="px-2 rounded-md">
+      Még nem vagy felhasználó?
+    </p>
+    <p class="w-fitpx-2 rounded-b-md pb-1">
+      Itt tudsz <a routerLink="/register" class="underline">regisztrálni</a>.
+    </p>
+  </div>
 </form>
