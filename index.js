@@ -7,7 +7,7 @@ const multer = require("multer");
 var app = Express();
 app.use(cors());
 
-var CONNECTION_STRING = "mongodb+srv://nagybertalazar:2002Ra11za16l@cluster.d4bejds.mongodb.net/?retryWrites=true&w=majority";
+var CONNECTION_STRING = "mongodb+srv://nagybertalazar:colaboracode@cluster.d4bejds.mongodb.net/?retryWrites=true&w=majority";
 var DATABASE_NAME = "CC";
 var database;
 
