@@ -12,6 +12,7 @@ import { HomeAfterComponent } from './home-after/home-after.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeBeforeComponent } from './home-before/home-before.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavComponent,
     HomeAfterComponent,
     FooterComponent,
-    HomeBeforeComponent
+    HomeBeforeComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
