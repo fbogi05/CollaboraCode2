@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HomeAfterComponent } from './home-after/home-after.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeBeforeComponent } from './home-before/home-before.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomeBeforeComponent } from './home-before/home-before.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

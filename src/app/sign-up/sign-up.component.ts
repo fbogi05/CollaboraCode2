@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../shared/auth-service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class SignUpComponent {
 
+
+  constructor() {}
 }

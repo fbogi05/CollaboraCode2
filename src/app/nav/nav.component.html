@@ -1,7 +1,7 @@
-<div class="p-6 shadow-2xl w-full">
+<div class="p-6 shadow-2xl w-full navi">
   <ul class="flex flex-row justify-between">
     <li>
-      <a href="/home">
+      <a>
         <img src="../../assets/Logo-Dark.svg" alt="CollaboraCode Logo" [width]="70">
       </a>
     </li>
@@ -9,8 +9,8 @@
       <img class="ml-4" src="../../assets/LogoType-Dark.svg" alt="CollaboraCode" [width]="300">
     </li>
     <li class="mr-6">
-      <button (click)="openLoginDialog()" class="text-white hover:text-sky-600 font-medium mr-8">Belépés</button>
-      <button (click)="openRegDialog()" class="text-white hover:text-sky-600 font-medium">Regisztráció</button>
+      <button class="text-white hover:text-sky-600 font-medium mr-8" routerLink="/login">Belépés</button>
+      <button class="text-white hover:text-sky-600 font-medium" routerLink="/sign-up">Regisztráció</button>
     </li>
   </ul>
 </div>
