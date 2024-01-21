@@ -7,15 +7,17 @@ import { HomeComponent } from './home/home.component';
 import { HomeAfterComponent } from './home-after/home-after.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { EditorComponent } from './editor/editor.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"nav", component:NavComponent},
   {path:"sign-up", component:SignUpComponent},
-  {path:"", component:HomeComponent},
   {path:"home", component:HomeAfterComponent},
   {path:"profil", component:ProfilComponent},
-  {path:"projects", component:ProjectsComponent}
+  {path:"projects", component:ProjectsComponent},
+  {path:"editor", component:EditorComponent},
+  {path:"", component:HomeComponent}
 ];
 
 @NgModule({

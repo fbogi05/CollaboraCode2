@@ -18,13 +18,9 @@ body, html {
     margin: 0 auto;
 }
 
-form{
-    margin: 0 auto;
+.test{
     width: 100%;
-}
-
-.ment{
-    margin-bottom: 269px;
+    height: 764px;
 }
 
 .foot{
