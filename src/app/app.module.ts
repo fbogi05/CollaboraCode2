@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProfilComponent } from './profil/profil.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EditorComponent } from './editor/editor.component';
+import { AddPeopleComponent } from './add-people/add-people.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditorComponent } from './editor/editor.component';
     HomeBeforeComponent,
     ProfilComponent,
     ProjectsComponent,
-    EditorComponent
+    EditorComponent,
+    AddPeopleComponent
   ],
   imports: [
     BrowserModule,

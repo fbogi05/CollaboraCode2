@@ -8,6 +8,7 @@ import { HomeAfterComponent } from './home-after/home-after.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { EditorComponent } from './editor/editor.component';
+import { AddPeopleComponent } from './add-people/add-people.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:"profil", component:ProfilComponent},
   {path:"projects", component:ProjectsComponent},
   {path:"editor", component:EditorComponent},
+  {path:"add-people", component:AddPeopleComponent},
   {path:"", component:HomeComponent}
 ];
 
