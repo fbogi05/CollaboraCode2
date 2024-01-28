@@ -1,29 +1,101 @@
+const Express = require("express");
+const MongoClient = require("mongodb").MongoClient;
+const cors = require("cors");
 
-var Express = require("express");
-var MongoClient = require("mongodb").MongoClient;
-var cors = require("cors");
-const multer = require("multer");
-
-var app = Express();
+const app = Express();
 app.use(cors());
 
-var CONNECTION_STRING = "mongodb+srv://nagybertalazar:colaboracode@cluster.d4bejds.mongodb.net/?retryWrites=true&w=majority";
-var DATABASE_NAME = "CC";
-var database;
+const uri = "mongodb+srv://nagybertalazar:almafa123@cluster.d4bejds.mongodb.net/?retryWrites=true&w=majority";
+const databaseName = "CC";
+let database;
 
-app.listen(5040, () => {
-    MongoClient.connect(CONNECTION_STRING, (error, client) => {
-        if (error) {
-            console.error("Mongo DB Connection Error:", error);
-        } else {
-            database = client.db(DATABASE_NAME);
-            console.log("Mongo DB Connection Successful :)");
-        }
+const connectToMongoDB = async () => {
+  try {
+    const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    const db = client.db(databaseName);
+    console.log('Sikeres csatlakozás :)');
+    return { client, db };
+  } catch (error) {
+    console.error(':c', error);
+    throw error;
+  }
+};
+
+const closeMongoDBConnection = (client) => {
+  if (client) {
+    client.close();
+    console.log('MongoDB connection closed');
+  }
+};
+
+const getFelhasznalok = async (db) => {
+  try {
+    const felhasznalokCollection = db.collection('felhasznalok');
+    const felhasznalok = await felhasznalokCollection.find({}).toArray();
+    return felhasznalok;
+  } catch (error) {
+    console.error('Hiba felhasznalok', error);
+    throw error;
+  }
+};
+
+
+const getKodok = async (db) => {
+  try {
+    const kodokCollection = db.collection('kodok');
+    const kodok = await kodokCollection.find({}).toArray();
+    return kodok;
+  } catch (error) {
+    console.error('Hiba kodok', error);
+    throw error;
+  }
+};
+
+
+const getProjektek = async (db) => {
+  try {
+    const projektekCollection = db.collection('projektek');
+    const projektek = await projektekCollection.find({}).toArray();
+    return projektek;
+  } catch (error) {
+    console.error('Hiba projektek', error);
+    throw error;
+  }
+};
+
+app.listen(5040, async () => {
+  try {
+    
+    const { client, db } = await connectToMongoDB();
+    database = db;
+    console.log("MongoDB kapcsolat létrehozva és az alkalmazás elindult.");
+
+    
+    app.get('/api/CC/GetAllData', async (request, response) => {
+      try {
+        const felhasznalok = await getFelhasznalok(database);
+        const kodok = await getKodok(database);
+        const projektek = await getProjektek(database);
+
+        const allData = {
+          felhasznalok: felhasznalok,
+          kodok: kodok,
+          projektek: projektek
+        };
+
+        response.send(allData);
+      } catch (error) {
+        console.error('Hiba a /api/CC/GetAllData útvonalon:', error);
+        response.status(500).send('Internal Server Error');
+      }
     });
+  } catch (error) {
+    console.error('Hiba az alkalmazás indításakor:', error);
+  }
 });
 
-app.get('/api/CC/GetNotes',(request,response)=>{
-    database.collection("felhasznalok").find=({}).toArray((error,result)=>{
-        response.send(result);
-    });
-})
+
+process.on('SIGINT', () => {
+  closeMongoDBConnection(database);
+  process.exit();
+});
