@@ -42,7 +42,7 @@ testem.log
 Thumbs.db
 
 # Web
-/www
+www
 
 # Android
-/android
+android
