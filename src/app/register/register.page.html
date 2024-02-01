@@ -1,0 +1,91 @@
+<ion-content [fullscreen]="true">
+  <form
+    class="from-blue-700 to-sky-500 bg-gradient-to-br min-h-full flex flex-col items-center justify-evenly"
+  >
+    <h1 class="text-xl text-center text-white my-4">Regisztráció</h1>
+    <div class="flex flex-col gap-4">
+      <div class="form-group flex flex-col gap-3">
+        <label for="firstname" class="text-white">Keresztnév</label>
+        <input
+          type="text"
+          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          id="firstname"
+          name="firstname"
+          autocomplete="given-name"
+        />
+      </div>
+      <div class="form-group flex flex-col gap-3">
+        <label for="lastname" class="text-white">Vezetéknév</label>
+        <input
+          type="text"
+          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          id="lastname"
+          name="lastname"
+          autocomplete="family-name"
+        />
+      </div>
+      <div class="form-group flex flex-col gap-3">
+        <label for="email" class="text-white">Email cím</label>
+        <input
+          type="email"
+          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          id="email"
+          name="email"
+          autocomplete="email"
+        />
+      </div>
+      <div class="form-group flex flex-col gap-3">
+        <label for="password" class="text-white">Jelszó</label>
+        <div class="relative flex gap-4">
+          <input
+            [type]="getFieldState('password')"
+            class="form-control rounded-full pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            id="password"
+            name="password"
+            autocomplete="new-password"
+          />
+          <button
+            type="button"
+            class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center"
+            (click)="changeVisibility('password')"
+          >
+            <img [src]="fieldData.password.icon" class="dark:invert" />
+          </button>
+        </div>
+        <div class="form-group flex flex-col gap-3">
+          <label for="password-again" class="text-white">Jelszó újra</label>
+          <div class="relative flex gap-4">
+            <input
+              [type]="getFieldState('passwordAgain')"
+              class="form-control rounded-full pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+              id="password-again"
+              name="password-again"
+              autocomplete="new-password"
+            />
+            <button
+              type="button"
+              class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center"
+              (click)="changeVisibility('passwordAgain')"
+            >
+              <img [src]="fieldData.passwordAgain.icon" class="dark:invert" />
+            </button>
+          </div>
+        </div>
+        <input
+          value="Regisztráció"
+          type="submit"
+          class="flex self-center bg-blue-700 shadow-sky-700 bg-opacity-80 shadow-lg text-white w-fit py-2 px-4 mt-2 rounded-lg"
+          (click)="register()"
+        >
+      </div>
+      <div
+        class="text-center flex flex-col items-center text-white font-semibold my-4"
+      >
+        <p class="px-2 rounded-md">Már felhasználó?</p>
+        <p class="w-fitpx-2 rounded-b-md pb-1">
+          Itt tud <a routerLink="/login" class="underline">bejelentkezni</a>.
+        </p>
+      </div>
+    </div>
+  </form>
+</ion-content>
