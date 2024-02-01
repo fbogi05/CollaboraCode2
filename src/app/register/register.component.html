@@ -1,0 +1,112 @@
+<form
+  class="from-blue-700 to-sky-500 bg-gradient-to-br min-h-screen flex flex-col items-center justify-evenly"
+>
+  <h1 class="text-xl text-center text-white my-4">Regisztráció</h1>
+  <div class="flex flex-col gap-4">
+    <div class="form-group flex flex-col">
+      <label for="username" class="text-white">Felhasználónév</label>
+      <input
+        type="text"
+        class="form-control rounded-sm pl-2"
+        id="username"
+        name="username"
+      />
+    </div>
+    <div class="form-group flex flex-col">
+      <label for="email" class="text-white">Email cím</label>
+      <input
+        type="email"
+        class="form-control rounded-sm pl-2"
+        id="email"
+        name="email"
+      />
+    </div>
+    <div class="form-group flex flex-col">
+      <label for="password" class="text-white">Jelszó</label>
+      <span class="flex flex-row gap-2">
+        <input
+          type="password"
+          class="form-control rounded-sm pl-2"
+          id="password"
+          name="password"
+        />
+        <button
+          type="button"
+          class="bg-white rounded-md w-6 flex justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            data-slot="icon"
+            class="w-5 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
+      </span>
+    </div>
+    <div class="form-group flex flex-col">
+      <label for="password-again" class="text-white">Jelszó újra</label>
+      <span class="flex flex-row gap-2">
+        <input
+          type="password"
+          class="form-control rounded-sm pl-2"
+          id="password-again"
+          name="password-again"
+        />
+        <button
+          type="button"
+          class="bg-white rounded-md w-6 flex justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            data-slot="icon"
+            class="w-5 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </button>
+      </span>
+    </div>
+    <button
+      type="button"
+      class="flex self-center from-blue-700 to-sky-500 shadow-blue-500 shadow-lg bg-gradient-to-br text-white w-fit py-2 px-4 rounded-lg"
+      (click)="register()"
+    >
+      Regisztráció
+    </button>
+  </div>
+  <div
+    class="text-center flex flex-col items-center text-white font-semibold my-4"
+  >
+    <p class="px-2 rounded-md">Már felhasználó vagy?</p>
+    <p class="w-fitpx-2 rounded-b-md pb-1">
+      Itt tudsz <a routerLink="/login" class="underline">bejelentkezni</a>.
+    </p>
+  </div>
+</form>

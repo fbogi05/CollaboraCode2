@@ -1,0 +1,42 @@
+<form
+  class="from-blue-700 to-sky-500 bg-gradient-to-br min-h-screen flex flex-col items-center justify-evenly"
+>
+  <h1 class="text-xl text-center text-white my-4">
+    Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
+  </h1>
+  <div class="flex flex-col gap-4">
+    <div class="form-group flex flex-col">
+      <label for="username" class="text-white">Felhasználónév</label>
+      <input
+        type="text"
+        class="form-control rounded-sm pl-2"
+        id="username"
+        name="username"
+      />
+    </div>
+    <div class="form-group flex flex-col">
+      <label for="password" class="text-white">Jelszó</label>
+      <input
+        type="password"
+        class="form-control rounded-sm pl-2"
+        id="password"
+        name="password"
+      />
+    </div>
+    <button
+      type="button"
+      class="flex self-center from-blue-700 to-sky-500 bg-gradient-to-br shadow-blue-500 shadow-lg text-white w-fit py-2 px-4 rounded-lg"
+      (click)="login()"
+    >
+      Bejelentkezés
+    </button>
+  </div>
+  <div class="text-center flex flex-col items-center text-white font-semibold my-4">
+    <p class="px-2 rounded-md">
+      Még nem vagy felhasználó?
+    </p>
+    <p class="w-fitpx-2 rounded-b-md pb-1">
+      Itt tudsz <a routerLink="/register" class="underline">regisztrálni</a>.
+    </p>
+  </div>
+</form>
