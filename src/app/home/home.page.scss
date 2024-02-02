@@ -1,15 +1,15 @@
 #overlay {
-  animation: overlayTransition 2000ms ease-out forwards;
+  animation: overlayTransition 1600ms ease-out forwards;
 }
 
 #title {
-  animation: floatTitle 1500ms 500ms ease-in-out forwards;
+  animation: floatTitle 1200ms 400ms ease-in-out forwards;
 }
 
 @keyframes overlayTransition {
   from {
     backdrop-filter: blur(10px);
-    background-color: rgb(29 78 216 / 100%);
+    background-color: rgb(29 78 216 / 60%);
   }
   to {
     backdrop-filter: blur(0px);

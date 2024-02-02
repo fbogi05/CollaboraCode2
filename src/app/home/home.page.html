@@ -1,23 +1,60 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Főoldal </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-menu contentId="main-content" #menu>
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Főoldal</ion-title>
+      <ion-title>Főoldal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="relative">
+    <ion-list lines="inset" class="h-full">
+      <ion-item routerLink="/home">
+        <span class="flex">
+          <img src="assets/home.svg" class="dark:invert h-5 mr-3" />
+          <ion-label>Főoldal</ion-label>
+        </span>
+      </ion-item>
+      <ion-item
+        class="absolute bottom-0 w-full"
+        routerLink="/settings"
+        lines="none"
+      >
+        <span class="flex">
+          <img src="assets/settings.svg" class="dark:invert h-5 mr-3" />
+          <ion-label>Beállítások</ion-label>
+        </span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header class="relative" [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Főoldal</ion-title>
+      <ion-avatar class="p-3" slot="end">
+        <img
+          class="shadow-gray-400 dark:shadow-zinc-900 shadow-md"
+          alt="Profile"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar>
     </ion-toolbar>
   </ion-header>
 
-  <div class="h-full" id="overlay">
-    <h1 class="relative top-1/2 -translate-y-1/2 pt-4 text-lg text-center" id="title">
-      Üdvözlünk a
-      <span
-        class="font-semibold from-sky-500 to-blue-700 bg-gradient-to-br text-transparent bg-clip-text"
-        >CollaboraCode</span
-      ><br />verzió követőjében!
-    </h1>
-  </div>
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <div class="h-full" id="overlay">
+      <h1
+        class="relative top-1/2 -translate-y-1/2 pt-4 text-xl text-center"
+        id="title"
+      >
+        Üdvözlünk a
+        <span
+          class="font-semibold from-sky-500 to-blue-700 bg-gradient-to-br text-transparent bg-clip-text"
+          >CollaboraCode</span
+        ><br />verzió követőjében!
+      </h1>
+    </div>
+  </ion-content>
+</div>

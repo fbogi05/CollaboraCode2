@@ -19,11 +19,16 @@ export class ErrorPage implements OnInit {
     let interval = setInterval(() => {
       this.redirectionTime--;
       if (this.redirectionTime === 0) {
-        this.router.navigate(['/home']);
+        this.backToHomePage();
       }
     }, 1000);
     setTimeout(() => {
       clearInterval(interval);
     }, this.redirectionTime * 1000);
+  }
+
+  backToHomePage() {
+    this.redirectionTime = 0;
+    this.router.navigate(['/home']);
   }
 }
