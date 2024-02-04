@@ -6,12 +6,12 @@ body, html {
     background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
 }
 
-.navi{
+nav{
     position: absolute;
     top: 0;
     background-color: black;
     opacity: .7;
-    margin-left: 0;
+    /* margin-left: 0; */
 }
 
 .logo{
@@ -28,11 +28,6 @@ body, html {
 }
 
 .monaco{
-    padding-top: 43px;
-    height: 600px !important;
-}
-
-.ment{
-    position: fixed;
-    right: 420px;
+    padding-top: 10px;
+    height: 580px !important;
 }
