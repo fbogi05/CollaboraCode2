@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class ProfilComponent {
 
+  isDropdownOpen: boolean = false;
+
+  toggleDropdown(){
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }

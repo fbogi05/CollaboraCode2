@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AddPeopleComponent {
 
+  isDropdownOpen: boolean = false;
+
+  toggleDropdown(){
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }
