@@ -7,8 +7,6 @@ body, html {
 }
 
 nav{
-    position: absolute;
-    top: 0;
     background-color: black;
     opacity: .7;
     /* margin-left: 0; */
@@ -23,11 +21,12 @@ nav{
 }
 
 .editor{
+    padding-top: 15px;
     padding-left: 20px;
     width: 85%;
 }
 
 .monaco{
     padding-top: 10px;
-    height: 580px !important;
+    height: 700px !important;
 }
