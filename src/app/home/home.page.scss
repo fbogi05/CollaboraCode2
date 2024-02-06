@@ -1,9 +1,9 @@
 #overlay {
-  animation: overlayTransition 1600ms ease-out forwards;
+  animation: overlayTransition 1200ms ease-out forwards;
 }
 
 #title {
-  animation: floatTitle 1200ms 400ms ease-in-out forwards;
+  animation: floatTitle 900ms 300ms ease-in-out forwards;
 }
 
 @keyframes overlayTransition {

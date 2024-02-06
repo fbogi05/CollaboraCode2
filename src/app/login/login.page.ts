@@ -14,6 +14,7 @@ export class LoginPage {
       visible: false,
     },
   };
+  titlePosition = 0;
 
   constructor(private base: BaseService, private router: Router) {}
 
