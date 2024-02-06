@@ -6,10 +6,4 @@ import { Component } from '@angular/core';
   styleUrl: './profil.component.css'
 })
 export class ProfilComponent {
-
-  isDropdownOpen: boolean = false;
-
-  toggleDropdown(){
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
 }

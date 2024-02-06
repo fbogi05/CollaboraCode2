@@ -16,6 +16,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { NavAfterComponent } from './nav-after/nav-after.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
     ProfilComponent,
     ProjectsComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    NavAfterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,31 +1,5 @@
 <div class="hatter h-full">
-    <nav class="p-6 shadow-2xl w-full">
-        <ul class="flex flex-row justify-between">
-          <li>
-            <a routerLink="/home">
-              <img src="../../assets/Logo-Dark.svg" alt="CollaboraCode Logo" [width]="70">
-            </a>
-          </li>
-          <li>
-            <img class="ml-4" src="../../assets/LogoType-Dark.svg" alt="CollaboraCode" [width]="300">
-          </li>
-          <li class="relative group" (click)="toggleDropdown()">
-            <button type="button" class="inline-flex items-center border border-transparent rounded-md shadow-sm text-sm font-medium text-white" aria-expanded="false">
-                <img src="../../assets/user.png" alt="user" [width]="30">
-              <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M7.293 7.293a1 1 0 011.414 0L10 9.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-            </button>
-            <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg">
-              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                <a routerLink="/profil" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profil</a>
-                <a routerLink="/projects" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Projektek</a>
-                <a routerLink="" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Kijelentkezés</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </nav>
+    <app-nav-after></app-nav-after>
       <div class="pt-16">
         <h2 class="text-3xl font-medium mb-8 text-white text-center mt-28">Profil Adatai</h2>
           <form class="w-full max-w-xl">
@@ -66,7 +40,5 @@
               </div>
             </form>
       </div>
-    <div class="flex justify-center text-white font-medium bg-black p-2 foot w-full">
-        <p>© CollaboraCode 2023</p>
-    </div>    
+    <app-footer></app-footer>    
 </div>

@@ -2,14 +2,10 @@ body,html {
     width: 100%;
   }
   
-  .hatter{
-      background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
-  }
-  
-nav{
-    background-color: black;
-    opacity: .7;
+.hatter{
+    background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
 }
+
 
 .logo{
     margin: 0 auto;
