@@ -16,7 +16,7 @@ const connectToMongoDB = async () => {
     console.log('Sikeres csatlakozás :)');
     return { client, db };
   } catch (error) {
-    console.error(':c', error);
+    console.error('Sikertelen csatlakozás :c', error);
     throw error;
   }
 };
