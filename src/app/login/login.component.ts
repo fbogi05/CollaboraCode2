@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActiveService } from '../active.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,15 @@ export class LoginComponent {
     'password': new FormControl('', [Validators.required])
   })
 
-  constructor() {}
+  constructor(private active: ActiveService) {}
+
+  get isLoggedIn(){
+    return this.active.isLoggedIn;
+  }
+
+  login(){
+    this.active.login();
+  }
 
 
 }
