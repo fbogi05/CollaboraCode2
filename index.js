@@ -5,8 +5,8 @@ const cors = require("cors");
 const app = Express();
 app.use(cors());
 
-const uri = "mongodb+srv://nagybertalazar:almafa123@cluster.d4bejds.mongodb.net/?retryWrites=true&w=majority";
-const databaseName = "CC";
+const uri = "mongodb+srv://admin:admin@cluster.d4bejds.mongodb.net/?retryWrites=true&w=majority";
+const databaseName = "CCDatabase";
 let database;
 
 const connectToMongoDB = async () => {
