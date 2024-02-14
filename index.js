@@ -24,41 +24,41 @@ const connectToMongoDB = async () => {
 const closeMongoDBConnection = (client) => {
   if (client) {
     client.close();
-    console.log('MongoDB connection closed');
+    console.log('MongoDB kapcsolat lezárva');
   }
 };
 
-const getFelhasznalok = async (db) => {
+const getUsers = async (db) => {
   try {
-    const felhasznalokCollection = db.collection('felhasznalok');
-    const felhasznalok = await felhasznalokCollection.find({}).toArray();
-    return felhasznalok;
+    const usersCollection = db.collection('users');
+    const users = await usersCollection.find({}).toArray();
+    return users;
   } catch (error) {
-    console.error('Hiba felhasznalok', error);
+    console.error('Hiba felhasznalok lekérésekor', error);
     throw error;
   }
 };
 
 
-const getKodok = async (db) => {
+const getCodes = async (db) => {
   try {
-    const kodokCollection = db.collection('kodok');
-    const kodok = await kodokCollection.find({}).toArray();
-    return kodok;
+    const codesCollection = db.collection('codes');
+    const codes = await codesCollection.find({}).toArray();
+    return codes;
   } catch (error) {
-    console.error('Hiba kodok', error);
+    console.error('Hiba kodok lekérésekor', error);
     throw error;
   }
 };
 
 
-const getProjektek = async (db) => {
+const getProjects = async (db) => {
   try {
-    const projektekCollection = db.collection('projektek');
-    const projektek = await projektekCollection.find({}).toArray();
-    return projektek;
+    const projectsCollection = db.collection('projects');
+    const projects = await projectsCollection.find({}).toArray();
+    return projects;
   } catch (error) {
-    console.error('Hiba projektek', error);
+    console.error('Hiba projektek lekérésekor', error);
     throw error;
   }
 };
@@ -73,14 +73,14 @@ app.listen(5040, async () => {
     
     app.get('/api/CC/GetAllData', async (request, response) => {
       try {
-        const felhasznalok = await getFelhasznalok(database);
-        const kodok = await getKodok(database);
-        const projektek = await getProjektek(database);
+        const users = await getUsers(database);
+        const codes = await getCodes(database);
+        const projects = await getProjects(database);
 
         const allData = {
-          felhasznalok: felhasznalok,
-          kodok: kodok,
-          projektek: projektek
+          users: users,
+          codes: codes,
+          projects: projects
         };
 
         response.send(allData);
