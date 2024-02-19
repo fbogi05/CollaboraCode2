@@ -1,20 +1,37 @@
 <ion-content [fullscreen]="true">
   <form
-    class="from-blue-700 to-sky-500 bg-gradient-to-br min-h-full flex flex-col items-center justify-evenly"
+    class="from-blue-700 to-sky-500 bg-gradient-to-br min-h-full flex flex-col items-center justify-evenly px-4"
+    #form="ngForm"
   >
     <h1 class="text-xl text-center text-white my-4">
       Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
     </h1>
     <div class="flex flex-col gap-3">
       <div class="form-group flex flex-col gap-3">
-        <label for="username" class="text-white">E-mail cím</label>
+        <label for="email" class="text-white">E-mail cím</label>
         <input
           type="email"
           class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
-          id="username"
-          name="username"
+          [ngClass]="{'outline outline-red-700': email.invalid && (email.dirty || email.touched), 'outline-blue-300 dark:outline-slate-700': email.valid || (!email.dirty && !email.touched)}"
+          id="email"
+          name="email"
           autocomplete="email"
+          [(ngModel)]="fieldData.email.text"
+          #email="ngModel"
+          [pattern]="fieldData.email.pattern"
+          required
         />
+        <div
+          *ngIf="email.invalid && (email.touched || email.dirty)"
+          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+        >
+          <div *ngIf="email.errors?.['required']">
+            Az email cím megadása kötelező!
+          </div>
+          <div *ngIf="email.errors?.['pattern']">
+            Az email cím formátuma nem helyes!
+          </div>
+        </div>
       </div>
       <div class="form-group flex flex-col gap-3">
         <label for="password" class="text-white">Jelszó</label>
@@ -22,9 +39,14 @@
           <input
             [type]="getFieldState()"
             class="form-control rounded-full pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            [ngClass]="{'outline outline-red-700': password.invalid && (password.dirty || password.touched), 'outline-blue-300 dark:outline-slate-700': password.valid || (!password.dirty && !password.touched)}"
             id="password"
             name="password"
             autocomplete="current-password"
+            [(ngModel)]="fieldData.password.text"
+            #password="ngModel"
+            [pattern]="fieldData.password.pattern"
+            required
           />
           <button
             type="button"
@@ -33,6 +55,46 @@
           >
             <img [src]="fieldData.password.icon" class="dark:invert" />
           </button>
+        </div>
+        <div
+          *ngIf="password.invalid && (password.touched || password.dirty)"
+          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+        >
+          <div *ngIf="password.errors?.['required']">
+            A jelszó megadása kötelező!
+          </div>
+          <div *ngIf="password.errors?.['pattern']">
+            <p>A jelszó formátuma nem helyes!</p>
+            <hr class="border-slate-500 my-2" />
+            <p class="text-left mb-1">A jelszónak legalább:</p>
+            <ul class="flex flex-col list-inside pl-6 text-left gap-1">
+              <li
+                *ngIf="!fieldData.password.text.match(fieldData.password.hasLowercasePattern)"
+              >
+                Egy kisbetűt kell tartalmaznia
+              </li>
+              <li
+                *ngIf="!fieldData.password.text.match(fieldData.password.hasUppercasePattern)"
+              >
+                Egy nagybetűt kell tartalmaznia
+              </li>
+              <li
+                *ngIf="!fieldData.password.text.match(fieldData.password.hasNumbersPattern)"
+              >
+                Egy számot kell tartalmaznia
+              </li>
+              <li
+                *ngIf="!fieldData.password.text.match(fieldData.password.hasSpecialCharsPattern)"
+              >
+                Egy speciális karaktert kell tartalmaznia
+              </li>
+              <li
+                *ngIf="!fieldData.password.text.match(fieldData.password.lengthPattern)"
+              >
+                8-16 karaktert kell tartalmaznia
+              </li>
+            </ul>
+          </div>
         </div>
         <input
           value="Bejelentkezés"

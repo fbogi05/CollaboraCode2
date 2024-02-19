@@ -9,7 +9,18 @@ import { BaseService } from '../base.service';
 })
 export class LoginPage {
   fieldData = {
+    email: {
+      text: '',
+      pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$',
+    },
     password: {
+      text: '',
+      pattern: '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$',
+      hasNumbersPattern: '(?=.*[0-9])',
+      hasLowercasePattern: '(?=.*[a-z])',
+      hasUppercasePattern: '(?=.*[A-Z])',
+      hasSpecialCharsPattern: '(?=.*[\\W])',
+      lengthPattern: '.{8,16}',
       icon: this.base.iconPaths.password.passwordHidden,
       visible: false,
     },
