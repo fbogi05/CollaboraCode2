@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActiveService } from '../active.service';
 
 @Component({
@@ -9,12 +9,15 @@ import { ActiveService } from '../active.service';
 })
 export class LoginComponent {
 
-  loginForm: FormGroup = new FormGroup({
-    'email': new FormControl('', [Validators.required]),
-    'password': new FormControl('', [Validators.required])
-  })
+  loginForm: FormGroup
 
-  constructor(private active: ActiveService) {}
+
+  constructor(private active: ActiveService, private formBuilder: FormBuilder) {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],      
+    })
+  }
 
   get isLoggedIn(){
     return this.active.isLoggedIn;
