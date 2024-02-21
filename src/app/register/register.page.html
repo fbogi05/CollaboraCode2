@@ -18,7 +18,7 @@
         <label for="first-name" class="text-white">Keresztnév</label>
         <input
           type="text"
-          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
           [ngClass]="{'outline outline-red-700': (firstName.invalid && (firstName.touched || firstName.dirty)) || !fieldData.firstName.valid, 'outline-blue-300 dark:outline-slate-700': (firstName.valid || (!firstName.touched && !firstName.dirty)) && fieldData.firstName.valid}"
           id="first-name"
           name="first-name"
@@ -41,7 +41,7 @@
         <label for="last-name" class="text-white">Vezetéknév</label>
         <input
           type="text"
-          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
           [ngClass]="{'outline outline-red-700': (lastName.invalid && (lastName.touched || lastName.dirty)) || !fieldData.lastName.valid, 'outline-blue-300 dark:outline-slate-700': (lastName.valid || (!lastName.touched && !lastName.dirty)) && fieldData.lastName.valid}"
           id="last-name"
           name="last-name"
@@ -64,7 +64,7 @@
         <label for="email" class="text-white">Email cím</label>
         <input
           type="email"
-          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
           [ngClass]="{'outline outline-red-700': (email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid, 'outline-blue-300 dark:outline-slate-700': (email.valid || (!email.touched && !email.dirty)) && fieldData.email.valid}"
           id="email"
           name="email"
@@ -92,7 +92,7 @@
         <div class="relative flex gap-4">
           <input
             [type]="getFieldState('password')"
-            class="form-control rounded-full pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
             [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
             id="password"
             name="password"
@@ -151,7 +151,7 @@
           <div class="relative flex gap-4">
             <input
               [type]="getFieldState('passwordAgain')"
-              class="form-control rounded-full pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+              class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
               [ngClass]="{'outline outline-red-700': (passwordAgain.invalid && (passwordAgain.touched || passwordAgain.dirty)) || !fieldData.passwordAgain.valid, 'outline-blue-300 dark:outline-slate-700': (passwordAgain.valid || (!passwordAgain.touched && !passwordAgain.dirty)) && fieldData.passwordAgain.valid}"
               id="password-again"
               name="password-again"

@@ -20,7 +20,7 @@
         <label for="email" class="text-white">E-mail cím</label>
         <input
           type="email"
-          class="form-control rounded-full px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+          class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
           [ngClass]="{'outline outline-red-700': (email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid, 'outline-blue-300 dark:outline-slate-700': (email.valid || (!email.touched && !email.dirty)) && fieldData.email.valid}"
           id="email"
           name="email"
@@ -49,7 +49,7 @@
         <div class="relative flex gap-4">
           <input
             [type]="getFieldState()"
-            class="form-control rounded-full pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
             [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
             id="password"
             name="password"
