@@ -4,15 +4,7 @@
     #form="ngForm"
     (ngSubmit)="register(form)"
   >
-    <div class="flex flex-col items-center">
-      <img
-        src="assets/wifi.svg"
-        alt="Offline"
-        class="h-8 aspect-square invert"
-        [ngClass]="{'hidden': networkStatus, 'block animate-pulse': !networkStatus}"
-      />
-      <h1 class="text-xl text-center text-white my-4">Regisztráció</h1>
-    </div>
+    <h1 class="text-xl text-center text-white my-4">Regisztráció</h1>
     <div class="flex flex-col gap-4">
       <div class="form-group flex flex-col gap-3">
         <label for="first-name" class="text-white">Keresztnév</label>
@@ -91,7 +83,7 @@
         <label for="password" class="text-white">Jelszó</label>
         <div class="relative flex gap-4">
           <input
-            [type]="getFieldState('password')"
+            [type]="getPasswordVisible('password')"
             class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
             [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
             id="password"
@@ -150,7 +142,7 @@
           <label for="password-again" class="text-white">Jelszó újra</label>
           <div class="relative flex gap-4">
             <input
-              [type]="getFieldState('passwordAgain')"
+              [type]="getPasswordVisible('passwordAgain')"
               class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
               [ngClass]="{'outline outline-red-700': (passwordAgain.invalid && (passwordAgain.touched || passwordAgain.dirty)) || !fieldData.passwordAgain.valid, 'outline-blue-300 dark:outline-slate-700': (passwordAgain.valid || (!passwordAgain.touched && !passwordAgain.dirty)) && fieldData.passwordAgain.valid}"
               id="password-again"

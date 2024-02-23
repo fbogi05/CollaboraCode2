@@ -9,14 +9,13 @@ import { Router } from '@angular/router';
 export class SettingsPage implements OnInit {
   @ViewChild('menu') menu: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe(() => {
       if (this.router.url === '/settings') {
         this.menu.close();
       }
-    })
+    });
   }
-
 }

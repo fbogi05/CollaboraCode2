@@ -4,17 +4,9 @@
     #form="ngForm"
     (ngSubmit)="login(form)"
   >
-    <div class="flex flex-col items-center">
-      <img
-        src="assets/wifi.svg"
-        alt="Offline"
-        class="h-8 aspect-square invert"
-        [ngClass]="{'hidden': networkStatus, 'block animate-pulse': !networkStatus}"
-      />
-      <h1 class="text-xl text-center text-white my-4">
-        Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
-      </h1>
-    </div>
+    <h1 class="text-xl text-center text-white my-4">
+      Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
+    </h1>
     <div class="flex flex-col gap-3">
       <div class="form-group flex flex-col gap-3">
         <label for="email" class="text-white">E-mail cím</label>
@@ -26,36 +18,31 @@
           name="email"
           autocomplete="email"
           [(ngModel)]="fieldData.email.value"
-          (ngModelChange)="fieldData.email.valid = true"
+          (ngModelChange)="resetFieldStates('email')"
           #email="ngModel"
           required
         />
         <div
-          *ngIf="email.invalid && (email.touched || email.dirty) || !fieldData.email.valid"
+          *ngIf="((email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid) && email.errors?.['required']"
           class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
         >
-          <div *ngIf="email.errors?.['required']; else isValid">
+          <div *ngIf="email.errors?.['required']">
             <p>Az email cím megadása kötelező!</p>
           </div>
-          <ng-template #isValid>
-            <div *ngIf="!fieldData.email.valid">
-              <p>Az email cím nem megfelelő!</p>
-            </div>
-          </ng-template>
         </div>
       </div>
       <div class="form-group flex flex-col gap-3">
         <label for="password" class="text-white">Jelszó</label>
         <div class="relative flex gap-4">
           <input
-            [type]="getFieldState()"
+            [type]="getPasswordVisible()"
             class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
             [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
             id="password"
             name="password"
             autocomplete="current-password"
             [(ngModel)]="fieldData.password.value"
-            (ngModelChange)="fieldData.password.valid = true"
+            (ngModelChange)="resetFieldStates('password')"
             #password="ngModel"
             required
           />
@@ -75,8 +62,11 @@
             <p>A jelszó megadása kötelező!</p>
           </div>
           <ng-template #isValid>
-            <div *ngIf="!fieldData.password.valid">
-              <p>A jelszó nem megfelelő!</p>
+            <div>
+              <p>
+                Az email cím vagy a jelszó nem megfelelő! Kérem próbálja meg
+                újra.
+              </p>
             </div>
           </ng-template>
         </div>

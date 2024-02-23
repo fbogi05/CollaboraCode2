@@ -1,15 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../base.service';
 import { NgForm } from '@angular/forms';
-import { Subscription, fromEvent, map, merge, of } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit, OnDestroy {
+export class RegisterPage {
   fieldData = {
     firstName: {
       value: '',
@@ -42,30 +41,6 @@ export class RegisterPage implements OnInit, OnDestroy {
       visible: false,
     },
   };
-  networkStatus: boolean = false;
-  networkStatus$: Subscription = Subscription.EMPTY;
-
-  ngOnInit() {
-    window.scrollTo(0, 0);
-    this.checkNetworkStatus();
-  }
-
-  ngOnDestroy() {
-    this.networkStatus$.unsubscribe();
-  }
-
-  checkNetworkStatus() {
-    this.networkStatus = navigator.onLine;
-    this.networkStatus$ = merge(
-      of(null),
-      fromEvent(window, 'online'),
-      fromEvent(window, 'offline')
-    )
-      .pipe(map(() => navigator.onLine))
-      .subscribe((status) => {
-        this.networkStatus = status;
-      });
-  }
 
   constructor(private base: BaseService, private router: Router) {}
 
@@ -84,7 +59,7 @@ export class RegisterPage implements OnInit, OnDestroy {
     }
   }
 
-  getFieldState(field: string) {
+  getPasswordVisible(field: string) {
     if (field === 'password')
       return this.fieldData.password.visible ? 'text' : 'password';
     else if (field === 'passwordAgain')
