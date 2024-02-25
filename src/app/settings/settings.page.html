@@ -1,4 +1,4 @@
-<ion-menu contentId="main-content" #menu>
+<ion-menu contentId="main-content" menuId="settings" #menu>
   <ion-header>
     <ion-toolbar>
       <ion-title>Beállítások</ion-title>
@@ -14,7 +14,7 @@
         <ion-button routerLink="/home" routerDirection="back">
           <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
         </ion-button>
-        <ion-menu-button></ion-menu-button>
+        <ion-menu-button menu="settings"></ion-menu-button>
       </ion-buttons>
       <ion-title>Beállítások</ion-title>
     </ion-toolbar>
