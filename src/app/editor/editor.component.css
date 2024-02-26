@@ -16,10 +16,14 @@ body, html {
 .editor{
     padding-top: 15px;
     padding-left: 20px;
-    width: 85%;
+    width: 80%;
 }
 
 .monaco{
     padding-top: 10px;
     height: 700px !important;
+}
+
+a{
+    text-align: center;
 }

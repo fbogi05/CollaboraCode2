@@ -23,7 +23,7 @@ export class LoginComponent {
     return this.active.isLoggedIn;
   }
 
-  login(){
+  loginActive(){
     this.active.login();
   }
 

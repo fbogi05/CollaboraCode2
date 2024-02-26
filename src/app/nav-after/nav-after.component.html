@@ -1,14 +1,14 @@
 <nav class="p-6 shadow-2xl w-full">
     <ul class="flex flex-row justify-between">
-      <li>
+      <li class="flex flex-1">
         <a routerLink="/home">
           <img src="../../assets/Logo-Dark.svg" alt="CollaboraCode Logo" [width]="70">
         </a>
       </li>
-      <li>
-        <img class="ml-4" src="../../assets/LogoType-Dark.svg" alt="CollaboraCode" [width]="300">
+      <li class="flex flex-1 justify-center">
+        <img class="ml-20" src="../../assets/LogoType-Dark.svg" alt="CollaboraCode" [width]="300">
       </li>
-      <li class="flex items-center">
+      <li class="flex flex-1 items-center justify-end">
         <p style="color: white">Üdvözöljük, Boglárka</p>
         <div class="relative group" (click)="toggleDropdown()">
           <button type="button" class="inline-flex items-center border border-transparent rounded-md shadow-sm text-sm font-medium text-white" aria-expanded="false">

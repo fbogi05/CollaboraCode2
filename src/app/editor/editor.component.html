@@ -6,20 +6,27 @@
         <button class="absolute right-48 transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
           Mentés
         </button>
-        <button type="button" class="absolute right-0 bg-white hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" (click)="toggleLanguageDropdown()" aria-expanded="false">
-          Nyelv változtatása >
-        </button>
-        <div *ngIf="isLanguageDropdownOpen" class="fixed right-20 w-40 origin-top-right bg-blue-50 rounded-md shadow-lg">
-          <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <a (click)="changeLanguage('python')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Python (Alapértelmezett)</a>
-            <a (click)="changeLanguage('javascript')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">JavaScript</a>
-            <a (click)="changeLanguage('typescript')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">TypeScript</a>
-            <a (click)="changeLanguage('java')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Java</a>
-            <a (click)="changeLanguage('html')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">HTML</a>
-            <a (click)="changeLanguage('css')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">CSS</a>
-            <a (click)="changeLanguage('c#')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">C#</a>
-            <a (click)="changeLanguage('sql')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">SQL</a>
-            <a (click)="changeLanguage('php')" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">PHP</a>
+        <div class="absolute right-0 inline-block">
+          <div>
+            <button (click)="toggleLanguageDropdown()" type="button" class="inline-flex gap-x-1.5 rounded-lg bg-white px-3 py-2 font-medium text-blue-900 hover:bg-blue-100" id="menu-button" aria-expanded="true" aria-haspopup="true">
+              Nyelv választása
+              <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+          <div *ngIf="isLanguageDropdownOpen" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div class="py-1" role="menu">
+              <a (click)="changeLanguage('python'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Python (Alapértelmezett)</a>
+              <a (click)="changeLanguage('javascript'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">JavaScript</a>
+              <a (click)="changeLanguage('typescript'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">TypeScript</a>
+              <a (click)="changeLanguage('java'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Java</a>
+              <a (click)="changeLanguage('html'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">HTML</a>
+              <a (click)="changeLanguage('css'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">CSS</a>
+              <a (click)="changeLanguage('c#'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">C#</a>
+              <a (click)="changeLanguage('sql'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">SQL</a>
+              <a (click)="changeLanguage('php'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">PHP</a>
+            </div>
           </div>
         </div>
       </div>

@@ -8,19 +8,18 @@ import loader from '@monaco-editor/loader';
   styleUrl: './editor.component.css'
 })
 export class EditorComponent {
-  
-  isDropdownOpen: boolean = false;
-  isLanguageDropdownOpen: boolean = false; 
+  isLanguageDropdownOpen: boolean = false;
 
-  toggleDropdown(){
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
 
   editorOptions = {theme: 'vs-dark', language: 'python', automaticLayout: true, scrollBeyondLastLine: false, minimap: {enabled: false}};
   code: string= 'print("Hello World!")';
 
   toggleLanguageDropdown() {
     this.isLanguageDropdownOpen = !this.isLanguageDropdownOpen;
+  }
+
+  closeLanguageDropdown(){
+    this.isLanguageDropdownOpen = false;
   }
 
   changeLanguage(language: string) {
