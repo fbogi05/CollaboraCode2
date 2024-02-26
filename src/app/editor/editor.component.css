@@ -14,14 +14,15 @@ body, html {
 }
 
 .editor{
+    box-sizing: border-box !important;
     padding-top: 15px;
     padding-left: 20px;
-    width: 80%;
+    width: 83%;
+    height: 100%;
 }
 
 .monaco{
     padding-top: 10px;
-    height: 700px !important;
 }
 
 a{

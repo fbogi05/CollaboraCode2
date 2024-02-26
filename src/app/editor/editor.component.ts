@@ -25,4 +25,5 @@ export class EditorComponent {
   changeLanguage(language: string) {
     this.editorOptions = { ...this.editorOptions, language };
   }
+
 }
