@@ -1,38 +1,6 @@
-<ion-menu contentId="main-content" menuId="home" #menu>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Főoldal</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="relative">
-    <ion-list lines="inset" class="h-full">
-      <ion-item routerLink="/home" routerDirection="root">
-        <span class="flex">
-          <img src="assets/home.svg" class="dark:invert h-5 mr-3" />
-          <ion-label>Főoldal</ion-label>
-        </span>
-      </ion-item>
-      <ion-item
-        class="absolute bottom-0 w-full"
-        routerLink="/settings"
-        routerDirection="forward"
-        lines="none"
-      >
-        <span class="flex">
-          <img src="assets/settings.svg" class="dark:invert h-5 mr-3" />
-          <ion-label>Beállítások</ion-label>
-        </span>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
 <div class="ion-page" id="main-content">
   <ion-header class="relative" [translucent]="true">
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button menu="home"></ion-menu-button>
-      </ion-buttons>
       <ion-title>Főoldal</ion-title>
       <ion-avatar class="p-3" slot="end">
         <img

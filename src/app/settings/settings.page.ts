@@ -17,7 +17,7 @@ export class SettingsPage implements OnInit {
     this.router.events.subscribe((event) => {
       if (
         event.type === EventType.NavigationEnd &&
-        this.router.url === '/settings'
+        this.router.url === '/tabs/settings'
       ) {
         console.log('closing menu');
         this.menu?.close();

@@ -97,7 +97,7 @@ export class RegisterPage {
   register(form: NgForm) {
     this.validateData();
     if (form.valid) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['tabs/home']);
     }
   }
 }

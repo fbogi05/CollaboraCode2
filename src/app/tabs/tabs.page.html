@@ -1,0 +1,49 @@
+<ion-tabs #tabs>
+  <ion-tab-bar class="py-2" slot="bottom">
+    <ion-tab-button tab="home">
+      <div
+        class="icon-container flex justify-center items-center w-2/3 h-10 bg-blue-700 bg-opacity-80 rounded-full shadow-stone-400 dark:shadow-stone-900 shadow-md"
+      >
+        <img
+          class="h-8 invert"
+          [src]="getIcon('home')"
+          alt="Kezdőlap"
+          [ngClass]="{ 'selected': isSelectedTab('home') }"
+        />
+      </div>
+      <ion-label class="mt-1 text-black dark:text-white text-sm"
+        >Home</ion-label
+      >
+    </ion-tab-button>
+    <ion-tab-button tab="projects">
+      <div
+        class="icon-container flex justify-center items-center w-2/3 h-10 bg-blue-700 bg-opacity-80 rounded-full shadow-stone-400 dark:shadow-stone-900 shadow-md"
+      >
+        <img
+          class="h-8 invert"
+          [src]="getIcon('projects')"
+          alt="Projektek"
+          [ngClass]="{ 'selected': isSelectedTab('projects') }"
+        />
+      </div>
+      <ion-label class="mt-1 text-black dark:text-white text-sm"
+        >Projektek</ion-label
+      >
+    </ion-tab-button>
+    <ion-tab-button tab="settings">
+      <div
+        class="icon-container flex justify-center items-center w-2/3 h-10 bg-blue-700 bg-opacity-80 rounded-full shadow-stone-400 dark:shadow-stone-900 shadow-md"
+      >
+        <img
+          class="h-8 invert"
+          [src]="getIcon('settings')"
+          alt="Beállítások"
+          [ngClass]="{ 'selected': isSelectedTab('settings') }"
+        />
+      </div>
+      <ion-label class="mt-1 text-black dark:text-white text-sm"
+        >Beállítások</ion-label
+      >
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

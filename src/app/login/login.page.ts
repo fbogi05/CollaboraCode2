@@ -75,7 +75,7 @@ export class LoginPage {
   login(form: NgForm) {
     let authenticated = this.checkCredentials();
     if (form.valid && authenticated) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['tabs/home']);
     }
   }
 }

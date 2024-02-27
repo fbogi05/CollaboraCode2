@@ -29,6 +29,6 @@ export class ErrorPage implements OnInit {
 
   backToHomePage() {
     this.redirectionTime = 0;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/tabs/home']);
   }
 }

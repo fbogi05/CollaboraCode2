@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventType, Router } from '@angular/router';
-import { IonMenu, NavController } from '@ionic/angular';
+import { IonMenu } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,9 @@ import { IonMenu, NavController } from '@ionic/angular';
 export class HomePage implements OnInit {
   @ViewChild('menu') homeMenu?: IonMenu;
 
-  constructor(private router: Router, private navController: NavController) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.navController.navigateRoot('/home');
     return;
     this.router.events.subscribe((event) => {
       if (
