@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class AuthService {
   private apiUrl = "http://127.0.0.1:3333";
   isLoggedIn: boolean = false;
   email: string = '';
+  private loggedInUser = new BehaviorSubject<string>('');
 
   constructor(private http:HttpClient) { }
 
@@ -39,5 +40,14 @@ export class AuthService {
     this.email = '';
     this.isLoggedIn = false;
     window.location.href = "/";
+    this.loggedInUser.next('');
+  }
+
+  getLoggedInUser() {
+    return this.loggedInUser.asObservable();
+  }
+
+  setLoggedInUser(username: string) {
+    this.loggedInUser.next(username);
   }
 }
