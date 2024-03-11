@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private apiUrl = "http://127.0.0.1:3333";
+  isLoggedIn: boolean = false;
+  email: string = '';
 
   constructor(private http:HttpClient) { }
 
@@ -31,5 +33,11 @@ export class AuthService {
 
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {});
+  }
+
+  clearSession(){
+    this.email = '';
+    this.isLoggedIn = false;
+    window.location.href = "/";
   }
 }

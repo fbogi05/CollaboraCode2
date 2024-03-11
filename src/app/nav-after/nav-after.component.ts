@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActiveService } from '../active.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-nav-after',
@@ -8,7 +9,7 @@ import { ActiveService } from '../active.service';
 })
 export class NavAfterComponent {
 
-  constructor(private active: ActiveService){ }
+  constructor(private active: ActiveService, private auth: AuthService){ }
   
   isDropdownOpen: boolean = false;
 
@@ -16,11 +17,23 @@ export class NavAfterComponent {
     return this.active.isLoggedIn;
   }
 
-  logout(){
+  logActive(){
     this.active.logout();
   }
 
   toggleDropdown(){
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  logout(){
+    this.auth.logout()
+      .subscribe({
+        next:(response) => {
+        this.auth.clearSession();
+      },
+        error: (error) => {
+          console.error('Sikertelen kijelentkezés:', error);
+        }
+      });
   }
 }

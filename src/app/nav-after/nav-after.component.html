@@ -21,7 +21,7 @@
             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
               <a routerLink="/profil" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profil</a>
               <a routerLink="/projects" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Projektek</a>
-              <a (click)="logout()" routerLink="" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Kijelentkezés</a>
+              <a (click)="logActive(); logout()" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Kijelentkezés</a>
             </div>
           </div>
         </div>
