@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { NavAfterComponent } from './nav-after/nav-after.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NavAfterComponent } from './nav-after/nav-after.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

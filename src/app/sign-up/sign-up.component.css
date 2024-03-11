@@ -2,18 +2,28 @@ body,html {
     width: 100%;
   }
   
-.hatter{
+.hatter {
     background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
 }
 
+.navi {
+    position: absolute;
+    top: 0;
+    background-color: black;
+    opacity: .7;
+}
 
-.logo{
+.logo {
     margin: 0 auto;
 }
 
-form{
+form {
     margin: 0 auto;
     width: 100%;
+}
+
+.info {
+    width: 12px;
 }
 
 .info-icon {
@@ -44,7 +54,7 @@ form{
     opacity: 1;
 }
 
-.foot{
+.foot {
     position: absolute;
     bottom: 0;
     background-color: #0c1733;

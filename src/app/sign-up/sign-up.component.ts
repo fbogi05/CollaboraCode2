@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,15 +7,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
-  // loginForm: FormGroup;
 
-  // constructor(private formBuilder: FormBuilder) { 
-  //   this.loginForm = this.formBuilder.group({
-  //     firstName: ['', [Validators.required]],
-  //     lastName: ['', [Validators.required]],
-  //     email: ['', [Validators.required, Validators.email]],
-  //     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]],            
-  //   })
-  // }
+  firstName!: string;
+  lasName!: string;
+  email!: string;
+  password!: string;
+
+  constructor(private auth:AuthService) { }
+
+  SubmitRegistration(firstName: string, lastName: string, email: string, password: string): void {
+    this.auth.register(firstName, lastName, email, password).subscribe({
+      next:(response) => {
+        console.log('Sikeres regisztráció:', response);
+        sessionStorage.setItem('loggedIn', 'true');
+        window.location.href = '/home';
+      },
+      error:(error) => {
+        console.error('Sikertelen regisztráció:', error);
+      }
+    });
+  }
 
 }
