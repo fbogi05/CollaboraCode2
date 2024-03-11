@@ -18,13 +18,19 @@
             <label class="block uppercase text-white text-sm font-medium mb-2" for="email">
               E-mail cím
             </label>
-            <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" id="email" type="text" placeholder="E-mail">
+            <input 
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
+              id="email" type="text" placeholder="E-mail" [(ngModel)]="email" name="email"
+            >
           </div>
           <div class="mb-6">
             <label class="block uppercase text-white text-sm font-medium mb-2" for="password">
               Jelszó
             </label>
-            <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" id="password" type="password" placeholder="********">
+            <input 
+              class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
+              id="password" type="password" placeholder="********" [(ngModel)]="password" name="password"
+            >
           </div>
           <div class="w-full flex justify-center">
             <button (click)="loginActive(); login(email, password)" routerLink="/home" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
