@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActiveService } from '../active.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +9,10 @@ import { ActiveService } from '../active.service';
 })
 export class LoginComponent {
 
-  loginForm: FormGroup
+  email: string = '';
+  password: string = '';
 
-
-  constructor(private active: ActiveService, private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],      
-    })
+  constructor(private active: ActiveService, private auth: AuthService) {
   }
 
   get isLoggedIn(){
@@ -25,6 +21,19 @@ export class LoginComponent {
 
   loginActive(){
     this.active.login();
+  }
+
+  login(email: string, password: string): void {
+    this.auth.login(email, password).subscribe({
+      next:(response) => {
+        console.log('Sikeres bejelentkezés:', response);
+        sessionStorage.setItem('loggedIn', 'true');
+        window.location.href = '/home';
+      },
+      error:(error) => {
+        console.error('Sikertelen bejelentkezés:', error);
+      }
+    });
   }
 
 

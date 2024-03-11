@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { ActiveService } from '../active.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,14 +9,23 @@ import { AuthService } from '../auth.service';
 })
 export class SignUpComponent {
 
-  firstName!: string;
-  lasName!: string;
-  email!: string;
-  password!: string;
+  firstName: string = '';
+  lastName: string = '';
+  email: string = '';
+  password: string = '';
 
-  constructor(private auth:AuthService) { }
+  constructor(private active: ActiveService, private auth: AuthService) {
+  }
 
-  SubmitRegistration(firstName: string, lastName: string, email: string, password: string): void {
+  get isLoggedIn() {
+    return this.active.isLoggedIn;
+  }
+
+  registerActive() {
+    this.active.login();
+  }
+
+  register(firstName: string, lastName: string, email: string, password: string): void {
     this.auth.register(firstName, lastName, email, password).subscribe({
       next:(response) => {
         console.log('Sikeres regisztráció:', response);

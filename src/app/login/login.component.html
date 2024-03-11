@@ -2,7 +2,7 @@
     <nav class="p-6 shadow-2xl w-full">
       <ul class="flex">
         <li>
-          <a routerLink="">
+          <a routerLink="/">
             <img src="../../assets/Logo-Dark.svg" alt="CollaboraCode Logo" [width]="70">
           </a>
         </li>
@@ -27,7 +27,7 @@
             <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" id="password" type="password" placeholder="********">
           </div>
           <div class="w-full flex justify-center">
-            <button (click)="loginActive()" routerLink="/home" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
+            <button (click)="loginActive(); login(email, password)" routerLink="/home" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
               Belépés
             </button>
           </div>
@@ -39,4 +39,4 @@
       <div class="flex justify-center text-white font-medium bg-black p-2 foot w-full">
         <p>© CollaboraCode 2023</p>
       </div>  
-  </div>
+</div>
