@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = "http://127.0.0.1:3333";
+   private host = "http://127.0.0.1:3333";
   isLoggedIn: boolean = false;
   email: string = '';
   private loggedInUser = new BehaviorSubject<string>('');
@@ -21,19 +21,19 @@ export class AuthService {
       email,
       password
     };
-    return this.http.post(`${this.apiUrl}/sign-up`, user);
+    return this.http.post(`${this.host}/sign-up`, user);
   }
 
   login(email: string, password: string): Observable<any> {
-    const credentials = {
+    const users = {
       email,
       password
     };
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    return this.http.post(`${this.host}/login`, users);
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/logout`, {});
+    return this.http.post(`${this.host}/logout`, {});
   }
 
   clearSession(){
