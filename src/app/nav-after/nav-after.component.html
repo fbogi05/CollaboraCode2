@@ -9,7 +9,7 @@
         <img class="ml-20" src="../../assets/LogoType-Dark.svg" alt="CollaboraCode" [width]="300">
       </li>
       <li class="flex flex-1 items-center justify-end">
-        <p style="color: white">Üdvözöljük, {{ loggedInName }}</p>
+        <p style="color: white">Üdvözlünk, {{ loggedInName }}</p>
         <div class="relative group" (click)="toggleDropdown()">
           <button type="button" class="inline-flex items-center border border-transparent rounded-md shadow-sm text-sm font-medium text-white" aria-expanded="false">
               <img [ngClass]="{'aktiv': isLoggedIn, 'nem-aktiv':!isLoggedIn}" src="../../assets/user.png" alt="user" [width]="32">
