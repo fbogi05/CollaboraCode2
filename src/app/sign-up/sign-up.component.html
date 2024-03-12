@@ -44,7 +44,7 @@
                   >
                 </div>
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                      <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password">
+                      <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password1">
                         Jelszó
                         <div class="info-icon">
                           <img src="../../assets/info.png" alt="info" class="info">
@@ -60,14 +60,17 @@
                       </label>
                       <input 
                         class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-                        id="grid-password" type="text" placeholder="********" [(ngModel)]="password" name="password"
+                        id="grid-password1" type="password" placeholder="********" [(ngModel)]="password" name="password"
                       >
                   </div>
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password">
+                    <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password2">
                       Jelszó újra
                     </label>
-                    <input class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" id="grid-password" type="text" placeholder="********">
+                    <input 
+                      class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
+                      id="grid-password2" type="password" placeholder="********"
+                    >
                 </div>
               </div>
             </div>
