@@ -1,53 +1,44 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AuthenticationClient } from './authentication.client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-   private host = "http://127.0.0.1:3333";
-  isLoggedIn: boolean = false;
-  email: string = '';
-  private loggedInUser = new BehaviorSubject<string>('');
+  private tokenKey = 'token';
 
-  constructor(private http:HttpClient) { }
+  constructor(private authenticationClient: AuthenticationClient, private router: Router) { }
 
-  register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
-    const user = {
-      firstName,
-      lastName,
-      email,
-      password
-    };
-    return this.http.post(`${this.host}/sign-up`, user);
+  public login(email: string, password: string): void {
+    this.authenticationClient.login(email, password).subscribe((user) => {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      window.location.replace('/home');
+    });
   }
 
-  login(email: string, password: string): Observable<any> {
-    const users = {
-      email,
-      password
-    };
-    return this.http.post(`${this.host}/login`, users);
+  public signUp(firstName: string, lastName: string, email: string, password: string): void {
+    this.authenticationClient
+      .register(firstName, lastName, email, password)
+      .subscribe((token) => {
+        localStorage.setItem(this.tokenKey, token);
+        window.location.replace('/home');
+      });
   }
 
-  logout(): Observable<any> {
-    return this.http.post(`${this.host}/logout`, {});
+  public logout() {
+    localStorage.removeItem(this.tokenKey);
+    window.location.replace('/');
   }
 
-  clearSession(){
-    this.email = '';
-    this.isLoggedIn = false;
-    window.location.href = "/";
-    this.loggedInUser.next('');
+  public isLoggedIn(): boolean {
+    let token = localStorage.getItem(this.tokenKey);
+    return token != null && token.length > 0;
   }
 
-  getLoggedInUser() {
-    return this.loggedInUser.asObservable();
-  }
-
-  setLoggedInUser(username: string) {
-    this.loggedInUser.next(username);
+  public getToken(): string | null {
+    return this.isLoggedIn() ? localStorage.getItem(this.tokenKey) : null;
   }
 }

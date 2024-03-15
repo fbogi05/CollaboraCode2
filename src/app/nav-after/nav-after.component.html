@@ -9,7 +9,7 @@
         <img class="ml-20" src="../../assets/LogoType-Dark.svg" alt="CollaboraCode" [width]="300">
       </li>
       <li class="flex flex-1 items-center justify-end">
-        <p style="color: white">Üdvözlünk, {{ loggedInName }}</p>
+        <p *ngIf="loggedInName" style="color: white">Üdvözlünk, {{ loggedInName }}</p>
         <div class="relative group" (click)="toggleDropdown()">
           <button type="button" class="inline-flex items-center border border-transparent rounded-md shadow-sm text-sm font-medium text-white" aria-expanded="false">
               <img [ngClass]="{'aktiv': isLoggedIn, 'nem-aktiv':!isLoggedIn}" src="../../assets/user.png" alt="user" [width]="32">
@@ -21,7 +21,7 @@
             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
               <a routerLink="/profil" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profil</a>
               <a routerLink="/projects" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Projektek</a>
-              <a (click)="logActive(); logout()" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Kijelentkezés</a>
+              <a (click)="logout()" class="block px-4 py-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Kijelentkezés</a>
             </div>
           </div>
         </div>

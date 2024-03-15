@@ -6,10 +6,4 @@ import { Component } from '@angular/core';
   styleUrl: './add-people.component.css'
 })
 export class AddPeopleComponent {
-
-  isDropdownOpen: boolean = false;
-
-  toggleDropdown(){
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
 }

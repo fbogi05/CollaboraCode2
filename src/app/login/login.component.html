@@ -13,14 +13,14 @@
     </nav>
       <div class="pt-20">
         <h2 class="text-3xl font-medium mb-8 text-white text-center mt-20">Belépés</h2>
-        <form class="rounded px-8 pt-6 pb-2 mb-4">
+        <form class="rounded px-8 pt-6 pb-2 mb-4" [formGroup]="loginForm">
           <div class="mb-4">
             <label class="block uppercase text-white text-sm font-medium mb-2" for="email">
               E-mail cím
             </label>
             <input 
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-              id="email" type="text" placeholder="E-mail" [(ngModel)]="email" name="email"
+              id="email" type="text" placeholder="E-mail" formControlName="email" name="email"
             >
           </div>
           <div class="mb-6">
@@ -29,11 +29,11 @@
             </label>
             <input 
               class="shadow appearance-none border rounded-lg w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-              id="password" type="password" placeholder="********" [(ngModel)]="password" name="password"
+              id="password" type="password" placeholder="********" formControlName="password" name="password"
             >
           </div>
           <div class="w-full flex justify-center">
-            <button (click)="loginActive(); login(email, password)" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
+            <button (click)="onSubmit()" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
               Belépés
             </button>
           </div>

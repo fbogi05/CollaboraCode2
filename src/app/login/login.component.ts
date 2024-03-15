@@ -1,40 +1,30 @@
-import { Component } from '@angular/core';
-import { ActiveService } from '../active.service';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  email: string = '';
-  password: string = '';
+  public loginForm!: FormGroup;
 
-  constructor(private active: ActiveService, private auth: AuthService) {
+  constructor(private auth: AuthService) {
   }
 
-  get isLoggedIn(){
-    return this.active.isLoggedIn;
-  }
-
-  loginActive(){
-    this.active.login();
-  }
-
-  login(email: string, password: string): void {
-    this.auth.login(email, password).subscribe({
-      next:(response) => {
-        console.log('Sikeres bejelentkezés:', response);
-        sessionStorage.setItem('loggedIn', 'true');
-        window.location.href = '/home';
-      },
-      error:(error) => {
-        console.error('Sikertelen bejelentkezés:', error);
-      }
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
   }
 
-
+  public onSubmit() {
+    this.auth.login(
+      this.loginForm.get('email')!.value,
+      this.loginForm!.get('password')!.value
+    );
+  }
 }

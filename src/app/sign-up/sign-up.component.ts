@@ -1,41 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { ActiveService } from '../active.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+  public registerForm!: FormGroup;
 
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  password: string = '';
-
-  constructor(private active: ActiveService, private auth: AuthService) {
+  constructor(private auth: AuthService) {
   }
 
-  get isLoggedIn() {
-    return this.active.isLoggedIn;
-  }
-
-  registerActive() {
-    this.active.login();
-  }
-
-  register(firstName: string, lastName: string, email: string, password: string): void {
-    this.auth.register(firstName, lastName, email, password).subscribe({
-      next:(response) => {
-        console.log('Sikeres regisztráció:', response);
-        sessionStorage.setItem('loggedIn', 'true');
-        window.location.href = '/home';
-      },
-      error:(error) => {
-        console.error('Sikertelen regisztráció:', error);
-      }
+  ngOnInit() {
+    this.registerForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
     });
+  }
+
+  public onSubmit() {
+    this.auth.signUp(
+      this.registerForm.get('firstName')!.value,
+      this.registerForm.get('lastName')!.value,
+      this.registerForm.get('email')!.value,
+      this.registerForm!.get('password')!.value
+    );
   }
 
 }

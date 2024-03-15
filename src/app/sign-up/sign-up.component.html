@@ -13,7 +13,7 @@
     </nav>
     <div class="pt-16">
       <h2 class="text-3xl font-medium mb-8 text-white text-center mt-10">Regisztráció</h2>
-        <form class="w-full max-w-xl">
+        <form class="w-full max-w-xl" [formGroup]="registerForm">
             <div class="">
               <div class="flex flex-col -mx-3 mb-6 items-center">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -22,7 +22,7 @@
                   </label>
                   <input
                     class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Keresztnév" [(ngModel)]="firstName" name="firstName"
+                    id="grid-first-name" type="text" placeholder="Keresztnév" name="firstName" formControlName="firstName"
                   >
                 </div>
                 <div class="w-full md:w-1/2 px-3 mb-3">
@@ -31,7 +31,7 @@
                   </label>
                   <input 
                     class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-                    id="grid-last-name" type="text" placeholder="Vezetéknév" [(ngModel)]="lastName" name="lastName"
+                    id="grid-last-name" type="text" placeholder="Vezetéknév" name="lastName" formControlName="lastName"
                   >
                 </div>
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -40,7 +40,7 @@
                   </label>
                   <input 
                     class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-                    id="grid-email" type="text" placeholder="E-mail cím" [(ngModel)]="email" name="email"
+                    id="grid-email" type="text" placeholder="E-mail cím" name="email" formControlName="email"
                   >
                 </div>
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -60,7 +60,7 @@
                       </label>
                       <input 
                         class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-                        id="grid-password1" type="password" placeholder="********" [(ngModel)]="password" name="password"
+                        id="grid-password1" type="password" placeholder="********" name="password" formControlName="password"
                       >
                   </div>
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -75,7 +75,7 @@
               </div>
             </div>
             <div class="w-full flex justify-center">
-              <button (click)="registerActive(); register(firstName, lastName, email, password)" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline" type="submit">
+              <button (click)="onSubmit()" class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline" type="submit">
                   Regisztráció
               </button>
             </div>
