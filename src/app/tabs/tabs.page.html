@@ -1,26 +1,28 @@
 <ion-tabs #tabs>
-  <ion-tab-bar class="py-2" slot="bottom">
+  <ion-tab-bar
+    class="h-20 fixed bottom-6 left-1/2 -translate-x-1/2 w-11/12 rounded-xl"
+  >
     <ion-tab-button tab="home">
       <div
-        class="flex justify-center items-center w-2/3 h-10 bg-blue-700 bg-opacity-80 rounded-full shadow-stone-400 dark:shadow-stone-900 shadow-md"
+        class="flex justify-center items-center h-10 aspect-square bg-blue-700 bg-opacity-80 rounded-xl shadow-stone-400 dark:shadow-stone-900 shadow-md"
       >
         <img
-          class="h-8 invert"
+          class="h-7 invert"
           [src]="getIcon('home')"
           alt="Kezdőlap"
           [ngClass]="{ 'selected': isSelectedTab('home') }"
         />
       </div>
       <ion-label class="mt-1 text-black dark:text-white text-sm"
-        >Home</ion-label
+        >Főoldal</ion-label
       >
     </ion-tab-button>
     <ion-tab-button tab="projects">
       <div
-        class="flex justify-center items-center w-2/3 h-10 bg-blue-700 bg-opacity-80 rounded-full shadow-stone-400 dark:shadow-stone-900 shadow-md"
+        class="flex justify-center items-center h-10 aspect-square bg-blue-700 bg-opacity-80 rounded-xl shadow-stone-400 dark:shadow-stone-900 shadow-md"
       >
         <img
-          class="h-8 invert"
+          class="h-7 invert"
           [src]="getIcon('projects')"
           alt="Projektek"
           [ngClass]="{ 'selected': isSelectedTab('projects') }"
@@ -32,10 +34,10 @@
     </ion-tab-button>
     <ion-tab-button tab="settings">
       <div
-        class="flex justify-center items-center w-2/3 h-10 bg-blue-700 bg-opacity-80 rounded-full shadow-stone-400 dark:shadow-stone-900 shadow-md"
+        class="flex justify-center items-center h-10 aspect-square bg-blue-700 bg-opacity-80 rounded-xl shadow-stone-400 dark:shadow-stone-900 shadow-md"
       >
         <img
-          class="h-8 invert"
+          class="h-7 invert"
           [src]="getIcon('settings')"
           alt="Beállítások"
           [ngClass]="{ 'selected': isSelectedTab('settings') }"

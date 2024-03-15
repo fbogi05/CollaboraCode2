@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseService } from '../base.service';
+import { BaseService } from '../services/base.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -42,7 +43,7 @@ export class RegisterPage {
     },
   };
 
-  constructor(private base: BaseService, private router: Router) {}
+  constructor(private base: BaseService, private authService: AuthService, private router: Router) {}
 
   changeVisibility(field: string) {
     if (field === 'password') {
@@ -97,6 +98,7 @@ export class RegisterPage {
   register(form: NgForm) {
     this.validateData();
     if (form.valid) {
+      this.authService.setAuthenticated(true);
       this.router.navigate(['tabs/home']);
     }
   }

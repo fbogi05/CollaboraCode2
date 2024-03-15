@@ -1,89 +1,93 @@
 <ion-content [fullscreen]="true">
-  <form
-    class="from-blue-700 to-sky-500 bg-gradient-to-br min-h-full flex flex-col items-center justify-evenly px-4"
-    #form="ngForm"
-    (ngSubmit)="login(form)"
-  >
-    <h1 class="text-xl text-center text-white my-4">
-      Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
-    </h1>
-    <div class="flex flex-col gap-3">
-      <div class="form-group flex flex-col gap-3">
-        <label for="email" class="text-white">E-mail cím</label>
-        <input
-          type="email"
-          class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
-          [ngClass]="{'outline outline-red-700': (email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid, 'outline-blue-300 dark:outline-slate-700': (email.valid || (!email.touched && !email.dirty)) && fieldData.email.valid}"
-          id="email"
-          name="email"
-          autocomplete="email"
-          [(ngModel)]="fieldData.email.value"
-          (ngModelChange)="resetFieldStates('email')"
-          #email="ngModel"
-          required
-        />
-        <div
-          *ngIf="((email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid) && email.errors?.['required']"
-          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
-        >
-          <div *ngIf="email.errors?.['required']">
-            <p>Az email cím megadása kötelező!</p>
-          </div>
-        </div>
-      </div>
-      <div class="form-group flex flex-col gap-3">
-        <label for="password" class="text-white">Jelszó</label>
-        <div class="relative flex gap-4">
+  <div class="content h-full">
+    <form
+      class="from-[#1d4ed8a0] to-[#0ea4e9a0] bg-gradient-to-br h-full flex flex-col items-center justify-evenly px-4"
+      #form="ngForm"
+      (ngSubmit)="login(form)"
+    >
+      <h1 class="text-xl text-center text-white my-4">
+        Bejelentkezés a<br /><span class="font-bold">CollaboraCode</span>-ba
+      </h1>
+      <div class="flex flex-col justify-center w-full max-w-64 gap-3">
+        <div class="form-group flex flex-col gap-3">
+          <label for="email" class="text-white">E-mail cím</label>
           <input
-            [type]="getPasswordVisible()"
-            class="form-control rounded-full shadow-lg shadow-blue-400 dark:shadow-blue-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
-            [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
-            id="password"
-            name="password"
-            autocomplete="current-password"
-            [(ngModel)]="fieldData.password.value"
-            (ngModelChange)="resetFieldStates('password')"
-            #password="ngModel"
+            type="email"
+            class="inline-block form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            [ngClass]="{'outline outline-red-700': (email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid, 'outline-blue-300 dark:outline-slate-700': (email.valid || (!email.touched && !email.dirty)) && fieldData.email.valid}"
+            id="email"
+            contenteditable="true"
+            name="email"
+            autocomplete="email"
+            [(ngModel)]="fieldData.email.value"
+            (ngModelChange)="resetFieldStates('email')"
+            #email="ngModel"
             required
           />
-          <button
-            type="button"
-            class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center"
-            (click)="changeVisibility()"
+          <div
+            *ngIf="((email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid) && email.errors?.['required']"
+            class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
           >
-            <img [src]="fieldData.password.icon" class="dark:invert" />
-          </button>
+            <div *ngIf="email.errors?.['required']">
+              <p>Az email cím megadása kötelező!</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group flex flex-col gap-3">
+          <label for="password" class="text-white">Jelszó</label>
+          <div class="relative flex gap-4">
+            <input
+              [type]="getPasswordVisible()"
+              class="form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 pl-4 py-1 pr-9 w-full focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+              [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              [(ngModel)]="fieldData.password.value"
+              (ngModelChange)="resetFieldStates('password')"
+              #password="ngModel"
+              required
+            />
+            <button
+              type="button"
+              class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center"
+              (click)="changeVisibility()"
+            >
+              <img [src]="fieldData.password.icon" class="dark:invert" />
+            </button>
+          </div>
+          <div
+            *ngIf="password.invalid && (password.touched || password.dirty) || !fieldData.password.valid"
+            class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+          >
+            <div *ngIf="password.errors?.['required']; else isValid">
+              <p>A jelszó megadása kötelező!</p>
+            </div>
+            <ng-template #isValid>
+              <div>
+                <p>
+                  Az email cím vagy a jelszó nem megfelelő! Kérem próbálja meg
+                  újra.
+                </p>
+              </div>
+            </ng-template>
+          </div>
+          <input
+            value="Bejelentkezés"
+            type="submit"
+            class="flex self-center bg-blue-700 shadow-blue-700 bg-opacity-80 shadow-lg text-white w-fit py-2 px-4 mt-2 rounded-lg"
+          />
         </div>
         <div
-          *ngIf="password.invalid && (password.touched || password.dirty) || !fieldData.password.valid"
-          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+          class="text-center flex flex-col items-center text-white font-semibold my-4"
         >
-          <div *ngIf="password.errors?.['required']; else isValid">
-            <p>A jelszó megadása kötelező!</p>
-          </div>
-          <ng-template #isValid>
-            <div>
-              <p>
-                Az email cím vagy a jelszó nem megfelelő! Kérem próbálja meg
-                újra.
-              </p>
-            </div>
-          </ng-template>
+          <p class="px-2 rounded-md">Még nem felhasználó?</p>
+          <p class="w-fitpx-2 rounded-b-md pb-1">
+            Itt tud
+            <a routerLink="/register" class="underline">regisztrálni</a>.
+          </p>
         </div>
-        <input
-          value="Bejelentkezés"
-          type="submit"
-          class="flex self-center bg-blue-700 shadow-sky-700 bg-opacity-80 shadow-lg text-white w-fit py-2 px-4 mt-2 rounded-lg"
-        />
       </div>
-      <div
-        class="text-center flex flex-col items-center text-white font-semibold my-4"
-      >
-        <p class="px-2 rounded-md">Még nem felhasználó?</p>
-        <p class="w-fitpx-2 rounded-b-md pb-1">
-          Itt tud <a routerLink="/register" class="underline">regisztrálni</a>.
-        </p>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </ion-content>

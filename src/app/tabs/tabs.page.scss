@@ -1,8 +1,8 @@
 .selected {
-  animation: selectedAnimation 500ms ease-in-out;
+  animation: buttonSelected 500ms ease-in-out;
 }
 
-@keyframes selectedAnimation {
+@keyframes buttonSelected {
   0% {
     transform: scale(100%);
   }
