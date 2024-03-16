@@ -19,6 +19,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { NavAfterComponent } from './nav-after/nav-after.component';
+import { FilesComponent } from './files/files.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NavAfterComponent } from './nav-after/nav-after.component';
     ProjectsComponent,
     SignUpComponent,
     HomeComponent,
-    NavAfterComponent
+    NavAfterComponent,
+    FilesComponent
   ],
   imports: [
     BrowserModule,

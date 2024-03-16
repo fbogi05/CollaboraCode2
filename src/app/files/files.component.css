@@ -1,16 +1,16 @@
-body, html {
+body,html {
     height: 100%;
 }
 
-.hatter{
+.hatter {
     background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
 }
 
-.logo{
+.logo {
     margin: 0 auto;
 }
 
-.foot{
+.foot {
     position: absolute;
     bottom: 0;
     background-color: #0c1733;

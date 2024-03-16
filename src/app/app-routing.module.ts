@@ -9,6 +9,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { EditorComponent } from './editor/editor.component';
 import { AddPeopleComponent } from './add-people/add-people.component';
 import { HomeComponent } from './home/home.component';
+import { FilesComponent } from './files/files.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -17,6 +18,8 @@ const routes: Routes = [
   {path:"home", component:HomeAfterComponent},
   {path:"profil", component:ProfilComponent},
   {path:"projects", component:ProjectsComponent},
+  {path: "files/:id", component:FilesComponent},
+  {path: "files", component:FilesComponent},
   {path:"editor", component:EditorComponent},
   {path:"add-people", component:AddPeopleComponent},
   {path:"", component:HomeComponent}

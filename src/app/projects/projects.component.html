@@ -1,12 +1,25 @@
 <div class="hatter h-full">
     <app-nav-after></app-nav-after>
-    <div class="test text-white text-center pt-56">
-        <p>Projektek</p>
-        <button (click)="onFolderCreate()" class="bg-white hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg" type="button">
-          Új mappa
-        </button>
+    <div class="test text-white text-center pt-10">
+        <div class="flex justify-between px-14 pb-5">
+          <h3 class="text-3xl font-semibold">Projektek</h3>
+          <button 
+            (click)="onFolderCreate()" 
+            class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+            type="button">
+            Új projekt
+          </button>
+        </div>
+        <table class="table-auto border-collapse mx-auto w-60">
+          <tr>
+            <th>Projekt neve</th>
+          </tr>
+          <tr *ngFor="let folder of folders">
+            <td><a routerLink="/files/{{ folder.id }}">{{ folder.name }}</a></td>
+          </tr>
+        </table>
     </div>
     <div class="flex justify-center text-white font-medium bg-black p-2 foot w-full">
       <p>© CollaboraCode 2023</p>
-    </div> 
+    </div>
 </div>

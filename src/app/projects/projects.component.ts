@@ -9,6 +9,7 @@ import { BackendService } from '../backend.service';
 export class ProjectsComponent {
 
   fileStructure: any;
+  folders: any[] = [];
 
   constructor(private backendService: BackendService) { }
 
@@ -17,6 +18,7 @@ export class ProjectsComponent {
     this.backendService.createFolder(newFolderName).subscribe({
       next: response => {
         console.log('Mappa létrehozva:', response);
+        this.folders.push(response);
       },
       error: error => {
         console.error('Hiba történt a mappa létrehozása közben:', error);
