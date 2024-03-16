@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { AuthenticationClient } from './authentication.client';
 
 @Injectable({
@@ -10,7 +8,7 @@ export class AuthService {
 
   private tokenKey = 'token';
 
-  constructor(private authenticationClient: AuthenticationClient, private router: Router) { }
+  constructor(private authenticationClient: AuthenticationClient) { }
 
   public login(email: string, password: string): void {
     this.authenticationClient.login(email, password).subscribe((user) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -6,16 +6,12 @@ import { AuthService } from '../auth.service';
   templateUrl: './nav-after.component.html',
   styleUrl: './nav-after.component.css'
 })
-export class NavAfterComponent implements OnInit{
+export class NavAfterComponent{
 
   isDropdownOpen: boolean = false;
   loggedInName!: string;
 
   constructor(private auth: AuthService){ 
-  }
-
-  ngOnInit(): void {
-    this.loggedInName = this.auth.getLoggedInUserName();
   }
 
   toggleDropdown(){

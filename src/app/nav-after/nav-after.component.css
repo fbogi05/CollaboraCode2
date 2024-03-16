@@ -3,17 +3,3 @@ nav{
     opacity: .7;
     margin-left: 0;
 }
-
-.aktiv{
-    outline: 2px solid #248f24;
-    outline-offset: 1px;
-    border-radius: 100%;
-    margin-left: 35px;
-}
-
-.nem-aktiv{
-    outline: 2px solid #cc0000;
-    outline-offset: 1px;
-    border-radius: 100%;
-    margin-left: 35px;
-}
