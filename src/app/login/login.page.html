@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
-  <div class="content h-full">
+  <div class="content">
     <form
-      class="from-[#1d4ed8a0] to-[#0ea4e9a0] bg-gradient-to-br h-full flex flex-col items-center justify-evenly px-4"
+      class="from-[#1d4ed8a0] to-[#0ea4e9a0] bg-gradient-to-br min-h-screen flex flex-col items-center justify-evenly px-4"
       #form="ngForm"
       (ngSubmit)="login(form)"
     >
@@ -50,7 +50,7 @@
             />
             <button
               type="button"
-              class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center"
+              class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center selection:out focus-visible:outline outline-2 outline-gray-500 outline-offset-1"
               (click)="changeVisibility()"
             >
               <img [src]="fieldData.password.icon" class="dark:invert" />
@@ -75,7 +75,7 @@
           <input
             value="Bejelentkezés"
             type="submit"
-            class="flex self-center bg-blue-700 shadow-blue-700 bg-opacity-80 shadow-lg text-white w-fit py-2 px-4 mt-2 rounded-lg"
+            class="flex self-center bg-blue-700 shadow-blue-700 bg-opacity-80 focus-visible:outline outline-2 outline-white outline-offset-2 shadow-lg text-white w-fit py-2 px-4 mt-2 rounded-lg"
           />
         </div>
         <div
@@ -84,7 +84,11 @@
           <p class="px-2 rounded-md">Még nem felhasználó?</p>
           <p class="w-fitpx-2 rounded-b-md pb-1">
             Itt tud
-            <a routerLink="/register" class="underline">regisztrálni</a>.
+            <a
+              routerLink="/register"
+              class="underline outline-none focus-visible:bg-white focus-visible:text-blue-700 focus-visible:rounded-lg focus-visible:px-2 focus-visible:py-1"
+              >regisztrálni</a
+            >.
           </p>
         </div>
       </div>

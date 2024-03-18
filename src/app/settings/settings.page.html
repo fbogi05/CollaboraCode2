@@ -1,3 +1,20 @@
+<ion-menu
+  style="z-index: 3"
+  class="absolute"
+  menuId="main-menu"
+  side="end"
+  contentId="main-content"
+>
+  <ion-content class="ion-padding">
+    <h1>Hello!</h1>
+  </ion-content>
+</ion-menu>
 <ion-content [fullscreen]="true">
   <h1>A beállítások működik!</h1>
+  <ion-menu-toggle
+    class="fixed top-4 right-4 p-2 bg-blue-700 rounded-lg"
+    menu="main-menu"
+  >
+    <img src="../../assets/menu.svg" class="h-8 aspect-square invert" />
+  </ion-menu-toggle>
 </ion-content>
