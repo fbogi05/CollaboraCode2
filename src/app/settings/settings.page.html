@@ -1,20 +1,33 @@
 <ion-menu
-  style="z-index: 3"
   class="absolute"
-  menuId="main-menu"
+  menuId="settings-menu"
   side="end"
-  contentId="main-content"
+  contentId="settings-content"
 >
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Beállítások</ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-content class="ion-padding">
-    <h1>Hello!</h1>
+    <ul class="flex flex-col gap-4">
+      <li class="p-3 bg-neutral-800 rounded-lg">
+        <a routerLink="general">Általános beállítások</a>
+      </li>
+      <li class="p-3 bg-neutral-800 rounded-lg">
+        <a routerLink="user">Fiók beállítások</a>
+      </li>
+    </ul>
   </ion-content>
 </ion-menu>
-<ion-content [fullscreen]="true">
-  <h1>A beállítások működik!</h1>
-  <ion-menu-toggle
-    class="fixed top-4 right-4 p-2 bg-blue-700 rounded-lg"
-    menu="main-menu"
-  >
-    <img src="../../assets/menu.svg" class="h-8 aspect-square invert" />
-  </ion-menu-toggle>
-</ion-content>
+<div class="ion-page" id="settings-content">
+  <ion-content [fullscreen]="true">
+    <ion-router-outlet [animated]="false"></ion-router-outlet>
+    <ion-menu-toggle
+      class="fixed top-4 right-4 p-2 bg-blue-700 rounded-lg"
+      menu="settings-menu"
+    >
+      <img src="../../assets/menu.svg" class="h-8 aspect-square invert" />
+    </ion-menu-toggle>
+  </ion-content>
+</div>

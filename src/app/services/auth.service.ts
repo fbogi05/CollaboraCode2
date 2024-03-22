@@ -11,7 +11,7 @@ export class AuthService {
   constructor() {}
 
   isAuthenticated() {
-    return localStorage.getItem('user');
+    return JSON.parse(localStorage.getItem('user')!).loggedIn;
   }
 
   setAuthenticated(authenticated: boolean) {

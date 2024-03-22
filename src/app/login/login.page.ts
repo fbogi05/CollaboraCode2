@@ -18,17 +18,17 @@ export class LoginPage {
     password: {
       value: '',
       valid: true,
-      icon: this.base.iconPaths.password.passwordHidden,
+      icon: this.baseService.iconPaths.password.passwordHidden,
       visible: false,
     },
   };
   canLogIn = true;
 
-  constructor(private base: BaseService, private authService: AuthService, private router: Router) {}
+  constructor(private baseService: BaseService, private authService: AuthService, private router: Router) {}
 
   changeVisibility() {
     this.fieldData.password.visible = !this.fieldData.password.visible;
-    this.fieldData.password.icon = this.base.getPasswordIcon(
+    this.fieldData.password.icon = this.baseService.getPasswordIcon(
       this.fieldData.password.visible
     );
   }

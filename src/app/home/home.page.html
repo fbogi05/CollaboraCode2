@@ -1,29 +1,24 @@
-<div class="ion-page" id="main-content">
-  <ion-header class="relative" [translucent]="true">
-    <ion-toolbar>
-      <ion-title>Főoldal</ion-title>
-      <ion-avatar class="p-3" slot="end">
-        <img
-          class="shadow-gray-400 dark:shadow-zinc-900 shadow-md"
-          alt="Profile"
-          src="assets/profile_icon.svg"
-        />
-      </ion-avatar>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-avatar class="fixed top-1 right-1 p-3" routerLink="/tabs/settings/user">
+    <img
+      class="shadow-gray-400 dark:shadow-zinc-900 shadow-md"
+      alt="Profile"
+      src="assets/profile_icon.svg"
+    />
+  </ion-avatar>
+</ion-header>
 
-  <ion-content [fullscreen]="true">
-    <div class="h-full" id="overlay">
-      <h1
-        class="relative top-1/2 -translate-y-1/2 pt-4 text-xl text-center"
-        id="title"
-      >
-        Üdvözlünk a
-        <span
-          class="font-semibold from-sky-500 to-blue-700 bg-gradient-to-br text-transparent bg-clip-text"
-          >CollaboraCode</span
-        ><br />verzió követőjében!
-      </h1>
-    </div>
-  </ion-content>
-</div>
+<ion-content [fullscreen]="true">
+  <div class="h-full" id="overlay">
+    <h1
+      class="relative top-1/2 -translate-y-1/2 pt-4 text-xl text-center"
+      id="title"
+    >
+      Üdvözlünk a
+      <span
+        class="font-semibold from-sky-500 to-blue-700 bg-gradient-to-br text-transparent bg-clip-text"
+        >CollaboraCode</span
+      ><br />verzió követőjében!
+    </h1>
+  </div>
+</ion-content>

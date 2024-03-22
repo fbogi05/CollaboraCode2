@@ -32,29 +32,29 @@ export class RegisterPage {
       hasLowercasePattern: '(?=.*[a-z])',
       hasUppercasePattern: '(?=.*[A-Z])',
       lengthPattern: '^.{8,16}$',
-      icon: this.base.iconPaths.password.passwordHidden,
+      icon: this.baseService.iconPaths.password.passwordHidden,
       visible: false,
     },
     passwordAgain: {
       value: '',
       valid: true,
-      icon: this.base.iconPaths.password.passwordHidden,
+      icon: this.baseService.iconPaths.password.passwordHidden,
       visible: false,
     },
   };
 
-  constructor(private base: BaseService, private authService: AuthService, private router: Router) {}
+  constructor(private baseService: BaseService, private authService: AuthService, private router: Router) {}
 
   changeVisibility(field: string) {
     if (field === 'password') {
       this.fieldData.password.visible = !this.fieldData.password.visible;
-      this.fieldData.password.icon = this.base.getPasswordIcon(
+      this.fieldData.password.icon = this.baseService.getPasswordIcon(
         this.fieldData.password.visible
       );
     } else if (field === 'passwordAgain') {
       this.fieldData.passwordAgain.visible =
         !this.fieldData.passwordAgain.visible;
-      this.fieldData.passwordAgain.icon = this.base.getPasswordIcon(
+      this.fieldData.passwordAgain.icon = this.baseService.getPasswordIcon(
         this.fieldData.passwordAgain.visible
       );
     }

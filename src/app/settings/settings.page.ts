@@ -1,27 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventType, Router } from '@angular/router';
-import { IonMenu } from '@ionic/angular';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
-  @ViewChild('menu') menu?: IonMenu;
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    return;
-    this.router.events.subscribe((event) => {
-      if (
-        event.type === EventType.NavigationEnd &&
-        this.router.url === '/tabs/settings'
-      ) {
-        console.log('closing menu');
-        this.menu?.close();
-      }
-    });
-  }
+export class SettingsPage {
+  currentTab = 'general-settings';
+  constructor() {}
 }

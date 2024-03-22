@@ -1,3 +1,22 @@
-<ion-content [fullscreen]="true">
-  <h2>A projektek működik!</h2>
-</ion-content>
+<ion-menu
+  class="absolute"
+  menuId="projects-menu"
+  side="end"
+  contentId="projects-content"
+>
+  <ion-content class="ion-padding">
+    <h1>Hello!</h1>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="projects-content">
+  <ion-content [fullscreen]="true">
+    <ion-menu-toggle
+      class="fixed top-4 right-4 p-2 bg-blue-700 rounded-lg"
+      menu="projects-menu"
+    >
+      <img src="../../assets/menu.svg" class="h-8 aspect-square invert" />
+    </ion-menu-toggle>
+    <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
+    <div class="flex-1 justify-center items-center" id="container"></div>
+  </ion-content>
+</div>
