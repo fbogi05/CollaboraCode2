@@ -81,7 +81,9 @@ export default class UsersController {
         return
       }
 
-      const token = await User.accessTokens.create(user)
+      const token = await User.accessTokens.create(user, ['*'], {
+        expiresIn: '1 day',
+      })
       response.status(200).json(token)
     } catch (error) {
       response.status(401).send(error.message)
