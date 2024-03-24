@@ -2,6 +2,7 @@
 import RegisterNotification from '#mails/register_notification'
 import User from '#models/user'
 import { loginValidator, registerValidator } from '#validators/user'
+import { AccessToken } from '@adonisjs/auth/access_tokens'
 import type { HttpContext } from '@adonisjs/core/http'
 import hash from '@adonisjs/core/services/hash'
 import mail from '@adonisjs/mail/services/main'
@@ -22,25 +23,23 @@ export default class UsersController {
       await email.buildWithContents()
 
       email.message.html(`
-      <body>
-        <style>
-          .container {
-            background-color: whitesmoke;
-            width: max-content;
-            text-align: center;
-            padding: 10px 20px;
-            border: 2px solid lightgray;
-            margin: 20px 10px;
-            font-family: sans-serif;
-            border-radius: 10px;
-          }
-        </style>
-        <div class="container">
+      <style>
+        .container {
+          background-color: whitesmoke;
+          width: max-content;
+          text-align: center;
+          padding: 10px 20px;
+          border: 2px solid lightgray;
+          margin: 20px 10px;
+          font-family: sans-serif;
+          border-radius: 10px;
+        }
+      </style>
+      <div class="container">
         <h1>Üdvözöljük a CollaboraCode-ban!</h1>
         <p>A regisztráció sikeres. Mostmár bejelentkezhet a fiókjába.</p>
-        </div>
-      </body>
-    `)
+      </div>
+      `)
 
       await mail.send(email)
 
@@ -82,7 +81,7 @@ export default class UsersController {
       }
 
       const token = await User.accessTokens.create(user, ['*'], {
-        expiresIn: '1 day',
+        expiresIn: '30 days',
       })
       response.status(200).json(token)
     } catch (error) {
@@ -91,26 +90,68 @@ export default class UsersController {
   }
 
   async verify({ auth, response }: HttpContext) {
-    const user = await auth.authenticate()
-
-    if (!user) {
-      return response.status(401).send('Unauthorized')
+    let user
+    try {
+      user = await auth.authenticate()
+      if (!user) {
+        return response.status(401).send({ message: 'Nem érvényes token' })
+      }
+    } catch (error) {
+      if (error.code === 'E_UNAUTHORIZED_ACCESS') {
+        return response.status(401).send({ message: 'Nem érvényes token' })
+      } else {
+        return response.status(error.status).send(error)
+      }
     }
 
-    response.status(200).json(user)
+    return response
+      .status(200)
+      .json(
+        `A felhasználó bejelentkezve marad (UTC): ${user.currentAccessToken.expiresAt?.toLocaleString()}-ig`
+      )
+  }
+
+  async renewToken({ auth, response }: HttpContext) {
+     let user
+     try {
+       user = await auth.authenticate()
+       if (!user) {
+         return response.status(401).send({ message: 'Nem érvényes token' })
+       }
+     } catch (error) {
+       if (error.code === 'E_UNAUTHORIZED_ACCESS') {
+         return response.status(401).send({ message: 'Nem érvényes token' })
+       } else {
+         return response.status(error.status).send(error)
+       }
+     }
+
+    await User.accessTokens.delete(user, user.currentAccessToken.identifier)
+
+    const token = await User.accessTokens.create(user!, ['*'], {
+      expiresIn: '30 days',
+    })
+
+    response.status(200).json(token)
   }
 
   async logout({ auth, response }: HttpContext) {
-    await auth.authenticate()
-
-    const user = await auth.user
-
-    if (!user) {
-      return response.status(400).send('Unauthorized')
+    let user
+    try {
+      user = await auth.authenticate()
+      if (!user) {
+        return response.status(401).send({ message: 'Nem érvényes token' })
+      }
+    } catch (error) {
+      if (error.code === 'E_UNAUTHORIZED_ACCESS') {
+        return response.status(401).send({ message: 'Nem érvényes token' })
+      } else {
+        return response.status(error.status).send(error)
+      }
     }
 
     await User.accessTokens.delete(user, user.currentAccessToken.identifier)
 
-    response.status(200).send('Logged out successfully')
+    response.status(200).send('Sikeres kijelentkezés!')
   }
 }

@@ -8,7 +8,7 @@ export const registerValidator = vine.compile(
       .string()
       .email()
       .unique(async (db, value) => {
-        const user = await db.from('users').whereNot('email', value).first()
+        const user = await db.from('users').where('email', value).first()
         return !user
       })
       .trim(),
@@ -37,7 +37,7 @@ registerValidator.messagesProvider = new SimpleMessagesProvider({
   'email.required': 'Az email cím megadása kötelező',
   'email.string': 'Az email címnek szövegnek kell lennie',
   'email.email': 'Az email cím formátuma nem megfelelő',
-  'database.unique': 'A megadott email cím már regisztrálva van',
+  'database.unique': 'A megadott e-mail címmel már van regisztrálva fiók',
   'password.required': 'A jelszó megadása kötelező',
   'password.string': 'A jelszónak szövegnek kell lennie',
   'password.minLength': 'A jelszónak tartalmaznia kell minimum {{ min }} karaktert',
