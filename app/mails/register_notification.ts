@@ -2,7 +2,7 @@ import User from '#models/user'
 import { BaseMail } from '@adonisjs/mail'
 
 export default class RegisterNotification extends BaseMail {
-  from = 'noreply@collaboracode'
+  from = 'noreply'
   subject = 'Üdvözöljük a CollaboraCode-ban!'
   user: User
 
