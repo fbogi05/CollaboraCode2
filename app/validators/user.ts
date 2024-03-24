@@ -21,12 +21,12 @@ export const loginValidator = vine.compile(
 )
 
 registerValidator.messagesProvider = new SimpleMessagesProvider({
-  'first_name.required': 'A keresztnév megadása kötelező',
-  'first_name.string': 'A keresztnévnek szövegnek kell lennie',
-  'first_name.minLength': 'A keresztnévnek tartalmaznia kell minimum {{ min }} karaktert',
-  'last_name.required': 'A vezetéknév megadása kötelező',
-  'last_name.string': 'A vezetéknévnek szövegnek kell lennie',
-  'last_name.minLength': 'A vezetéknévnek tartalmaznia kell minimum {{ min }} karaktert',
+  'firstName.required': 'A keresztnév megadása kötelező',
+  'firstName.string': 'A keresztnévnek szövegnek kell lennie',
+  'firstName.minLength': 'A keresztnévnek tartalmaznia kell minimum {{ min }} karaktert',
+  'lastName.required': 'A vezetéknév megadása kötelező',
+  'lastName.string': 'A vezetéknévnek szövegnek kell lennie',
+  'lastName.minLength': 'A vezetéknévnek tartalmaznia kell minimum {{ min }} karaktert',
   'email.required': 'Az email cím megadása kötelező',
   'email.string': 'Az email címnek szövegnek kell lennie',
   'email.email': 'Az email cím formátuma nem megfelelő',
