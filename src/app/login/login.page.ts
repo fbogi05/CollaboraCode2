@@ -22,9 +22,13 @@ export class LoginPage {
       visible: false,
     },
   };
-  canLogIn = true;
+  allowLogIn = true;
 
-  constructor(private baseService: BaseService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private baseService: BaseService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   changeVisibility() {
     this.fieldData.password.visible = !this.fieldData.password.visible;
@@ -40,16 +44,16 @@ export class LoginPage {
   resetFieldStates(fieldName: string) {
     if (fieldName === 'email') {
       this.fieldData.email.valid = true;
-      this.fieldData.password.valid = this.canLogIn
+      this.fieldData.password.valid = this.allowLogIn
         ? this.fieldData.password.valid
         : true;
     } else if (fieldName === 'password') {
       this.fieldData.password.valid = true;
-      this.fieldData.email.valid = this.canLogIn
+      this.fieldData.email.valid = this.allowLogIn
         ? this.fieldData.email.valid
         : true;
     }
-    this.canLogIn = true;
+    this.allowLogIn = true;
   }
 
   checkCredentials() {
@@ -59,24 +63,39 @@ export class LoginPage {
       this.fieldData.password.valid = false;
     else this.fieldData.password.valid = true;
 
-    this.canLogIn =
-      this.fieldData.email.value === 'user@example.com' &&
-      this.fieldData.password.value === 'Almafa12;';
+    this.authService
+      .login(this.fieldData.email.value, this.fieldData.password.value)
+      .subscribe({
+        next: (data) => {
+          const body: any = data.body;
+          console.log(body);
+
+          if (body.token) {
+            this.authService.setToken(body.token);
+            this.allowLogIn = true;
+          } else {
+            this.allowLogIn = false;
+          }
+        },
+        error: (error) => {
+          console.log(error.error.message);
+          this.allowLogIn = false;
+        },
+      });
 
     if (this.fieldData.email.valid && this.fieldData.password.valid) {
-      if (!this.canLogIn) {
+      if (!this.allowLogIn) {
         this.fieldData.email.valid = false;
         this.fieldData.password.valid = false;
       }
     }
 
-    return this.canLogIn;
+    return this.allowLogIn;
   }
 
   login(form: NgForm) {
-    let authenticated = this.checkCredentials();
+    const authenticated = this.checkCredentials();
     if (form.valid && authenticated) {
-      this.authService.setAuthenticated(true);
       this.router.navigate(['tabs/home']);
     }
   }

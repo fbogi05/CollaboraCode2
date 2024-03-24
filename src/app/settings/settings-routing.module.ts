@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { SettingsPage } from './settings.page';
-import { GeneralSettingsComponent } from '../general-settings/general-settings.component';
-import { UserSettingsComponent } from '../user-settings/user-settings.component';
 
 const routes: Routes = [
   {
     path: '',
     component: SettingsPage,
     children: [
-      { path: '', redirectTo: 'general', pathMatch: 'full' },
-      { path: 'general', component: GeneralSettingsComponent },
-      { path: 'user', component: UserSettingsComponent },
+      { path: '', redirectTo: 'options', pathMatch: 'full' },
+      { path: 'options', loadChildren: () => import('../settings-options/settings-options.module').then(m => m.SettingsOptionsPageModule) },
+      { path: 'user', loadChildren: () => import('../user-settings/user-settings.module').then(m => m.UserSettingsPageModule) },
+      { path: 'theme', loadChildren: () => import('../theme-settings/theme-settings.module').then(m => m.ThemeSettingsPageModule) },
+      { path: 'about', loadChildren: () => import('../about/about.module').then(m => m.AboutPageModule) },
     ],
   },
 ];

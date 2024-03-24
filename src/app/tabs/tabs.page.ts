@@ -1,6 +1,5 @@
-import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonTabs, NavController } from '@ionic/angular';
+import { IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -24,7 +23,7 @@ export class TabsPage implements OnInit {
   };
   @ViewChild('tabs') tabs?: IonTabs;
 
-  constructor(private navController: NavController) {}
+  constructor() {}
 
   getIcon(tab: string) {
     return this.tabs?.getSelected() === tab
@@ -37,6 +36,14 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.navController.navigateRoot('tabs');
+    if (
+      localStorage['theme'] === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }
 }

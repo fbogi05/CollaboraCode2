@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-avatar class="fixed top-1 right-1 p-3" routerLink="/tabs/settings/user">
+  <ion-avatar
+    class="fixed top-1 right-1 p-3 z-10"
+    routerLink="/tabs/settings/user"
+  >
     <img
       class="shadow-gray-400 dark:shadow-zinc-900 shadow-md"
       alt="Profile"
@@ -9,9 +12,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="h-full" id="overlay">
+  <div class="flex items-start justify-center h-full" id="overlay">
     <h1
-      class="relative top-1/2 -translate-y-1/2 pt-4 text-xl text-center"
+      class="text-black dark:text-white relative top-1/2 -translate-y-1/2 pt-4 w-2/3 text-xl text-center"
       id="title"
     >
       Üdvözlünk a

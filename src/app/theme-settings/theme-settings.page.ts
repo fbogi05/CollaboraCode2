@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventType, Router } from '@angular/router';
-import { IonMenu } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-theme-settings',
+  templateUrl: './theme-settings.page.html',
+  styleUrls: ['./theme-settings.page.scss'],
 })
-export class HomePage implements OnInit {
+export class ThemeSettingsPage implements OnInit {
+  @ViewChild('themeSelection') themeSelection!: HTMLElement;
+
   constructor() {}
 
   ngOnInit() {
@@ -17,8 +17,10 @@ export class HomePage implements OnInit {
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       document.documentElement.classList.add('dark');
+      alert('dark');
     } else {
       document.documentElement.classList.remove('dark');
+      alert('light');
     }
   }
 }

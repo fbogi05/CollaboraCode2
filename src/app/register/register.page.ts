@@ -42,8 +42,13 @@ export class RegisterPage {
       visible: false,
     },
   };
+  allowRegister = false;
 
-  constructor(private baseService: BaseService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private baseService: BaseService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   changeVisibility(field: string) {
     if (field === 'password') {
@@ -68,7 +73,9 @@ export class RegisterPage {
     else return 'text';
   }
 
-  validateData() {
+  checkCredentials() {
+    let allowRegister = false;
+
     if (this.fieldData.firstName.value !== '')
       this.fieldData.firstName.valid = true;
     else this.fieldData.firstName.valid = false;
@@ -93,12 +100,37 @@ export class RegisterPage {
     )
       this.fieldData.passwordAgain.valid = true;
     else this.fieldData.passwordAgain.valid = false;
+
+    this.authService
+      .register(
+        this.fieldData.firstName.value,
+        this.fieldData.lastName.value,
+        this.fieldData.email.value,
+        this.fieldData.password.value,
+        this.fieldData.passwordAgain.value
+      )
+      .subscribe({
+        next: (data) => {
+          const body: any = data.body;
+          if (body.token) {
+            this.authService.setToken(body.token);
+            allowRegister = true;
+          } else {
+            allowRegister = false;
+          }
+        },
+        error: (error) => {
+          console.log(error.error.messages);
+          allowRegister = false;
+        },
+      });
+
+    return allowRegister;
   }
 
   register(form: NgForm) {
-    this.validateData();
-    if (form.valid) {
-      this.authService.setAuthenticated(true);
+    const authenticated = this.checkCredentials();
+    if (form.valid && authenticated) {
       this.router.navigate(['tabs/home']);
     }
   }
