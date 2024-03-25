@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,16 +19,29 @@ export class SignUpComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
+      password_confirmation: new FormControl('', [Validators.required, this.passwordsMatchValidator()]),
     });
   }
 
+  passwordsMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const password = control.get('password');
+      const password_confirmation = control.get('password_confirmation');
+      if (password && password_confirmation && password.value !== password_confirmation.value) {
+        return { passwordsNotMatching: true };
+      }
+      return null;
+    };
+  }
+
   public onSubmit() {
-    this.auth.signUp(
-      this.registerForm.get('firstName')!.value,
-      this.registerForm.get('lastName')!.value,
-      this.registerForm.get('email')!.value,
-      this.registerForm!.get('password')!.value
-    );
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    const { firstName, lastName, email, password, password_confirmation } = this.registerForm.value;
+
+    this.auth.signUp(firstName, lastName, email, password, password_confirmation);
   }
 
 }

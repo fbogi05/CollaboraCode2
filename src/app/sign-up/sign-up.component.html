@@ -44,7 +44,7 @@
                   >
                 </div>
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                      <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password1">
+                      <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password">
                         Jelszó
                         <div class="info-icon">
                           <img src="../../assets/info.png" alt="info" class="info">
@@ -60,18 +60,18 @@
                       </label>
                       <input 
                         class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-                        id="grid-password1" type="password" placeholder="********" name="password" formControlName="password"
+                        id="grid-password" type="password" placeholder="********" name="password" formControlName="password"
                       >
                   </div>
                   <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-password2">
+                    <label class="block uppercase tracking-wide text-white text-xs font-medium mb-2" for="grid-confirmPassword">
                       Jelszó újra
                     </label>
-                    <input 
-                      class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" 
-                      id="grid-password2" type="password" placeholder="********"
-                    >
-                </div>
+                    <input
+                      class="appearance-none block w-full bg-gray-100 text-gray-700 border rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white"
+                      id="grid-confirmPassword" type="password" placeholder="********" name="password_confirmation"
+                      formControlName="password_confirmation">
+                  </div>
               </div>
             </div>
             <div class="w-full flex justify-center">
@@ -85,7 +85,7 @@
           </form>
     </div>
         <div class="text-center py-7 text-white">
-          <p class="fiok">Már van fiókod? <a class="underline hover:text-blue-950" routerLink="/login">Lépj be itt</a></p>
+          <p class="fiok">Már van fiókja? <a class="underline hover:text-blue-950" routerLink="/login">Lépjen be itt</a></p>
         </div>
         <div class="flex justify-center text-white font-medium bg-black p-2 foot w-full">
           <p>© CollaboraCode 2023</p>

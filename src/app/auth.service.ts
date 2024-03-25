@@ -11,19 +11,29 @@ export class AuthService {
   constructor(private authenticationClient: AuthenticationClient) { }
 
   public login(email: string, password: string): void {
-    this.authenticationClient.login(email, password).subscribe((user) => {
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
-      window.location.replace('/home');
+    this.authenticationClient.login(email, password).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        window.location.replace('/home');
+      },
+      error: (error) => {
+      console.error('Login error:', error.error.message);
+      alert('Hibás e-mail cím és/vagy jelszó!');
+      }
     });
   }
 
-  public signUp(firstName: string, lastName: string, email: string, password: string): void {
-    this.authenticationClient
-      .register(firstName, lastName, email, password)
-      .subscribe((token) => {
-        localStorage.setItem(this.tokenKey, token);
-        window.location.replace('/home');
-      });
+  public signUp(firstName: string, lastName: string, email: string, password: string, password_confirmation: string): void {
+    this.authenticationClient.register(firstName, lastName, email, password, password_confirmation).subscribe({
+      next: (response: any) => {
+          localStorage.setItem(this.tokenKey, response.token);
+          alert('Sikeres regisztráció.');
+      },
+      error: (error) => {
+        console.error('Hiba történt a regisztráció során:', error);
+        alert('Hiba történt a regisztráció során. Kérjük, próbálja újra később.');
+      }
+    });
   }
 
   public logout() {
