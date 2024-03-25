@@ -10,6 +10,21 @@ body,html {
     margin: 0 auto;
 }
 
+table{
+    background-color: #152443de;
+    width: 95%;
+}
+
+table th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+table tr{
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+
 .foot {
     position: absolute;
     bottom: 0;

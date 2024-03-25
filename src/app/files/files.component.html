@@ -1,15 +1,15 @@
 <div class="hatter h-full">
     <app-nav-after></app-nav-after>
-    <div class="test text-white text-center pt-10">
+    <div class="text-white text-center pt-5">
         <h3 class="text-3xl font-semibold text-left mb-5 pl-4">Fájlok</h3>
         <div class="flex justify-center px-14">
-            <div class="mx-auto w-96 bg-black">
-                <table class="table-auto border-collapse">
+            <div class="mx-auto">
+                <table class="table-fixed border-collapse rounded-md">
                     <tr>
                         <th>Fájl neve</th>
                     </tr>
                     <tr *ngFor="let file of files">
-                        <td>{{ file.name }}</td>
+                        <td><a routerLink="/editor/{{file.id}}">{{file.name }}</a></td>
                     </tr>
                 </table>
             </div>
