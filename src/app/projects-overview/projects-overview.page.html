@@ -1,22 +1,49 @@
 <ion-content [fullscreen]="true">
   <main class="flex flex-1 flex-col h-full">
-    <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
+    <header class="flex items-center justify-between">
+      <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
+      <span class="block w-max" *ngIf="projects.length > 0">
+        <button
+          class="fixed top-4 right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-sm flex gap-2 justify-end items-center h-11 aspect-square"
+          (click)="addProject()"
+          id="add-button"
+        >
+          <p class="overflow-hidden text-nowrap">Projekt hozzáadása</p>
+          <img
+            class="h-4/6 aspect-square dark:invert"
+            src="/assets/add.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+      </span>
+    </header>
     <div
       class="flex flex-wrap gap-4 pb-32 h-full px-4"
       id="container"
       [ngClass]="{ 'flex-col justify-center items-center': projects.length === 0, 'flex-row content-start items-start': projects.length > 0 }"
     >
-      <button
-        class="bg-blue-200 shadow-lg shadow-neutral-300 dark:shadow-neutral-950 rounded-2xl dark:bg-neutral-800 flex justify-center items-center w-28 aspect-square"
-        (click)="addProject()"
+      <div
+        class="flex flex-1 flex-col justify-center items-center w-full"
         *ngIf="projects.length === 0"
       >
-        <img
-          class="h-4/6 aspect-square dark:invert"
-          src="/assets/add.svg"
-          alt="Projekt hozzáadása"
-        />
-      </button>
+        <span class="mb-10">
+          <p class="text-center text-neutral-300 mb-2">
+            Nincsenek elérhető projektek.
+          </p>
+          <p class="text-center text-neutral-300">Hozzon létre egyet most!</p>
+        </span>
+
+        <button
+          class="bg-blue-200 shadow-lg shadow-neutral-300 dark:shadow-neutral-950 rounded-xl dark:bg-neutral-800 flex justify-center items-center w-20 aspect-square"
+          (click)="addProject()"
+        >
+          <img
+            class="h-4/6 aspect-square dark:invert"
+            src="/assets/add.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+      </div>
       <app-project-card
         class="flex flex-1 w-full"
         *ngFor="let project of projects"

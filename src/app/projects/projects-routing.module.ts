@@ -17,6 +17,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'create',
+        loadChildren: () =>
+          import('../create-project/create-project.module').then(
+            (m) => m.CreateProjectPageModule
+          ),
+      },
+      {
         path: 'details/:id',
         loadChildren: () =>
           import('../project-details/project-details.module').then(

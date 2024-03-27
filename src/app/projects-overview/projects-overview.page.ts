@@ -30,7 +30,7 @@ export class ProjectsOverviewPage implements OnInit {
     this.baseService.addProject();
     this.projects = this.baseService.getProjects();
     this.router.navigate([
-      `/tabs/projects/details/${this.projects.length - 1}`,
+      `/tabs/projects/create`,
     ]);
   }
 }

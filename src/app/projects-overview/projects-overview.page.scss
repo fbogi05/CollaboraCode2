@@ -1,0 +1,35 @@
+#add-button {
+  width: 2.75rem;
+  padding-right: 0.5rem;
+  transition: width 0.5s ease-in-out;
+}
+
+#add-button:hover {
+  width: 12.5rem;
+}
+
+#add-button > p {
+  animation: hideButton 0.5s ease-in-out forwards;
+}
+
+#add-button:hover > p {
+  animation: showButton 0.5s ease-in-out forwards;
+}
+
+@keyframes hideButton {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes showButton {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
