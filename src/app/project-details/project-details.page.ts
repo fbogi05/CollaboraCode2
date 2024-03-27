@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.page.html',
-  styleUrls: ['./settings.page.scss'],
+  selector: 'app-project-details',
+  templateUrl: './project-details.page.html',
+  styleUrls: ['./project-details.page.scss'],
 })
-export class SettingsPage implements OnInit {
-  currentTab = 'general-settings';
+export class ProjectDetailsPage implements OnInit {
   constructor() {}
 
   ngOnInit() {

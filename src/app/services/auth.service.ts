@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  url = 'http://localhost:3333/';
+  url = 'https://render-test-dbi1.onrender.com/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     if (!localStorage.getItem('token')) localStorage.setItem('token', '');
   }
 
@@ -45,10 +46,10 @@ export class AuthService {
     );
   }
 
-  logout() {
+  async logout(redirect = true) {
     const token = this.getToken();
     this.setToken('');
-    return this.http.post(
+    await this.http.post(
       this.url + 'logout',
       {},
       {
@@ -56,5 +57,29 @@ export class AuthService {
         observe: 'response',
       }
     );
+    if (redirect) this.router.navigate(['/login']);
+  }
+
+  renewToken() {
+    const token = this.getToken();
+    this.http
+      .post(
+        this.url + 'renew-token',
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          observe: 'response',
+        }
+      )
+      .subscribe({
+        next: (data) => {
+          const body: any = data.body;
+          this.setToken(body.token);
+        },
+        error: (error) => {
+          console.log(error);
+          this.logout();
+        },
+      });
   }
 }

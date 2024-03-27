@@ -8,17 +8,15 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./settings-options.page.scss'],
 })
 export class SettingsOptionsPage implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['login']);
   }
 
   ngOnInit() {
-    localStorage['theme'] = 'light';
     if (
-      localStorage['theme'] === 'dark' ||
+      localStorage.getItem('theme') === 'dark' ||
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {

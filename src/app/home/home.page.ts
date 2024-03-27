@@ -12,7 +12,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     if (
-      localStorage['theme'] === 'dark' ||
+      localStorage.getItem('theme') === 'dark' ||
       (!('theme' in localStorage) &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {

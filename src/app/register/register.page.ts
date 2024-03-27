@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
 import { NgForm } from '@angular/forms';
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
   fieldData = {
     firstName: {
       value: '',
@@ -49,6 +49,14 @@ export class RegisterPage {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  ngOnInit() {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
 
   changeVisibility(field: string) {
     if (field === 'password') {

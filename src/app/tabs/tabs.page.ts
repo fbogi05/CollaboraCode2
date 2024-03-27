@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -23,7 +24,21 @@ export class TabsPage implements OnInit {
   };
   @ViewChild('tabs') tabs?: IonTabs;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    if (
+      localStorage.getItem('theme') === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    this.authService.renewToken();
+  }
 
   getIcon(tab: string) {
     return this.tabs?.getSelected() === tab
@@ -33,17 +48,5 @@ export class TabsPage implements OnInit {
 
   isSelectedTab(tab: string) {
     return this.tabs?.getSelected() === tab;
-  }
-
-  ngOnInit() {
-    if (
-      localStorage['theme'] === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
   }
 }

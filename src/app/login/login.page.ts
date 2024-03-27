@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
 import { NgForm } from '@angular/forms';
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
   fieldData = {
     email: {
       value: '',
@@ -29,6 +29,14 @@ export class LoginPage {
     private authService: AuthService,
     private router: Router
   ) {}
+
+  ngOnInit() {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
 
   changeVisibility() {
     this.fieldData.password.visible = !this.fieldData.password.visible;
@@ -56,14 +64,14 @@ export class LoginPage {
     this.allowLogIn = true;
   }
 
-  checkCredentials() {
+  async checkCredentials() {
     if (this.fieldData.email.value === '') this.fieldData.email.valid = false;
     else this.fieldData.email.valid = true;
     if (this.fieldData.password.value === '')
       this.fieldData.password.valid = false;
     else this.fieldData.password.valid = true;
 
-    this.authService
+    await this.authService
       .login(this.fieldData.email.value, this.fieldData.password.value)
       .subscribe({
         next: (data) => {
@@ -93,10 +101,15 @@ export class LoginPage {
     return this.allowLogIn;
   }
 
-  login(form: NgForm) {
+  async login(form: NgForm) {
     const authenticated = this.checkCredentials();
-    if (form.valid && authenticated) {
-      this.router.navigate(['tabs/home']);
+    if (form.valid && (await authenticated)) {
+      this.router
+        .navigate(['tabs/home'])
+        .then(() => {})
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 }

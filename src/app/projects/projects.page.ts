@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseService } from '../services/base.service';
 
 @Component({
   selector: 'app-projects',
@@ -8,15 +9,5 @@ import { Component, OnInit } from '@angular/core';
 export class ProjectsPage implements OnInit {
   constructor() {}
 
-  ngOnInit() {
-    if (
-      localStorage['theme'] === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }
+  ngOnInit() {}
 }

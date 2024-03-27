@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'options', pathMatch: 'full' },
       { path: 'options', loadChildren: () => import('../settings-options/settings-options.module').then(m => m.SettingsOptionsPageModule) },
-      { path: 'user', loadChildren: () => import('../user-settings/user-settings.module').then(m => m.UserSettingsPageModule) },
+      { path: 'account', loadChildren: () => import('../account-settings/account-settings.module').then(m => m.AccountSettingsPageModule) },
       { path: 'theme', loadChildren: () => import('../theme-settings/theme-settings.module').then(m => m.ThemeSettingsPageModule) },
       { path: 'about', loadChildren: () => import('../about/about.module').then(m => m.AboutPageModule) },
     ],

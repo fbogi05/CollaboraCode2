@@ -32,17 +32,6 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'error',
-  },  {
-    path: 'user-settings',
-    loadChildren: () => import('./user-settings/user-settings.module').then( m => m.UserSettingsPageModule)
-  },
-  {
-    path: 'theme-settings',
-    loadChildren: () => import('./theme-settings/theme-settings.module').then( m => m.ThemeSettingsPageModule)
-  },
-  {
-    path: 'about',
-    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
 
 ];

@@ -6,8 +6,25 @@ import { ProjectsPage } from './projects.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProjectsPage
-  }
+    component: ProjectsPage,
+    children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      {
+        path: 'overview',
+        loadChildren: () =>
+          import('../projects-overview/projects-overview.module').then(
+            (m) => m.ProjectsOverviewPageModule
+          ),
+      },
+      {
+        path: 'details/:id',
+        loadChildren: () =>
+          import('../project-details/project-details.module').then(
+            (m) => m.ProjectDetailsPageModule
+          ),
+      },
+    ],
+  },
 ];
 
 @NgModule({
