@@ -16,6 +16,11 @@
   animation: showButton 0.5s ease-in-out forwards;
 }
 
+#projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
 @keyframes hideButton {
   from {
     opacity: 1;

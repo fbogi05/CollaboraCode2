@@ -21,9 +21,9 @@
       </span>
     </header>
     <main
-      class="flex flex-wrap gap-4 pb-32 h-full px-4"
-      id="container"
-      [ngClass]="{ 'flex-col justify-center items-center': projects.length === 0, 'flex-row content-start items-start': projects.length > 0 }"
+      class="gap-4 pb-32 h-full px-4"
+      id="projects-container"
+      [ngClass]="{ 'justify-center items-center': projects.length === 0, 'content-start items-start': projects.length > 0 }"
     >
       <div
         class="flex flex-1 flex-col justify-center items-center w-full"
