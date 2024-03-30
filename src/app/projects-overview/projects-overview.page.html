@@ -1,11 +1,14 @@
 <ion-content [fullscreen]="true">
-  <main class="flex flex-1 flex-col h-full">
+  <div class="flex flex-1 flex-col h-full">
     <header class="flex items-center justify-between">
       <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
-      <span class="block w-max" *ngIf="projects.length > 0">
+      <span
+        class="fixed top-4 right-4 block w-max backdrop-blur-sm"
+        *ngIf="projects.length > 0"
+      >
         <button
-          class="fixed top-4 right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 backdrop-blur-sm flex gap-2 justify-end items-center h-11 aspect-square"
-          (click)="addProject()"
+          class="shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
+          routerLink="/tabs/projects/create"
           id="add-button"
         >
           <p class="overflow-hidden text-nowrap">Projekt hozzáadása</p>
@@ -17,7 +20,7 @@
         </button>
       </span>
     </header>
-    <div
+    <main
       class="flex flex-wrap gap-4 pb-32 h-full px-4"
       id="container"
       [ngClass]="{ 'flex-col justify-center items-center': projects.length === 0, 'flex-row content-start items-start': projects.length > 0 }"
@@ -35,7 +38,7 @@
 
         <button
           class="bg-blue-200 shadow-lg shadow-neutral-300 dark:shadow-neutral-950 rounded-xl dark:bg-neutral-800 flex justify-center items-center w-20 aspect-square"
-          (click)="addProject()"
+          routerLink="/tabs/projects/create"
         >
           <img
             class="h-4/6 aspect-square dark:invert"
@@ -49,6 +52,6 @@
         *ngFor="let project of projects"
         [project]="project"
       ></app-project-card>
-    </div>
-  </main>
+    </main>
+  </div>
 </ion-content>

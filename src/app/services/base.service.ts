@@ -24,17 +24,17 @@ export class BaseService {
     return projects ? JSON.parse(projects) : [];
   }
 
-  addProject() {
+  createProject(projectName: string, userName: string) {
     const projects = this.getProjects();
     projects.push({
       id: projects.length,
-      name: `Projekt ${projects.length + 1}`,
+      name: projectName,
       users: [
-        { id: 1, name: 'Felhasználó 1' },
-        { id: 2, name: 'Felhasználó 2' },
-        { id: 3, name: 'Felhasználó 3' },
-        { id: 4, name: 'Felhasználó 4' },
-        { id: 5, name: 'Felhasználó 5' },
+        { id: 1, name: userName },
+        { id: 2, name: userName },
+        { id: 3, name: userName },
+        { id: 4, name: userName },
+        { id: 5, name: userName },
       ],
     });
     localStorage.setItem('projects', JSON.stringify(projects));

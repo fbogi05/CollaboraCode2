@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ProjectsOverviewPage implements OnInit {
   projects: any = [];
 
-  constructor(private baseService: BaseService, private router: Router) {
+  constructor(private baseService: BaseService) {
     this.projects = this.baseService.getProjects();
   }
 
@@ -24,13 +24,5 @@ export class ProjectsOverviewPage implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }
-
-  addProject() {
-    this.baseService.addProject();
-    this.projects = this.baseService.getProjects();
-    this.router.navigate([
-      `/tabs/projects/create`,
-    ]);
   }
 }

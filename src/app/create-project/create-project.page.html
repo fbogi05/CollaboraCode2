@@ -1,18 +1,58 @@
 <ion-content [fullscreen]="true">
-  <header>
-    <button
-      class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
-      routerLink="/tabs/projects"
-      routerDirection="back"
+  <div class="flex flex-1 flex-col h-full">
+    <header>
+      <button
+        class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
+        routerLink="/tabs/projects"
+        routerDirection="back"
+      >
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
+      <h1 class="py-6 pl-16 text-2xl text-left">Projekt hozzáadása</h1>
+    </header>
+    <main
+      class="flex flex-wrap gap-8 pb-32 h-full justify-center content-center"
     >
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </button>
-    <h1 class="py-6 pl-16 text-2xl text-left">Projekt hozzáadása</h1>
-  </header>
-  <main class="flex flex-col justify-evenly items-center">
-    <div>
-      <p class="text-center text-neutral-300 mb-2">Projekt neve</p>
-      <input type="text" class="w-64" />
-    </div>
-  </main>
+      <div class="form-group flex flex-col gap-3">
+        <label for="project-name" class="">Projekt neve</label>
+        <input
+          type="text"
+          class="form-control rounded-full bg-neutral-200 dark:bg-neutral-700 shadow-lg shadow-neutral-400 dark:shadow-neutral-950 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
+          id="project-name"
+          name="project-name"
+          [(ngModel)]="fieldData.projectName.value"
+          #projectName="ngModel"
+          required
+        />
+      </div>
+      <div class="form-group flex flex-col gap-3">
+        <label for="user-search" class="">Felhasználók hozzáadása</label>
+        <div
+          class="flex flex-col rounded-2xl shadow-lg shadow-neutral-400 dark:shadow-neutral-950 has-[#user-search:focus]:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
+          id="user-search-container"
+        >
+          <input
+            type="text"
+            class="bg-neutral-200 dark:bg-neutral-700 form-control outline-none px-4 py-1"
+            id="user-search"
+            name="user-search"
+            [(ngModel)]="fieldData.userSearch.value"
+            #projectName="ngModel"
+            required
+          />
+          <div
+            class="bg-neutral-200 dark:bg-neutral-700 rounded-2xl rounded-tl-md rounded-tr-md h-32 w-full"
+            id="user-search-results"
+          ></div>
+        </div>
+        <button
+          type="button"
+          class="flex self-center bg-blue-700 dark:bg-opacity-80 focus-visible:outline outline-2 outline-white outline-offset-2 shadow-lg shadow-blue-300 dark:shadow-neutral-950 text-white w-fit py-2 px-4 mt-8 rounded-lg"
+          (click)="createProject()"
+        >
+          Projekt letrehozása
+        </button>
+      </div>
+    </main>
+  </div>
 </ion-content>
