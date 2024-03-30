@@ -1,7 +1,7 @@
 {
   "name": "CollaboraCode",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "version": "1.0.0",
+  "author": "Borbély Gergő Árpád",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -66,5 +66,5 @@
     "tailwindcss": "^3.4.1",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project"
+  "description": "A mobile app made for tracking changes that were made on CollaboraCode."
 }
