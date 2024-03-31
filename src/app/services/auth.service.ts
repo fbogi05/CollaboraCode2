@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  url = 'https://render-test-dbi1.onrender.com/';
+  url = 'https://ccbackend-test.onrender.com/';
 
   constructor(private http: HttpClient, private router: Router) {
     if (!localStorage.getItem('token')) localStorage.setItem('token', '');

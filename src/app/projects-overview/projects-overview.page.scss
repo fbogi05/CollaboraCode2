@@ -1,7 +1,7 @@
 #add-button {
   width: 2.75rem;
   padding-right: 0.5rem;
-  transition: width 0.5s ease-in-out;
+  transition: width 0.2s ease-in-out;
 }
 
 #add-button:hover {
@@ -9,11 +9,11 @@
 }
 
 #add-button > p {
-  animation: hideButton 0.5s ease-in-out forwards;
+  animation: hideButton 0.2s ease-in-out forwards;
 }
 
 #add-button:hover > p {
-  animation: showButton 0.5s ease-in-out forwards;
+  animation: showButton 0.2s ease-in-out forwards;
 }
 
 #projects-container {

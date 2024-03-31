@@ -10,9 +10,7 @@ import { Router } from '@angular/router';
 export class ProjectsOverviewPage implements OnInit {
   projects: any = [];
 
-  constructor(private baseService: BaseService) {
-    this.projects = this.baseService.getProjects();
-  }
+  constructor(private baseService: BaseService) {}
 
   ngOnInit() {
     if (
@@ -24,5 +22,7 @@ export class ProjectsOverviewPage implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    this.projects = this.baseService.getProjects();
   }
 }

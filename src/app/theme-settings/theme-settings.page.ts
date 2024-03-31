@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSelect } from '@ionic/angular';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-theme-settings',
@@ -9,7 +10,17 @@ import { IonSelect } from '@ionic/angular';
 export class ThemeSettingsPage implements OnInit {
   @ViewChild('themeSelector') themeSelector!: HTMLSelectElement;
 
-  constructor() {}
+  currentTheme = () => {
+    if (localStorage.getItem('theme') === 'dark') {
+      return 'dark';
+    } else if (localStorage.getItem('theme') === 'light') {
+      return 'light';
+    } else {
+      return 'auto';
+    }
+  };
+
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
     if (
@@ -24,11 +35,11 @@ export class ThemeSettingsPage implements OnInit {
   }
 
   setTheme(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    if (selectedValue === 'dark') {
+    const theme = (event.target as HTMLSelectElement).value;
+    if (theme === 'dark') {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
-    } else if (selectedValue === 'light') {
+    } else if (theme === 'light') {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     } else {

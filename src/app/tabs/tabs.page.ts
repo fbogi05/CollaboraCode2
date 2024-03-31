@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-tabs',
@@ -24,7 +25,7 @@ export class TabsPage implements OnInit {
   };
   @ViewChild('tabs') tabs?: IonTabs;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private themeService: ThemeService) {}
 
   ngOnInit() {
     if (
@@ -36,6 +37,10 @@ export class TabsPage implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    this.themeService.isDarkMode$.subscribe((isDark) => {
+      document.body.classList.toggle('dark', isDark);
+    });
 
     this.authService.renewToken();
   }
