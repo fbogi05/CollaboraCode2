@@ -9,15 +9,19 @@ import { environment } from '../environments/environment';
 export class BackendService {
   constructor(private http: HttpClient) { }
 
-  createFolder(folderName: string): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/createFolder`, { folderName });
+  createProject(projectName: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/project`, { projectName });
   }
 
   createFile(fileName: string): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/createFile`, { fileName });
+    return this.http.post(`${environment.apiUrl}/file`, { fileName });
   }
 
   openFile(fileName: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/openFile/${fileName}`);
+  }
+
+  addUser(email: string){
+    return this.http.post(`${environment.apiUrl}/project/member/add`, {email});
   }
 }

@@ -8,20 +8,19 @@ import { BackendService } from '../backend.service';
 })
 export class ProjectsComponent {
 
-  fileStructure: any;
-  folders: any[] = [];
+  projects: any[] = [];
 
   constructor(private backendService: BackendService) { }
 
   onFolderCreate() {
-    const newFolderName = 'új mappa neve';
-    this.backendService.createFolder(newFolderName).subscribe({
+    const newProjectName = 'új projekt';
+    this.backendService.createProject(newProjectName).subscribe({
       next: response => {
         console.log('Mappa létrehozva:', response);
-        this.folders.push(response);
+        this.projects.push(response);
       },
       error: error => {
-        console.error('Hiba történt a mappa létrehozása közben:', error);
+        console.error('Hiba történt a projekt létrehozása közben:', error);
       }
     });
   }

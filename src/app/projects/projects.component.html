@@ -15,8 +15,8 @@
             <tr>
               <th>Projekt neve</th>
             </tr>
-            <tr *ngFor="let folder of folders">
-              <td><a routerLink="/files/{{ folder.id }}">{{ folder.name }}</a></td>
+            <tr *ngFor="let project of projects">
+              <td><a routerLink="/files/{{ project.id }}">{{ project.name }}</a></td>
             </tr>
           </table>
         </div>
