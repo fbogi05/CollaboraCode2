@@ -16,6 +16,8 @@ createProjectValidator.messagesProvider = new SimpleMessagesProvider({
   'name.required': 'A név megadása kötelező',
   'name.string': 'A névnek szövegnek kell lennie',
   'name.alpha': 'A névnek egyben kell lennie',
+  'name.alphaNumeric': 'A név csak angol betűket, számokat, kötőjelet és alsóvonalat tartalmazhat',
+  'database.unique': 'Ilyen nevű projekt már létezik',
   'name.minLength': 'A névnek tartalmaznia kell minimum {{ min }} karaktert',
 })
 
