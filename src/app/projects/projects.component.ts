@@ -12,6 +12,8 @@ import { environment } from '../../environments/environment';
 export class ProjectsComponent {
 
   projects: any[] = [];
+  showInput: boolean = false;
+  projectName: string = "";
 
   constructor(private backendService: BackendService, private auth: AuthService, private http: HttpClient) { 
 
@@ -35,9 +37,8 @@ export class ProjectsComponent {
   }
 
   onProjectCreate() {
-    const name = 'ujProjekt';
     const token: string = this.auth.getToken()!;
-    this.backendService.createProject(name, token).subscribe({
+    this.backendService.createProject(this.projectName, token).subscribe({
       next: response => {
         console.log('Projekt létrehozva:', response);
         this.projects.push(response);

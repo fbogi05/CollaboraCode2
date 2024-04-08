@@ -29,11 +29,23 @@ export class BackendService {
     return this.http.post(`${environment.apiUrl}/project/member/add`, {email});
   }
 
-  public getAccountInfo(auth_token: string){
+  getAccountInfo(auth_token: string){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     })
     return this.http.get(`${environment.apiUrl}/account/info`, {headers: headers});
+  }
+
+  deleteProject(name: any, auth_token: string){
+    let projectId = 0;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`
+    })
+    this.http.post(`${environment.apiUrl}/project/info`, {name}, {headers: headers}).subscribe((project:any) => {
+      projectId = project.id;
+    })
+    return this.http.delete(`${environment.apiUrl}/project/delete`, {body:{id:projectId}, headers: headers})
   }
 }

@@ -9,7 +9,7 @@
                         <th>Fájl neve</th>
                     </tr>
                     <tr *ngFor="let file of files">
-                        <td><a routerLink="/editor/{{file.id}}">{{file.name }}</a></td>
+                        <td><a routerLink="/editor/{{file.name}}">{{file.name }}</a></td>
                     </tr>
                 </table>
             </div>
@@ -20,6 +20,9 @@
                     Új fájl
                 </button>
                 <app-add-people></app-add-people>
+                <button class="mt-4 transition ease-in-out bg-red-50 hover:-translate-y-1 hover:scale-105 hover:bg-red-100 text-red-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-2">
+                    Projekt törlése
+                </button>
             </div>
         </div>
     </div>

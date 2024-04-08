@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../backend.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-files',
@@ -10,7 +11,7 @@ export class FilesComponent {
 
   files: any[] = [];
 
-  constructor(private backendService: BackendService) { }
+  constructor(private backendService: BackendService, private auth: AuthService) { }
 
   onFileCreate() {
     const file_name = 'ujFajl';
@@ -23,5 +24,10 @@ export class FilesComponent {
         console.error('Hiba történt a fájl létrehozása közben:', error);
       }
     });
+  }
+
+  deleteProject(){
+    const token: string = this.auth.getToken()!;
+    this.backendService.deleteProject(projectName, token);
   }
 }
