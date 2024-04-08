@@ -13,8 +13,8 @@ export class FilesComponent {
   constructor(private backendService: BackendService) { }
 
   onFileCreate() {
-    const newFileName = 'új fájl';
-    this.backendService.createFile(newFileName).subscribe({
+    const file_name = 'ujFajl';
+    this.backendService.createFile(file_name).subscribe({
       next: response => {
         console.log('Fájl létrehozva:', response);
         this.files.push(response);

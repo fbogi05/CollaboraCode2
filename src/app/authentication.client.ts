@@ -14,8 +14,8 @@ export class AuthenticationClient {
   }
 
   public register(
-    firstName: string,
-    lastName: string,
+    first_name: string,
+    last_name: string,
     email: string,
     password: string,
     password_confirmation: string
@@ -23,8 +23,8 @@ export class AuthenticationClient {
     return this.http.post(
       environment.apiUrl + '/sign-up',
       {
-        firstName: firstName,
-        lastName: lastName,
+        first_name: first_name,
+        last_name: last_name,
         email: email,
         password: password,
         password_confirmation: password

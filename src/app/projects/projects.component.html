@@ -4,7 +4,7 @@
         <div class="flex justify-between px-14 pb-5">
           <h3 class="text-3xl font-semibold">Projektek</h3>
           <button 
-            (click)="onFolderCreate()" 
+            (click)="onProjectCreate()" 
             class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
             type="button">
             Új projekt
@@ -16,7 +16,7 @@
               <th>Projekt neve</th>
             </tr>
             <tr *ngFor="let project of projects">
-              <td><a routerLink="/files/{{ project.id }}">{{ project.name }}</a></td>
+              <td><a routerLink="/files/{{ project.name }}">{{ project.name }}</a></td>
             </tr>
           </table>
         </div>

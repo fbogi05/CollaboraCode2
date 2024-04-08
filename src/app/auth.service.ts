@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthenticationClient } from './authentication.client';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class AuthService {
 
   private tokenKey = 'token';
 
-  constructor(private authenticationClient: AuthenticationClient) { }
+  constructor(private authenticationClient: AuthenticationClient, private http: HttpClient) { }
 
   public login(email: string, password: string): void {
     this.authenticationClient.login(email, password).subscribe({
@@ -23,8 +25,8 @@ export class AuthService {
     });
   }
 
-  public signUp(firstName: string, lastName: string, email: string, password: string, password_confirmation: string): void {
-    this.authenticationClient.register(firstName, lastName, email, password, password_confirmation).subscribe({
+  public signUp(first_name: string, last_name: string, email: string, password: string, password_confirmation: string): void {
+    this.authenticationClient.register(first_name, last_name, email, password, password_confirmation).subscribe({
       next: (response: any) => {
           localStorage.setItem(this.tokenKey, response.token);
           alert('Sikeres regisztráció.');
