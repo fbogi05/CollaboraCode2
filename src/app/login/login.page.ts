@@ -76,7 +76,6 @@ export class LoginPage implements OnInit {
       .subscribe({
         next: (data) => {
           const body: any = data.body;
-          console.log(body);
 
           if (body.token) {
             this.authService.setToken(body.token);

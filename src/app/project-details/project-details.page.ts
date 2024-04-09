@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseService } from '../services/base.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-details',
@@ -6,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./project-details.page.scss'],
 })
 export class ProjectDetailsPage implements OnInit {
-  constructor() {}
+  files: any[] = [];
+
+  constructor(private baseService: BaseService) {}
 
   ngOnInit() {
     if (
@@ -18,5 +22,24 @@ export class ProjectDetailsPage implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    let retryCount = 0;
+    let getProjectFiles: Subscription;
+
+    const retries = setInterval(() => {
+      getProjectFiles = this.baseService
+        .getProjectFiles()
+        .subscribe((files) => {
+          this.files = files;
+          if (this.files) {
+            clearInterval(retries);
+          }
+          retryCount++;
+          if (retryCount >= 30) {
+            getProjectFiles.unsubscribe();
+            clearInterval(retries);
+          }
+        });
+    }, 100);
   }
 }

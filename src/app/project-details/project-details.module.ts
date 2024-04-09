@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProjectDetailsPageRoutingModule } from './project-details-routing.module';
 
 import { ProjectDetailsPage } from './project-details.page';
+import { FileCardComponent } from '../file-card/file-card.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProjectDetailsPageRoutingModule
+    ProjectDetailsPageRoutingModule,
   ],
-  declarations: [ProjectDetailsPage]
+  declarations: [ProjectDetailsPage, FileCardComponent],
 })
 export class ProjectDetailsPageModule {}

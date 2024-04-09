@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-projects-overview',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./projects-overview.page.scss'],
 })
 export class ProjectsOverviewPage implements OnInit {
-  projects: any = [];
+  projects: any[] = [];
 
   constructor(private baseService: BaseService) {}
 
@@ -23,6 +23,23 @@ export class ProjectsOverviewPage implements OnInit {
       document.documentElement.classList.remove('dark');
     }
 
-    this.projects = this.baseService.getProjects();
+    let retryCount = 0;
+    let getUserProjects: Subscription;
+
+    const retries = setInterval(() => {
+      getUserProjects = this.baseService
+        .getUserProjects()
+        .subscribe((projects) => {
+          this.projects = projects;
+          if (this.projects) {
+            clearInterval(retries);
+          }
+          retryCount++;
+          if (retryCount >= 30) {
+            getUserProjects.unsubscribe();
+            clearInterval(retries);
+          }
+        });
+    }, 100);
   }
 }

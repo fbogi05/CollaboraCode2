@@ -1,14 +1,14 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
 
 @Component({
-  selector: 'app-project-card',
-  templateUrl: './project-card.component.html',
-  styleUrls: ['./project-card.component.scss'],
+  selector: 'app-file-card',
+  templateUrl: './file-card.component.html',
+  styleUrls: ['./file-card.component.scss'],
 })
-export class ProjectCardComponent implements OnInit {
-  @Input() project: any;
+export class FileCardComponent implements OnInit {
+  @Input() file: any;
 
   constructor(private baseService: BaseService, private router: Router) {}
 
@@ -24,8 +24,7 @@ export class ProjectCardComponent implements OnInit {
     }
   }
 
-  openProject(project: any) {
-    this.baseService.currentProjectId = project.id;
-    this.router.navigate(['/tabs/projects/details/' + project.name]);
+  openFile(file: any) {
+    //this.router.navigate(['/tabs/projects/file/' + file.name]);
   }
 }

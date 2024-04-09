@@ -14,8 +14,9 @@ export class CreateProjectPage implements OnInit {
     },
     userSearch: {
       value: '',
-    }
+    },
   };
+  users: any[] = [];
 
   constructor(private baseService: BaseService, private router: Router) {}
 
@@ -31,8 +32,15 @@ export class CreateProjectPage implements OnInit {
     }
   }
 
+  addUser() {
+    this.users.push(this.baseService.getUser(this.fieldData.userSearch.value));
+  }
+
   createProject() {
-    this.baseService.createProject(this.fieldData.projectName.value, this.fieldData.userSearch.value);
-    this.router.navigate([`/tabs/projects/details/${this.baseService.getProjects().length - 1}`]);
+    this.baseService
+      .createProject(this.fieldData.projectName.value, this.users)
+      .subscribe((project: any) => {
+        this.router.navigate([`/tabs/projects/details/${project.name}`]);
+      });
   }
 }

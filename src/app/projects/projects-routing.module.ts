@@ -24,7 +24,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'details/:id',
+        path: 'details/:name',
         loadChildren: () =>
           import('../project-details/project-details.module').then(
             (m) => m.ProjectDetailsPageModule

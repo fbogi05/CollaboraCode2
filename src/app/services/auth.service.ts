@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  url = 'https://ccbackend-test.onrender.com/';
+  url = 'https://collaboracode-backend.onrender.com/';
 
   constructor(private http: HttpClient, private router: Router) {
     if (!localStorage.getItem('token')) localStorage.setItem('token', '');
@@ -64,7 +64,7 @@ export class AuthService {
     const token = this.getToken();
     this.http
       .post(
-        this.url + 'renew-token',
+        this.url + 'token/renew',
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -78,7 +78,7 @@ export class AuthService {
         },
         error: (error) => {
           console.log(error);
-          this.logout();
+          if (error.status === 401) this.logout();
         },
       });
   }
