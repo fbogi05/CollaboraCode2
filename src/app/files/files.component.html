@@ -9,18 +9,21 @@
                         <th>Fájl neve</th>
                     </tr>
                     <tr *ngFor="let file of files">
-                        <td><a routerLink="/editor/{{file.name}}">{{file.name }}</a></td>
+                        <td><a routerLink="/editor/{{ file.name }}">{{ file.name }}</a></td>
                     </tr>
                 </table>
             </div>
             <div class="flex flex-col items-center">
-                <button (click)="onFileCreate()"
+                <button 
+                    (click)="showInput = true"
                     class="transition ease-in-out bg-white hover:-translate-y-1 hover:scale-105 hover:bg-blue-100 text-blue-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-2"
                     type="button">
                     Új fájl
                 </button>
+                <input class="shadow appearance-none border rounded-lg w-full min-w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" *ngIf="showInput" type="text" [(ngModel)]="fileName" (keyup.enter)="onFileCreate(); showInput = false">
                 <app-add-people></app-add-people>
-                <button class="mt-4 transition ease-in-out bg-red-50 hover:-translate-y-1 hover:scale-105 hover:bg-red-100 text-red-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-2">
+                <button (click)="deleteProject()" 
+                    class="mt-4 transition ease-in-out bg-red-50 hover:-translate-y-1 hover:scale-105 hover:bg-red-100 text-red-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-2">
                     Projekt törlése
                 </button>
             </div>

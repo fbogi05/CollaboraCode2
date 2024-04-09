@@ -30,6 +30,7 @@ export class AuthService {
       next: (response: any) => {
           localStorage.setItem(this.tokenKey, response.token);
           alert('Sikeres regisztráció.');
+          window.location.replace('/home');
       },
       error: (error) => {
         console.error('Hiba történt a regisztráció során:', error);
