@@ -32,6 +32,7 @@ export class ProjectsOverviewPage implements OnInit {
         .subscribe((projects) => {
           this.projects = projects;
           if (this.projects) {
+            getUserProjects.unsubscribe();
             clearInterval(retries);
           }
           retryCount++;

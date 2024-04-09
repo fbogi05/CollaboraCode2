@@ -32,7 +32,11 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'error',
+  },  {
+    path: 'create-file',
+    loadChildren: () => import('./create-file/create-file.module').then( m => m.CreateFilePageModule)
   },
+
 
 
 ];

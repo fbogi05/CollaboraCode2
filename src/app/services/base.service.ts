@@ -45,6 +45,19 @@ export class BaseService {
     return user;
   }
 
+  getProjectInfo(projectId: number) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}project/info`,
+      {
+        id: projectId,
+      },
+      { headers: headers }
+    );
+  }
+
   getUserProjects(): Observable<any[]> {
     const headers = new HttpHeaders(
       `Authorization: Bearer ${this.authService.getToken()}`
@@ -103,6 +116,22 @@ export class BaseService {
           );
         })
       );
+  }
+
+  createFile(fileName: string) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}file/create`,
+      {
+        name: fileName,
+        project_id: this.currentProjectId,
+      },
+      {
+        headers: headers,
+      }
+    );
   }
 
   async removeProject(index: number) {

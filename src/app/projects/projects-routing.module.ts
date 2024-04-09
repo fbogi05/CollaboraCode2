@@ -17,10 +17,17 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'create',
+        path: 'create-project',
         loadChildren: () =>
           import('../create-project/create-project.module').then(
             (m) => m.CreateProjectPageModule
+          ),
+      },
+      {
+        path: 'create-file',
+        loadChildren: () =>
+          import('../create-file/create-file.module').then(
+            (m) => m.CreateFilePageModule
           ),
       },
       {
