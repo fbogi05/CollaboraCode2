@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('file_name').notNullable()
       table.string('content').notNullable()
       table.integer('project_id').notNullable().unsigned().references('id').inTable('projects')
-      table.integer('last_edited_user').nullable()
+      table.string('last_edited_user').nullable()
       table.dateTime('last_edited_time').notNullable()
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
