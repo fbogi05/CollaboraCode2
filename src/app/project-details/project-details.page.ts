@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-details',
@@ -9,8 +10,9 @@ import { Subscription } from 'rxjs';
 })
 export class ProjectDetailsPage implements OnInit {
   files: any[] = [];
+  currentProjectName = '';
 
-  constructor(private baseService: BaseService) {}
+  constructor(private baseService: BaseService, private router: Router) {}
 
   ngOnInit() {
     if (
@@ -23,6 +25,15 @@ export class ProjectDetailsPage implements OnInit {
       document.documentElement.classList.remove('dark');
     }
 
+    this.currentProjectName = this.router.url.split('/')[4];
+   
+    this.baseService
+      .getProjectInfoWithName(this.currentProjectName)
+      .subscribe((project: any) => {
+        this.baseService.currentProjectId = project[0].id;
+        
+      });
+
     let retryCount = 0;
     let getProjectFiles: Subscription;
 
@@ -32,6 +43,7 @@ export class ProjectDetailsPage implements OnInit {
         .subscribe((files) => {
           this.files = files;
           if (this.files) {
+            getProjectFiles.unsubscribe();
             clearInterval(retries);
           }
           retryCount++;

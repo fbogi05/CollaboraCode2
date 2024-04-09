@@ -25,6 +25,8 @@ export class FileCardComponent implements OnInit {
   }
 
   openFile(file: any) {
+    // Add show-file-changes component to body
+    
     //this.router.navigate(['/tabs/projects/file/' + file.name]);
   }
 }

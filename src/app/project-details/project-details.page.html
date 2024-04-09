@@ -8,13 +8,24 @@
       >
         <ion-icon name="arrow-back-outline"></ion-icon>
       </button>
-      <h1 class="py-6 pl-16 text-2xl text-left">Fájlok</h1>
+      <h1 class="py-6 pl-16 text-2xl text-left">{{ currentProjectName }}</h1>
       <span
-        class="fixed top-4 right-4 block w-max backdrop-blur-sm"
+        class="fixed top-4 right-4 flex w-max backdrop-blur-sm"
         *ngIf="files.length > 0"
       >
         <button
-          class="shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
+          class="relative right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-center items-center h-11 aspect-square"
+          [routerLink]="'/tabs/projects/settings/' + currentProjectName"
+          id="settings-button"
+        >
+          <img
+            class="w-4/6 aspect-square dark:invert"
+            src="/assets/settings.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+        <button
+          class="relative top-0 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
           routerLink="/tabs/projects/create-file"
           id="add-button"
         >

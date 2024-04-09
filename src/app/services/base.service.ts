@@ -45,14 +45,27 @@ export class BaseService {
     return user;
   }
 
-  getProjectInfo(projectId: number) {
+  getProjectInfoWithId(id: number) {
     const headers = new HttpHeaders(
       `Authorization: Bearer ${this.authService.getToken()}`
     );
     return this.httpClient.post(
       `${this.url}project/info`,
       {
-        id: projectId,
+        id: id,
+      },
+      { headers: headers }
+    );
+  }
+
+  getProjectInfoWithName(name: string) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}project/info`,
+      {
+        name: name,
       },
       { headers: headers }
     );
