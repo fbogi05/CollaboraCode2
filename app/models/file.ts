@@ -17,7 +17,7 @@ export default class File extends BaseModel {
   declare lastEditedUser: string
 
   @column()
-  declare lastEditedTime: DateTime
+  declare lastEditedTime: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
