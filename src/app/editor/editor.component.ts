@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import * as monaco from 'monaco-editor';
+import { ContentsService } from '../contents.service';
 
 @Component({
   selector: 'app-editor',
@@ -15,9 +16,13 @@ export class EditorComponent implements OnInit {
   editorOptions = {theme: 'vs-dark', language: 'python', automaticLayout: true, scrollBeyondLastLine: false, minimap: {enabled: false}};
   code: string= 'print("Hello World!")';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private contentService: ContentsService) { }
 
   ngOnInit(): void {
+    this.contentService.fileContent.subscribe(content => {
+      this.code = content;
+    });
+
     const saveButton = document.getElementById('saveButton');
     if (saveButton) {
       saveButton.addEventListener('click', this.saveCode.bind(this));

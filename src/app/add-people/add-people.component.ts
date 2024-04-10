@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BackendService } from '../backend.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-add-people',
@@ -12,12 +13,7 @@ export class AddPeopleComponent {
 
   public emailForm!: FormGroup;
 
-  constructor(private backendService: BackendService, private auth: AuthService){  
-    // this.backendService.getProjectInfo(this.auth.getToken()!).subscribe(
-    //   (project: any) => {
-    //     const projectId = project.project_id;
-    //   }
-    // )
+  constructor(private backendService: BackendService, private auth: AuthService, private projectService: ProjectService){ 
   }
 
   ngOnInit() {
@@ -28,8 +24,8 @@ export class AddPeopleComponent {
 
   addUser(){
     const token: string = this.auth.getToken()!;
-    let project_id = 2;
-      this.backendService.addUser(this.emailForm.get('user_email')!.value, project_id, token).subscribe({
+    let projectName = this.projectService.getProjectNameFromUrl(); 
+      this.backendService.addUser(this.emailForm.get('user_email')!.value, projectName, token).subscribe({
         next: response => {
           alert("Szerkesztő sikeresen hozzáadva");
           console.log("Szerkesztő sikeresen hozzáadva: ", response);

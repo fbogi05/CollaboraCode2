@@ -34,7 +34,7 @@ export class ProjectsComponent {
     )
   }
 
-  onProjectCreate() {
+  createProject() {
     const token: string = this.auth.getToken()!;
     this.backendService.createProject(this.projectName, token).subscribe({
       next: response => {

@@ -9,7 +9,7 @@
             type="button">
             Új projekt
           </button>
-          <input class="shadow appearance-none border rounded-lg py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" *ngIf="showInput" type="text" [(ngModel)]="projectName" (keyup.enter)="onProjectCreate(); showInput = false">
+          <input class="shadow appearance-none border rounded-lg py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" *ngIf="showInput" type="text" [(ngModel)]="projectName" (keyup.enter)="createProject(); showInput = false">
         </div>
         <div class="mx-auto">
           <table class="table-fixed border-collapse rounded-md">
