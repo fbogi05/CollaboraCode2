@@ -32,13 +32,13 @@ export class ProjectsOverviewPage implements OnInit {
         .subscribe((projects) => {
           this.projects = projects;
           if (this.projects) {
-            getUserProjects.unsubscribe();
             clearInterval(retries);
+            getUserProjects.unsubscribe();
           }
           retryCount++;
           if (retryCount >= 30) {
-            getUserProjects.unsubscribe();
             clearInterval(retries);
+            getUserProjects.unsubscribe();
           }
         });
     }, 100);

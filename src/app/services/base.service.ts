@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -89,8 +89,11 @@ export class BaseService {
             },
             { headers: headers }
           );
+        }),
+        catchError((error) => {
+          return [];
         })
-      );
+      )
   }
 
   createProject(projectName: string, users: any[]) {

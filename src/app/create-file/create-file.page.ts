@@ -31,7 +31,11 @@ export class CreateFilePage implements OnInit {
 
     this.baseService
       .getProjectInfoWithId(this.baseService.currentProjectId!)
-      .subscribe((project: any) => (this.currentProjectName = project.name));
+      .subscribe((project: any) => {
+        console.log(this.baseService.currentProjectId);
+        
+        this.currentProjectName = project.name
+      });
   }
 
   createFile() {

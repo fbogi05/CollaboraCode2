@@ -43,13 +43,13 @@ export class ProjectDetailsPage implements OnInit {
         .subscribe((files) => {
           this.files = files;
           if (this.files) {
-            getProjectFiles.unsubscribe();
             clearInterval(retries);
+            getProjectFiles.unsubscribe();
           }
           retryCount++;
           if (retryCount >= 30) {
-            getProjectFiles.unsubscribe();
             clearInterval(retries);
+            getProjectFiles.unsubscribe();
           }
         });
     }, 100);
