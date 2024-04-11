@@ -21,7 +21,7 @@
           <img
             class="w-4/6 aspect-square dark:invert"
             src="/assets/settings.svg"
-            alt="Projekt hozzáadása"
+            alt="Projekt beállítások"
           />
         </button>
         <button
@@ -72,4 +72,5 @@
       ></app-file-card>
     </main>
   </div>
+  <app-show-file-changes *ngIf="lastEditInformation" [lastEditInformation]="lastEditInformation"></app-show-file-changes>
 </ion-content>

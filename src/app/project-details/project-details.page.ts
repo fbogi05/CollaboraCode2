@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { FileCardComponent } from '../file-card/file-card.component';
 
 @Component({
   selector: 'app-project-details',
@@ -9,8 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-details.page.scss'],
 })
 export class ProjectDetailsPage implements OnInit {
+  getSelectedFile() {
+    throw new Error('Method not implemented.');
+  }
+
   files: any[] = [];
   currentProjectName = '';
+  lastEditInformation: any;
 
   constructor(private baseService: BaseService, private router: Router) {}
 
@@ -26,12 +32,11 @@ export class ProjectDetailsPage implements OnInit {
     }
 
     this.currentProjectName = this.router.url.split('/')[4];
-   
+
     this.baseService
       .getProjectInfoWithName(this.currentProjectName)
       .subscribe((project: any) => {
         this.baseService.currentProjectId = project[0].id;
-        
       });
 
     let retryCount = 0;
@@ -53,5 +58,16 @@ export class ProjectDetailsPage implements OnInit {
           }
         });
     }, 100);
+  }
+
+  showFileChanges(file: any) {
+    this.lastEditInformation;
+    this.baseService.getLastEditInformation(file.id).subscribe((info) => {
+      this.lastEditInformation = info;
+    });
+  }
+
+  hideFileChanges() {
+    this.lastEditInformation = null;
   }
 }

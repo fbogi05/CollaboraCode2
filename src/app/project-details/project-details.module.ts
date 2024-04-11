@@ -8,6 +8,7 @@ import { ProjectDetailsPageRoutingModule } from './project-details-routing.modul
 
 import { ProjectDetailsPage } from './project-details.page';
 import { FileCardComponent } from '../file-card/file-card.component';
+import { ShowFileChangesComponent } from '../show-file-changes/show-file-changes.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { FileCardComponent } from '../file-card/file-card.component';
     IonicModule,
     ProjectDetailsPageRoutingModule,
   ],
-  declarations: [ProjectDetailsPage, FileCardComponent],
+  declarations: [ProjectDetailsPage, FileCardComponent, ShowFileChangesComponent],
 })
 export class ProjectDetailsPageModule {}

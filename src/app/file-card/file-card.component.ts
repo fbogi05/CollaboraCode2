@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
+import { Method } from 'ionicons/dist/types/stencil-public-runtime';
+import { Observable } from 'rxjs';
+import { ProjectDetailsPage } from '../project-details/project-details.page';
 
 @Component({
   selector: 'app-file-card',
@@ -10,7 +13,7 @@ import { BaseService } from '../services/base.service';
 export class FileCardComponent implements OnInit {
   @Input() file: any;
 
-  constructor(private baseService: BaseService, private router: Router) {}
+  constructor(private projectDetails: ProjectDetailsPage) {}
 
   ngOnInit() {
     if (
@@ -24,9 +27,7 @@ export class FileCardComponent implements OnInit {
     }
   }
 
-  openFile(file: any) {
-    // Add show-file-changes component to body
-    
-    //this.router.navigate(['/tabs/projects/file/' + file.name]);
+  showFileChanges() {
+    this.projectDetails.showFileChanges(this.file);
   }
 }

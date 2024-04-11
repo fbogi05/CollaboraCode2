@@ -34,20 +34,30 @@ export class BaseService {
     });
   }
 
-  updateAccountInformation(firstName: string, lastName: string, email: string, password: string) {
+  updateAccountInformation(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
     const userToken = localStorage.getItem('token');
-    let values: { first_name?: string; last_name?: string; email?: string; password?: string } = {}
+    let values: {
+      first_name?: string;
+      last_name?: string;
+      email?: string;
+      password?: string;
+    } = {};
     if (firstName != '') {
-      values.first_name = firstName
+      values.first_name = firstName;
     }
     if (lastName != '') {
-      values.last_name = lastName
+      values.last_name = lastName;
     }
     if (email != '') {
-      values.email = email
+      values.email = email;
     }
     if (password != '') {
-      values.password = password
+      values.password = password;
     }
     return this.httpClient.put(`${this.url}account/modify`, values, {
       headers: { Authorization: `Bearer ${userToken}` },
@@ -162,9 +172,22 @@ export class BaseService {
     );
   }
 
-  async removeProject(index: number) {
+  removeProject(index: number) {
     // const projects = this.getUserProjects();
     // projects.splice(index, 1);
     // localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
+  getLastEditInformation(fileId: number) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}file/info/edit`,
+      {
+        id: fileId,
+      },
+      { headers: headers }
+    );
   }
 }
