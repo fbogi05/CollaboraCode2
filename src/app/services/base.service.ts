@@ -15,6 +15,7 @@ export class BaseService {
   };
   url = 'https://collaboracode-backend.onrender.com/';
   currentProjectId: number | null = null;
+  currentProjectName: string | null = null;
 
   constructor(
     private authService: AuthService,
@@ -156,6 +157,32 @@ export class BaseService {
       );
   }
 
+  getFileInfoWithId(id: number) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}file/info`,
+      {
+        id: id,
+      },
+      { headers: headers }
+    );
+  }
+
+  getFileInfoWithName(name: string) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}file/info`,
+      {
+        name: name,
+      },
+      { headers: headers }
+    );
+  }
+
   createFile(fileName: string) {
     const headers = new HttpHeaders(
       `Authorization: Bearer ${this.authService.getToken()}`
@@ -172,11 +199,33 @@ export class BaseService {
     );
   }
 
-  removeProject(index: number) {
-    // const projects = this.getUserProjects();
-    // projects.splice(index, 1);
-    // localStorage.setItem('projects', JSON.stringify(projects));
+  updateFile(id: number, fileName: string) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.put(
+      `${this.url}file/modify`,
+      {
+        id: id,
+        name: fileName,
+      },
+      {
+        headers: headers,
+      }
+    );
   }
+
+  deleteFile(id: number) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.delete(`${this.url}file/delete`, {
+      body: { id: id },
+      headers: headers,
+    });
+  }
+
+  deleteProject(id: number) {}
 
   getLastEditInformation(fileId: number) {
     const headers = new HttpHeaders(

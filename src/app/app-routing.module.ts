@@ -29,21 +29,10 @@ const routes: Routes = [
     redirectTo: 'tabs',
     pathMatch: 'full',
   },
-  {
-    path: '**',
-    redirectTo: 'error',
-  },  {
-    path: 'create-file',
-    loadChildren: () => import('./create-file/create-file.module').then( m => m.CreateFilePageModule)
-  },
-  {
-    path: 'project-settings',
-    loadChildren: () => import('./project-settings/project-settings.module').then( m => m.ProjectSettingsPageModule)
-  },
-  {
-    path: 'file-settings',
-    loadChildren: () => import('./file-settings/file-settings.module').then( m => m.FileSettingsPageModule)
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: 'error',
+  // },
 
 
 

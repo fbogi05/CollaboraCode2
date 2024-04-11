@@ -8,14 +8,16 @@
       >
         <ion-icon name="arrow-back-outline"></ion-icon>
       </button>
-      <h1 class="py-6 pl-16 text-2xl text-left w-4/6">{{ currentProjectName }}</h1>
+      <h1 class="py-6 pl-16 text-2xl text-left w-4/6">
+        {{ currentProjectName }}
+      </h1>
       <span
         class="fixed top-4 right-4 flex w-max backdrop-blur-sm"
         *ngIf="files.length > 0"
       >
         <button
           class="relative right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-center items-center h-11 aspect-square"
-          [routerLink]="'/tabs/projects/settings/' + currentProjectName"
+          [routerLink]="'/tabs/projects/details/' + currentProjectName + '/project-settings'"
           id="settings-button"
         >
           <img
@@ -72,5 +74,9 @@
       ></app-file-card>
     </main>
   </div>
-  <app-show-file-changes *ngIf="lastEditInformation" [lastEditInformation]="lastEditInformation"></app-show-file-changes>
+  <app-show-file-changes
+    *ngIf="lastEditInformation"
+    [lastEditInformation]="lastEditInformation"
+    [currentProjectName]="currentProjectName"
+  ></app-show-file-changes>
 </ion-content>

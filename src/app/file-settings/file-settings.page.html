@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>FileSettings</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">FileSettings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="flex flex-col h-full">
+    <button
+      class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
+      [routerLink]="'/tabs/projects/details/' + currentProjectName"
+      routerDirection="back"
+    >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <h1 class="py-6 pl-16 text-2xl text-left">Fájl beállítások</h1>
+    <main class="relative flex flex-col flex-grow pb-32">
+      <ul
+        class="flex flex-col gap-4 w-full h-max sm:w-2/3 mx-auto px-4"
+      >
+        <li
+          class="bg-neutral-200 dark:bg-neutral-800 rounded-lg flex flex-1 flex-col justify-start items-center min-h-28 w-full p-4"
+        >
+          <div class="form-group flex flex-col w-full px-4 pt-2 pb-4 gap-3">
+            <label for="file-name">Fájlnév</label>
+            <input
+              type="text"
+              class="form-control rounded-xl bg-blue-50 dark:bg-neutral-700 shadow-lg px-4 py-2 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
+              id="file-name"
+              name="file-name"
+              [(ngModel)]="fieldData.fileName.value"
+              #fileName="ngModel"
+            />
+          </div>
+        </li>
+        <li>
+          <div class="form-group flex flex-col gap-3">
+            <button
+              type="button"
+              class="flex self-end bg-blue-700 dark:bg-opacity-80 focus-visible:outline outline-2 outline-white outline-offset-2 shadow-lg shadow-blue-300 dark:shadow-neutral-950 text-white w-fit py-2 px-4 rounded-lg"
+              (click)="updateFile()"
+            >
+              File adatainak módosítása
+            </button>
+          </div>
+        </li>
+      </ul>
+      <div
+        class="flex flex-col grow justify-end mx-4 mt-2"
+        id="button-container"
+      >
+        <button
+          class="relative top-2 flex bg-red-700 text-white justify-center rounded-lg sm:w-2/3 py-2 w-full mx-auto"
+          (click)="deleteFile()"
+        >
+          Fájl törlése
+        </button>
+      </div>
+    </main>
+  </div>
 </ion-content>

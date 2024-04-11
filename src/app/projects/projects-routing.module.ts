@@ -31,6 +31,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'details/:name/project-settings',
+        loadChildren: () =>
+          import('../project-settings/project-settings.module').then(
+            (m) => m.ProjectSettingsPageModule
+          ),
+      },
+      {
+        path: 'details/:name/file-settings',
+        loadChildren: () =>
+          import('../file-settings/file-settings.module').then(
+            (m) => m.FileSettingsPageModule
+          ),
+      },
+      {
         path: 'details/:name',
         loadChildren: () =>
           import('../project-details/project-details.module').then(

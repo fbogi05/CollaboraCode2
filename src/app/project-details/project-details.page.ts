@@ -10,13 +10,10 @@ import { FileCardComponent } from '../file-card/file-card.component';
   styleUrls: ['./project-details.page.scss'],
 })
 export class ProjectDetailsPage implements OnInit {
-  getSelectedFile() {
-    throw new Error('Method not implemented.');
-  }
-
   files: any[] = [];
   currentProjectName = '';
   lastEditInformation: any;
+  selectedFile: any;
 
   constructor(private baseService: BaseService, private router: Router) {}
 
@@ -31,7 +28,8 @@ export class ProjectDetailsPage implements OnInit {
       document.documentElement.classList.remove('dark');
     }
 
-    this.currentProjectName = this.router.url.split('/')[4];
+    this.baseService.currentProjectName = this.router.url.split('/')[4];
+    this.currentProjectName = this.baseService.currentProjectName;
 
     this.baseService
       .getProjectInfoWithName(this.currentProjectName)
@@ -61,7 +59,7 @@ export class ProjectDetailsPage implements OnInit {
   }
 
   showFileChanges(file: any) {
-    this.lastEditInformation;
+    this.selectedFile
     this.baseService.getLastEditInformation(file.id).subscribe((info) => {
       this.lastEditInformation = info;
     });

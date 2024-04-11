@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -29,9 +27,7 @@ export class AccountSettingsPage implements OnInit {
 
   constructor(
     private baseService: BaseService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+    private authService: AuthService  ) {}
 
   ngOnInit() {
     if (
@@ -74,23 +70,11 @@ export class AccountSettingsPage implements OnInit {
         this.fieldData.email.value,
         this.fieldData.password.value
       )
-      .subscribe({
-        next: (message: any) => {
-          this.baseService
-            .getAccountInformation()
-            .subscribe((accountData: any) => {
-              this.fieldData.firstName.value = accountData.firstName;
-              this.fieldData.lastName.value = accountData.lastName;
-              this.fieldData.email.value = accountData.email;
-              this.fieldData.password.value = '';
-            });
-        },
-        error: (error) => {},
-      });
+      .subscribe();
   }
 
   deleteAccount() {
-    this.baseService.deleteAccount().subscribe((message: any) => {
+    this.baseService.deleteAccount().subscribe(() => {
       this.authService.logout(true);
     });
   }

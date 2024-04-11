@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-file-changes',
@@ -10,8 +11,13 @@ import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
 })
 export class ShowFileChangesComponent implements OnInit {
   @Input() lastEditInformation: any;
+  @Input() currentProjectName?: string;
 
-  constructor(private projectDetails: ProjectDetailsPage, private datePipe: HungarianDatePipe) {}
+  constructor(
+    private router: Router,
+    private projectDetails: ProjectDetailsPage,
+    private datePipe: HungarianDatePipe
+  ) {}
 
   ngOnInit() {
     if (
@@ -24,7 +30,13 @@ export class ShowFileChangesComponent implements OnInit {
       document.documentElement.classList.remove('dark');
     }
 
-    this.lastEditInformation.lastEditedTime = this.datePipe.transform(this.lastEditInformation.lastEditedTime);
+    this.lastEditInformation.lastEditedTime = this.datePipe.transform(
+      this.lastEditInformation.lastEditedTime
+    );
+  }
+
+  openFileSettings() {
+    this.router.navigate(['/tabs/projects/details/' + this.currentProjectName + '/file-settings']);
   }
 
   hideFileChanges() {
