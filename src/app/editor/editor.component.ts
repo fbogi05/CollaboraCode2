@@ -14,17 +14,30 @@ import { BackendService } from '../backend.service';
 })
 export class EditorComponent implements OnInit {
   isLanguageDropdownOpen: boolean = false;
-
-
   editorOptions = {theme: 'vs-dark', language: 'python', automaticLayout: true, scrollBeyondLastLine: false, minimap: {enabled: false}};
-  fileContent: string= 'print(Hello World!)';
+  fileContent: string= '';
+  editor: monaco.editor.IStandaloneCodeEditor | null = null;
 
   constructor(private http: HttpClient, private contentService: ContentsService, private auth: AuthService, private projectService: ProjectService, private backendService: BackendService) { }
 
   ngOnInit(): void {
-    this.contentService.fileContent.subscribe(content => {
-      this.fileContent = content;
+    this.contentService.fileContent$.subscribe(content => {
+      if (this.editor) {
+        this.editor.setValue(content);
+      }
     });
+  }
+
+  toggleLanguageDropdown() {
+    this.isLanguageDropdownOpen = !this.isLanguageDropdownOpen;
+  }
+
+  closeLanguageDropdown(){
+    this.isLanguageDropdownOpen = false;
+  }
+
+  changeLanguage(language: string) {
+    this.editorOptions = { ...this.editorOptions, language };
   }
 
   editCode() {
@@ -42,18 +55,6 @@ export class EditorComponent implements OnInit {
         console.error('Hiba a fájl mentése közben:', error);
       }
     });
-  }
-
-  toggleLanguageDropdown() {
-    this.isLanguageDropdownOpen = !this.isLanguageDropdownOpen;
-  }
-
-  closeLanguageDropdown(){
-    this.isLanguageDropdownOpen = false;
-  }
-
-  changeLanguage(language: string) {
-    this.editorOptions = { ...this.editorOptions, language };
   }
 
 }

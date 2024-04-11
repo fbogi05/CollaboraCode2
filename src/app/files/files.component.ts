@@ -79,13 +79,13 @@ export class FilesComponent {
     const token: string = this.auth.getToken()!;
 
     this.backendService.openFile(fileName, token).subscribe({
-        next: (result: any) => {
-            console.log('A fájl tartalma lekérve:', result);
-            this.contentService.updateFileContent(result.content);
-        },
-        error: (error: any) => {
-            console.error('Hiba a fájl lekérése közben:', error);
-        }
+      next: (result: any) => {
+        console.log('A fájl tartalma lekérve:', result);
+        this.contentService.updateFileContent(result.content);
+      },
+      error: (error: any) => {
+        console.error('Hiba a fájl lekérése közben:', error);
+      }
     });
   }
 }

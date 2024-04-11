@@ -52,7 +52,8 @@ export class BackendService {
     );
   }
 
-  openFile(fileName: string, auth_token: string): Observable<any> {
+  
+openFile(fileName: string, auth_token: string): Observable<any> {
     console.log('Fetching file info for:', fileName);
   
     return this.http.post(`${environment.apiUrl}/file/info`, { name: fileName }, { headers: this.getHeaders(auth_token) }).pipe(

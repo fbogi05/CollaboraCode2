@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentsService {
-
-  private fileContentSource = new Subject<string>();
-  fileContent = this.fileContentSource.asObservable();
+  private fileContentSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  fileContent$: Observable<string> = this.fileContentSubject.asObservable();
 
   constructor() { }
 
   updateFileContent(content: string) {
-    this.fileContentSource.next(content);
+    try {
+      const jsonData = JSON.parse(content);
+      const fileContent = jsonData.content;
+      this.fileContentSubject.next(fileContent);
+    } catch (error) {
+      console.error('Error parsing JSON content:', error);
+    }
   }
 }
