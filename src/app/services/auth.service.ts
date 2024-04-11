@@ -29,11 +29,17 @@ export class AuthService {
     lastName: string,
     email: string,
     password: string,
-    password_confirmation: string
+    passwordConfirmation: string
   ) {
     return this.http.post(
       this.url + 'sign-up',
-      { firstName, lastName, email, password, password_confirmation },
+      {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
+      },
       { observe: 'response' }
     );
   }

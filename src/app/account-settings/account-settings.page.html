@@ -1,15 +1,97 @@
 <ion-content [fullscreen]="true">
-  <button
-    class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
-    routerLink="/tabs/settings"
-    routerDirection="back"
-  >
-    <ion-icon name="arrow-back-outline"></ion-icon>
-  </button>
-  <h1 class="py-6 pl-16 text-2xl text-left">Fiók beállítások</h1>
-  <main>
-    <ul class="flex flex-col gap-6 w-full sm:w-2/3 mx-auto px-4">
-      <li></li>
-    </ul>
-  </main>
+  <div class="flex flex-col h-full">
+    <button
+      class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
+      routerLink="/tabs/settings"
+      routerDirection="back"
+    >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <h1 class="py-6 pl-16 text-2xl text-left">Fiók beállítások</h1>
+    <main class="relative flex flex-col flex-grow pb-32">
+      <ul
+        class="flex flex-col gap-4 w-full h-max sm:w-2/3 mx-auto px-4"
+      >
+        <li
+          class="bg-neutral-200 dark:bg-neutral-800 rounded-lg flex flex-1 flex-col justify-start items-center min-h-28 w-full p-4"
+        >
+          <div class="form-group flex flex-col w-full px-4 pt-2 pb-4 gap-3">
+            <label for="first-name">Keresztnév</label>
+            <input
+              type="text"
+              class="form-control rounded-xl bg-blue-50 dark:bg-neutral-700 shadow-lg px-4 py-2 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
+              id="first-name"
+              name="first-name"
+              [(ngModel)]="fieldData.firstName.value"
+              #firstName="ngModel"
+            />
+          </div>
+          <div class="form-group flex flex-col w-full px-4 pt-2 pb-4 gap-3">
+            <label for="last-name">Vezetéknév</label>
+            <input
+              type="text"
+              class="form-control rounded-xl bg-blue-50 dark:bg-neutral-700 shadow-lg px-4 py-2 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
+              id="last-name"
+              name="last-name"
+              [(ngModel)]="fieldData.lastName.value"
+              #lastName="ngModel"
+            />
+          </div>
+          <div class="form-group flex flex-col w-full px-4 pt-2 pb-4 gap-3">
+            <label for="email">E-mail cím</label>
+            <input
+              type="email"
+              class="form-control rounded-xl bg-blue-50 dark:bg-neutral-700 shadow-lg px-4 py-2 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
+              id="email"
+              name="email"
+              [(ngModel)]="fieldData.email.value"
+              #email="ngModel"
+            />
+          </div>
+          <div class="form-group flex flex-col w-full px-4 pt-2 pb-4 gap-3">
+            <label for="password">Jelszó</label>
+            <div class="relative flex gap-4">
+              <input
+                [type]="getPasswordVisible()"
+                class="form-control rounded-xl bg-blue-50 dark:bg-neutral-700 shadow-lg pl-4 pr-9 py-2 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900 w-full"
+                id="password"
+                name="password"
+                [(ngModel)]="fieldData.password.value"
+                #password="ngModel"
+              />
+              <button
+                type="button"
+                class="absolute right-2 top-2 rounded-full h-6 aspect-square flex justify-center items-center focus-visible:outline outline-2 outline-gray-500 outline-offset-1"
+                (click)="changeVisibility()"
+              >
+                <img [src]="fieldData.password.icon" class="dark:invert" />
+              </button>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="form-group flex flex-col gap-3">
+            <button
+              type="button"
+              class="flex self-end bg-blue-700 dark:bg-opacity-80 focus-visible:outline outline-2 outline-white outline-offset-2 shadow-lg shadow-blue-300 dark:shadow-neutral-950 text-white w-fit py-2 px-4 rounded-lg"
+              (click)="updateAccount()"
+            >
+              Fiók adatok módosítása
+            </button>
+          </div>
+        </li>
+      </ul>
+      <div
+        class="flex flex-col grow justify-end mx-4 mt-2"
+        id="button-container"
+      >
+        <button
+          class="relative top-2 flex bg-red-700 text-white justify-center rounded-lg sm:w-2/3 py-2 w-full mx-auto"
+          (click)="deleteAccount()"
+        >
+          Fiók törlése
+        </button>
+      </div>
+    </main>
+  </div>
 </ion-content>

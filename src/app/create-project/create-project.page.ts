@@ -33,7 +33,7 @@ export class CreateProjectPage implements OnInit {
   }
 
   addUser() {
-    this.users.push(this.baseService.getUser(this.fieldData.userSearch.value));
+    this.users.push(this.fieldData.userSearch.value);
   }
 
   createProject() {

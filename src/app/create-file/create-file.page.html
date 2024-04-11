@@ -14,14 +14,14 @@
       class="flex flex-col gap-8 pb-32 h-full justify-center content-center w-full max-w-64 sm:max-w-72 mx-auto px-4"
     >
       <div class="form-group flex flex-col gap-3">
-        <label for="project-name" class="">Fájl neve</label>
+        <label for="file-name" class="">Fájl neve</label>
         <input
           type="text"
           class="form-control rounded-full bg-neutral-200 dark:bg-neutral-700 shadow-lg shadow-neutral-400 dark:shadow-neutral-950 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
-          id="project-name"
-          name="project-name"
+          id="file-name"
+          name="file-name"
           [(ngModel)]="fieldData.fileName.value"
-          #projectName="ngModel"
+          #fileName="ngModel"
           required
         />
       </div>

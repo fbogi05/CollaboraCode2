@@ -27,22 +27,38 @@ export class BaseService {
     ];
   }
 
-  getUser(email: string) {
+  getAccountInformation() {
     const userToken = localStorage.getItem('token');
-    let user;
+    return this.httpClient.get(`${this.url}account/info`, {
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
+  }
 
-    this.httpClient
-      .post(
-        `${this.url}account/info`,
-        { user_email: email },
-        { headers: { Authorization: `Bearer ${userToken}` } }
-      )
-      .subscribe({
-        next: (data: any) => (user = data.user),
-        error: (error) => console.log(error),
-      });
+  updateAccountInformation(firstName: string, lastName: string, email: string, password: string) {
+    const userToken = localStorage.getItem('token');
+    let values: { first_name?: string; last_name?: string; email?: string; password?: string } = {}
+    if (firstName != '') {
+      values.first_name = firstName
+    }
+    if (lastName != '') {
+      values.last_name = lastName
+    }
+    if (email != '') {
+      values.email = email
+    }
+    if (password != '') {
+      values.password = password
+    }
+    return this.httpClient.put(`${this.url}account/modify`, values, {
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
+  }
 
-    return user;
+  deleteAccount() {
+    const userToken = localStorage.getItem('token');
+    return this.httpClient.delete(`${this.url}account/delete`, {
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
   }
 
   getProjectInfoWithId(id: number) {
@@ -75,25 +91,21 @@ export class BaseService {
     const headers = new HttpHeaders(
       `Authorization: Bearer ${this.authService.getToken()}`
     );
-    return this.httpClient
-      .get<any>(`${this.url}account/info`, {
-        headers: headers,
+    return this.getAccountInformation().pipe(
+      switchMap((accountData: any) => {
+        const userEmail = accountData.email;
+        return this.httpClient.post<any[]>(
+          `${this.url}user/projects`,
+          {
+            user_email: userEmail,
+          },
+          { headers: headers }
+        );
+      }),
+      catchError((error) => {
+        return [];
       })
-      .pipe(
-        switchMap((userData: any) => {
-          const userEmail = userData.email;
-          return this.httpClient.post<any[]>(
-            `${this.url}user/projects`,
-            {
-              user_email: userEmail,
-            },
-            { headers: headers }
-          );
-        }),
-        catchError((error) => {
-          return [];
-        })
-      )
+    );
   }
 
   createProject(projectName: string, users: any[]) {
