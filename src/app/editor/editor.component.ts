@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 import * as monaco from 'monaco-editor';
 import { ContentsService } from '../contents.service';
+import { AuthService } from '../auth.service';
+import { ProjectService } from '../project.service';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-editor',
@@ -14,28 +17,30 @@ export class EditorComponent implements OnInit {
 
 
   editorOptions = {theme: 'vs-dark', language: 'python', automaticLayout: true, scrollBeyondLastLine: false, minimap: {enabled: false}};
-  code: string= 'print("Hello World!")';
+  fileContent: string= 'print(Hello World!)';
 
-  constructor(private http: HttpClient, private contentService: ContentsService) { }
+  constructor(private http: HttpClient, private contentService: ContentsService, private auth: AuthService, private projectService: ProjectService, private backendService: BackendService) { }
 
   ngOnInit(): void {
     this.contentService.fileContent.subscribe(content => {
-      this.code = content;
+      this.fileContent = content;
     });
-
-    const saveButton = document.getElementById('saveButton');
-    if (saveButton) {
-      saveButton.addEventListener('click', this.saveCode.bind(this));
-    }
   }
 
-  saveCode() {
-    const filename = (document.getElementById('filename') as HTMLInputElement).value;
-    const code = this.code;
-    const language = this.editorOptions.language;
+  editCode() {
+    const token: string = this.auth.getToken()!;
+    let fileName = this.projectService.getFileNameFromUrl();
+    let content = this.fileContent;
 
-    this.http.post(environment.apiUrl + '/saveCode', { filename, code, language }).subscribe(response => {
-      console.log('Kód sikeresen mentve:', response);
+    this.backendService.editCode(fileName, content, token).subscribe({
+      next: (result: any) => {
+        alert("Fájl sikeresen elmentve.");
+        console.log('Fájl sikeresen elmentve:', result);
+      },
+      error: (error: any) => {
+        alert("Hiba a fájl mentése közben. Próbálja újra.");
+        console.error('Hiba a fájl mentése közben:', error);
+      }
     });
   }
 

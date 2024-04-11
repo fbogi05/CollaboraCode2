@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ProjectService } from '../project.service';
+import { ContentsService } from '../contents.service';
 
 @Component({
   selector: 'app-files',
@@ -16,7 +17,7 @@ export class FilesComponent {
   showInput: boolean = false;
   fileName: string = "";
 
-  constructor(private backendService: BackendService, private auth: AuthService, private http: HttpClient, private projectService: ProjectService) {  
+  constructor(private backendService: BackendService, private auth: AuthService, private http: HttpClient, private projectService: ProjectService, private contentService: ContentsService) {  
     let projectName = this.projectService.getProjectNameFromUrl();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -74,17 +75,17 @@ export class FilesComponent {
     });
   }
 
-  openFile() {
+  openFile(fileName: string) {
     const token: string = this.auth.getToken()!;
-    let fileName = this.projectService.getFileNameFromUrl();
 
     this.backendService.openFile(fileName, token).subscribe({
-      next:(result: any) => {
-        console.log('File content retrieved:', result);
-      },
-      error:(error: any) => {
-        console.error('Error opening file:', error);
-      }
+        next: (result: any) => {
+            console.log('A fájl tartalma lekérve:', result);
+            this.contentService.updateFileContent(result.content);
+        },
+        error: (error: any) => {
+            console.error('Hiba a fájl lekérése közben:', error);
+        }
     });
   }
 }

@@ -9,7 +9,7 @@
                         <th>Fájl neve</th>
                     </tr>
                     <tr *ngFor="let file of files">
-                        <td><a routerLink="/editor/{{ file.name }}">{{ file.name }}</a></td>
+                        <td><a routerLink="/editor/{{ file.name }}" (click)="openFile(file.name)">{{ file.name }}</a></td>
                     </tr>
                 </table>
             </div>

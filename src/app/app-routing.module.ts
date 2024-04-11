@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: "files/:id", component:FilesComponent},
   {path: "files", component:FilesComponent},
   {path:"editor", component:EditorComponent},
+  {path: "editor/:fileName", component: EditorComponent},
   {path:"add-people", component:AddPeopleComponent},
   {path:"", component:HomeComponent}
 ];

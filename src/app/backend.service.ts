@@ -55,15 +55,12 @@ export class BackendService {
   openFile(fileName: string, auth_token: string): Observable<any> {
     console.log('Fetching file info for:', fileName);
   
-    return this.http.post(`${environment.apiUrl}/file/info`, { fileName: fileName }, { headers: this.getHeaders(auth_token) }).pipe(
-      tap((fileInfo: any) => {
-        console.log('File info retrieved for:', fileName, fileInfo);
-      }),
+    return this.http.post(`${environment.apiUrl}/file/info`, { name: fileName }, { headers: this.getHeaders(auth_token) }).pipe(
       switchMap((fileInfo: any) => {
-        if (fileInfo && fileInfo.id) {
+        if (fileInfo && fileInfo[0].id) {
           console.log('Attempting to retrieve file content for:', fileName);
   
-          return this.http.post<string>(`${environment.apiUrl}/file/content`, {id: fileInfo.id}).pipe(
+          return this.http.post<string>(`${environment.apiUrl}/file/content`, { id: fileInfo[0].id }).pipe(
             map((content: string) => {
               console.log('File content retrieved for:', fileName);
               return { fileInfo, content };
@@ -71,6 +68,35 @@ export class BackendService {
             catchError((contentError: any) => {
               console.error('Error retrieving file content for:', fileName, contentError);
               return throwError(contentError);
+            })
+          );
+        } else {
+          console.error('File id not found for:', fileName);
+          return throwError('File id not found for:' + fileName);
+        }
+      }),
+      catchError((error: any) => {
+        console.error('Error fetching file info for:', fileName, error);
+        return throwError(error);
+      })
+    );
+  }
+
+  editCode(fileName: string, content: string, auth_token: string): Observable<any> {
+    console.log('Saving file:', fileName);
+  
+    return this.http.post(`${environment.apiUrl}/file/info`, { name: fileName }, { headers: this.getHeaders(auth_token) }).pipe(
+      switchMap((fileInfo: any) => {
+        if (fileInfo && fileInfo[0].id) {
+          console.log('File info retrieved for:', fileName, fileInfo);
+  
+          return this.http.put(`${environment.apiUrl}/file/edit`, { id: fileInfo[0].id, content }, { headers: this.getHeaders(auth_token) }).pipe(
+            tap((response: any) => {
+              console.log('File saved:', response);
+            }),
+            catchError((error: any) => {
+              console.error('Error saving file:', error);
+              return throwError(error);
             })
           );
         } else {
