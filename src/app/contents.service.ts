@@ -10,13 +10,14 @@ export class ContentsService {
 
   constructor() { }
 
-  updateFileContent(content: string) {
-    try {
-      const jsonData = JSON.parse(content);
-      const fileContent = jsonData.content;
-      this.fileContentSubject.next(fileContent);
-    } catch (error) {
-      console.error('Error parsing JSON content:', error);
-    }
-  }
+  // updateFileContent(content: string) {
+  //   try {
+  //     const jsonData = JSON.parse(content);
+  //     const fileContent = jsonData.content;
+  //     this.fileContentSubject.next(fileContent);
+  //   } 
+  //   catch (error) {
+  //     console.error('Error parsing JSON content:', error);
+  //   }
+  // }
 }

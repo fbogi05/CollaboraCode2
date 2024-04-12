@@ -21,11 +21,13 @@ export class EditorComponent implements OnInit {
   constructor(private http: HttpClient, private contentService: ContentsService, private auth: AuthService, private projectService: ProjectService, private backendService: BackendService) { }
 
   ngOnInit(): void {
-    this.contentService.fileContent$.subscribe(content => {
-      if (this.editor) {
-        this.editor.setValue(content);
-      }
-    });
+    // this.contentService.fileContent$.subscribe(content => {
+    //   if (this.editor) {
+    //     if(content && typeof content === 'object' && content){
+    //       this.editor.setValue(content);
+    //     }
+    //   }
+    // });
   }
 
   toggleLanguageDropdown() {
