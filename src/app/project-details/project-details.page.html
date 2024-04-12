@@ -13,11 +13,11 @@
       </h1>
       <span
         class="fixed top-4 right-4 flex w-max backdrop-blur-sm"
-        *ngIf="files.length > 0"
+        *ngIf="getFiles().length > 0"
       >
         <button
           class="relative right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-center items-center h-11 aspect-square"
-          [routerLink]="'/tabs/projects/details/' + currentProjectName + '/project-settings'"
+          routerLink="/tabs/projects/project-settings"
           id="settings-button"
         >
           <img
@@ -43,11 +43,11 @@
     <main
       class="gap-4 pb-32 h-full px-4"
       id="projects-container"
-      [ngClass]="{ 'justify-center items-center': files.length === 0, 'content-start items-start': files.length > 0 }"
+      [ngClass]="{ 'justify-center items-center': getFiles().length === 0, 'content-start items-start': getFiles().length > 0 }"
     >
       <div
         class="flex flex-1 flex-col justify-center items-center w-full"
-        *ngIf="files.length === 0"
+        *ngIf="getFiles().length === 0"
       >
         <span class="mb-10">
           <p class="text-center text-neutral-300 mb-2">
@@ -69,14 +69,14 @@
       </div>
       <app-file-card
         class="flex flex-1 w-full"
-        *ngFor="let file of files"
+        *ngFor="let file of getFiles()"
         [file]="file"
       ></app-file-card>
     </main>
   </div>
   <app-show-file-changes
-    *ngIf="lastEditInformation"
-    [lastEditInformation]="lastEditInformation"
+    *ngIf="getLastEditInformation()"
+    [lastEditInformation]="getLastEditInformation()"
     [currentProjectName]="currentProjectName"
   ></app-show-file-changes>
 </ion-content>

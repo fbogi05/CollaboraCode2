@@ -31,24 +31,25 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'details/:name/project-settings',
+        path: 'details/:name',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('../project-details/project-details.module').then(
+            (m) => m.ProjectDetailsPageModule
+          ),
+      },
+      {
+        path: 'project-settings',
         loadChildren: () =>
           import('../project-settings/project-settings.module').then(
             (m) => m.ProjectSettingsPageModule
           ),
       },
       {
-        path: 'details/:name/file-settings',
+        path: 'file-settings',
         loadChildren: () =>
           import('../file-settings/file-settings.module').then(
             (m) => m.FileSettingsPageModule
-          ),
-      },
-      {
-        path: 'details/:name',
-        loadChildren: () =>
-          import('../project-details/project-details.module').then(
-            (m) => m.ProjectDetailsPageModule
           ),
       },
     ],

@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
 import { Method } from 'ionicons/dist/types/stencil-public-runtime';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 
 @Component({
@@ -13,7 +13,8 @@ import { ProjectDetailsPage } from '../project-details/project-details.page';
 export class FileCardComponent implements OnInit {
   @Input() file: any;
 
-  constructor(private projectDetails: ProjectDetailsPage) {}
+  constructor(private projectDetails: ProjectDetailsPage) {
+  }
 
   ngOnInit() {
     if (

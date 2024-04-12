@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
+import { ProjectDetailsPage } from '../project-details/project-details.page';
 
 @Component({
   selector: 'app-create-file',
@@ -16,7 +17,11 @@ export class CreateFilePage implements OnInit {
   users: any[] = [];
   currentProjectName = '';
 
-  constructor(private baseService: BaseService, private router: Router) {}
+  constructor(
+    private projectDetails: ProjectDetailsPage,
+    private baseService: BaseService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     if (
@@ -32,7 +37,7 @@ export class CreateFilePage implements OnInit {
     this.baseService
       .getProjectInfoWithId(this.baseService.currentProjectId!)
       .subscribe((project: any) => {
-        this.currentProjectName = project[0].name
+        this.currentProjectName = project[0].name;
       });
   }
 
@@ -40,7 +45,13 @@ export class CreateFilePage implements OnInit {
     this.baseService
       .createFile(this.fieldData.fileName.value)
       .subscribe((file: any) => {
-        this.router.navigate([`/tabs/projects/details/${this.currentProjectName}`]);
+        this.router.navigate([
+          `/tabs/projects/details/${this.currentProjectName}`,
+        ]);
       });
+  }
+
+  prevoiusPage() {
+    this.router.navigate([`/tabs/projects/details/${this.currentProjectName}`]);
   }
 }

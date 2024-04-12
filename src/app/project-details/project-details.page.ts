@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { FileCardComponent } from '../file-card/file-card.component';
 
 @Component({
   selector: 'app-project-details',
@@ -10,10 +9,14 @@ import { FileCardComponent } from '../file-card/file-card.component';
   styleUrls: ['./project-details.page.scss'],
 })
 export class ProjectDetailsPage implements OnInit {
-  files: any[] = [];
   currentProjectName = '';
-  lastEditInformation: any;
   selectedFile: any;
+  getFiles = () => {
+    return this.baseService.projectFiles;
+  }
+  getLastEditInformation = () => {
+    return this.baseService.lastEditInformation;
+  }
 
   constructor(private baseService: BaseService, private router: Router) {}
 
@@ -37,6 +40,10 @@ export class ProjectDetailsPage implements OnInit {
         this.baseService.currentProjectId = project[0].id;
       });
 
+    this.getProjectFiles();
+  }
+
+  getProjectFiles() {
     let retryCount = 0;
     let getProjectFiles: Subscription;
 
@@ -44,8 +51,8 @@ export class ProjectDetailsPage implements OnInit {
       getProjectFiles = this.baseService
         .getProjectFiles()
         .subscribe((files) => {
-          this.files = files;
-          if (this.files) {
+          this.baseService.projectFiles = files;
+          if (this.getFiles()!) {
             clearInterval(retries);
             getProjectFiles.unsubscribe();
           }
@@ -59,13 +66,13 @@ export class ProjectDetailsPage implements OnInit {
   }
 
   showFileChanges(file: any) {
-    this.selectedFile
+    this.baseService.selectedFile = file;
     this.baseService.getLastEditInformation(file.id).subscribe((info) => {
-      this.lastEditInformation = info;
+      this.baseService.lastEditInformation = info;
     });
   }
 
   hideFileChanges() {
-    this.lastEditInformation = null;
+    this.baseService.lastEditInformation = null;
   }
 }

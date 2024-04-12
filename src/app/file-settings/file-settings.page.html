@@ -2,16 +2,14 @@
   <div class="flex flex-col h-full">
     <button
       class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
-      [routerLink]="'/tabs/projects/details/' + currentProjectName"
+      (click)="goBack()"
       routerDirection="back"
     >
       <ion-icon name="arrow-back-outline"></ion-icon>
     </button>
     <h1 class="py-6 pl-16 text-2xl text-left">Fájl beállítások</h1>
     <main class="relative flex flex-col flex-grow pb-32">
-      <ul
-        class="flex flex-col gap-4 w-full h-max sm:w-2/3 mx-auto px-4"
-      >
+      <ul class="flex flex-col gap-4 w-full h-max sm:w-2/3 mx-auto px-4">
         <li
           class="bg-neutral-200 dark:bg-neutral-800 rounded-lg flex flex-1 flex-col justify-start items-center min-h-28 w-full p-4"
         >

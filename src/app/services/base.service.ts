@@ -15,7 +15,10 @@ export class BaseService {
   };
   url = 'https://collaboracode-backend.onrender.com/';
   currentProjectId: number | null = null;
-  currentProjectName: string | null = null;
+  currentProjectName: string = '';
+  selectedFile: any;
+  projectFiles: any[] = [];
+  lastEditInformation: any;
 
   constructor(
     private authService: AuthService,

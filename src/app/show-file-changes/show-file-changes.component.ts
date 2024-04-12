@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
 import { Router } from '@angular/router';
+import { BaseService } from '../services/base.service';
 
 @Component({
   selector: 'app-show-file-changes',
@@ -36,10 +37,11 @@ export class ShowFileChangesComponent implements OnInit {
   }
 
   openFileSettings() {
-    this.router.navigate(['/tabs/projects/details/' + this.currentProjectName + '/file-settings']);
+    this.router.navigate(['/tabs/projects/file-settings']);
   }
 
   hideFileChanges() {
+    this.projectDetails.selectedFile = null;
     this.projectDetails.hideFileChanges();
   }
 }

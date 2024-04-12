@@ -15,10 +15,14 @@ export class FileSettingsPage implements OnInit {
       value: '',
     },
   };
-  file: any;
-  currentProjectName: string = this.baseService.currentProjectName!;
+  file: any = this.baseService.selectedFile;
+  currentProjectName: string = this.baseService.currentProjectName;
 
-  constructor(private baseService: BaseService, private router: Router, private projectDetails: ProjectDetailsPage) {}
+  constructor(
+    private projectDetails: ProjectDetailsPage,
+    private baseService: BaseService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     if (
@@ -35,28 +39,20 @@ export class FileSettingsPage implements OnInit {
   }
 
   setFieldValues() {
-    this.currentProjectName = this.router.url.split('/')[4];
-
     if (this.file.name) {
       this.baseService
         .getFileInfoWithName(this.file.name)
         .subscribe((fileData: any) => {
-          console.log(fileData);
-          this.fieldData.fileName.value = fileData.fileName;
-          this.file.id = fileData.id;
+          this.fieldData.fileName.value = fileData[0].name;
         });
     }
-    
   }
 
   updateFile() {
     if (this.file.id) {
       this.baseService
         .updateFile(this.file.id, this.fieldData.fileName.value)
-        .subscribe((fileData: any) => {
-          console.log(fileData);
-          
-        });
+        .subscribe((fileData: any) => {});
     }
   }
 
@@ -64,5 +60,12 @@ export class FileSettingsPage implements OnInit {
     if (this.file.id) {
       this.baseService.deleteFile(this.file.id).subscribe();
     }
+  }
+
+  goBack() {
+    this.projectDetails.hideFileChanges();
+    this.projectDetails.getProjectFiles();
+    this.projectDetails.selectedFile = null;
+    this.router.navigate(['/tabs/projects/details', this.currentProjectName]);
   }
 }

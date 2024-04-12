@@ -3,7 +3,7 @@
     <header>
       <button
         class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
-        [routerLink]="'/tabs/projects/details/' + currentProjectName"
+        (click)="prevoiusPage()"
         routerDirection="back"
       >
         <ion-icon name="arrow-back-outline"></ion-icon>
