@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').notNullable().primary()
-      table.string('file_name').notNullable()
+      table.string('name').notNullable()
       table.string('content').notNullable()
       table.integer('project_id').notNullable().unsigned().references('id').inTable('projects')
       table.string('last_edited_user').nullable()

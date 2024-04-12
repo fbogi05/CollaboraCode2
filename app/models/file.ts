@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeCreate, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Project from './project.js'
 
@@ -12,6 +12,9 @@ export default class File extends BaseModel {
 
   @column()
   declare content: string
+
+  @column()
+  declare projectId: number
 
   @column()
   declare lastEditedUser: string
@@ -27,4 +30,9 @@ export default class File extends BaseModel {
 
   @belongsTo(() => Project)
   declare projects: BelongsTo<typeof Project>
+
+  @beforeCreate()
+  static async setContent(file: File) {
+    file.content = ''
+  }
 }

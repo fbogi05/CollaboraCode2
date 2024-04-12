@@ -9,6 +9,10 @@ export default class extends BaseSchema {
       table.integer('project_id').notNullable().unsigned().references('id').inTable('projects')
       table.integer('user_id').notNullable().unsigned().references('id').inTable('users')
     })
+
+    this.schema.alterTable('projects', (table) => {
+      table.integer('owner_id').notNullable().unsigned().references('id').inTable('users')
+    })
   }
 
   async down() {

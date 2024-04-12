@@ -7,7 +7,6 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').notNullable().primary()
       table.string('name').notNullable()
-      table.integer('owner')
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
     })
