@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <div class="flex flex-col h-full">
+    <h1 class="py-6 pl-6 text-2xl text-left">Beállítások</h1>
+    <main class="relative flex flex-col flex-grow pb-32">
+      <ul class="flex flex-col h-max gap-6 w-full sm:w-2/3 mx-auto px-4">
+        <a routerLink="/tabs/settings/account">
+          <li class="py-3 px-5 bg-neutral-200 dark:bg-neutral-800 rounded-lg">
+            Fiók beállítások
+          </li>
+        </a>
+        <a routerLink="/tabs/settings/theme">
+          <li class="py-3 px-5 bg-neutral-200 dark:bg-neutral-800 rounded-lg">
+            Téma beállítások
+          </li>
+        </a>
+        <a routerLink="/tabs/settings/about">
+          <li class="py-3 px-5 bg-neutral-200 dark:bg-neutral-800 rounded-lg">
+            Rólunk
+          </li>
+        </a>
+      </ul>
+      <div
+        class="flex flex-col grow justify-end mx-4 mt-2"
+        id="button-container"
+      >
+        <button
+          class="relative top-2 flex bg-red-700 text-white justify-center rounded-lg sm:w-2/3 py-2 w-full mx-auto"
+          (click)="logout()"
+        >
+          Kijelentkezés
+        </button>
+      </div>
+    </main>
+  </div>
+</ion-content>

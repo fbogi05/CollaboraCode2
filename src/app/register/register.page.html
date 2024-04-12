@@ -1,0 +1,201 @@
+<ion-content [fullscreen]="true">
+  <div class="content">
+    <form
+      class="from-[#1d4ed8a0] to-[#0ea4e9a0] bg-gradient-to-br min-h-screen flex flex-col items-center justify-evenly px-4"
+      #form="ngForm"
+      (ngSubmit)="register(form)"
+    >
+      <h1 class="text-xl text-center text-white my-4">Regisztráció</h1>
+      <div class="flex flex-col w-full max-w-64 gap-4">
+        <div class="form-group flex flex-col gap-3">
+          <label for="first-name" class="text-white">Keresztnév</label>
+          <input
+            type="text"
+            class="form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            [ngClass]="{'outline outline-red-700': (firstName.invalid && (firstName.touched || firstName.dirty)) || !fieldData.firstName.valid, 'outline-blue-300 dark:outline-slate-700': (firstName.valid || (!firstName.touched && !firstName.dirty)) && fieldData.firstName.valid}"
+            id="first-name"
+            name="first-name"
+            autocomplete="given-name"
+            [(ngModel)]="fieldData.firstName.value"
+            (ngModelChange)="fieldData.firstName.valid = true"
+            #firstName="ngModel"
+            required
+          />
+        </div>
+        <div
+          *ngIf="firstName.invalid && (firstName.touched || firstName.dirty) || !fieldData.firstName.valid"
+          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+        >
+          <div *ngIf="firstName.errors?.['required']">
+            <p>A keresztnév megadása kötelező!</p>
+          </div>
+        </div>
+        <div class="form-group flex flex-col gap-3">
+          <label for="last-name" class="text-white">Vezetéknév</label>
+          <input
+            type="text"
+            class="form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            [ngClass]="{'outline outline-red-700': (lastName.invalid && (lastName.touched || lastName.dirty)) || !fieldData.lastName.valid, 'outline-blue-300 dark:outline-slate-700': (lastName.valid || (!lastName.touched && !lastName.dirty)) && fieldData.lastName.valid}"
+            id="last-name"
+            name="last-name"
+            autocomplete="family-name"
+            [(ngModel)]="fieldData.lastName.value"
+            (ngModelChange)="fieldData.lastName.valid = true"
+            #lastName="ngModel"
+            required
+          />
+        </div>
+        <div
+          *ngIf="lastName.invalid && (lastName.touched || lastName.dirty) || !fieldData.lastName.valid"
+          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+        >
+          <div *ngIf="lastName.errors?.['required']">
+            <p>A vezetéknév megadása kötelező!</p>
+          </div>
+        </div>
+        <div class="form-group flex flex-col gap-3">
+          <label for="email" class="text-white">E-mail cím</label>
+          <input
+            type="email"
+            class="form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 px-4 py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+            [ngClass]="{'outline outline-red-700': (email.invalid && (email.touched || email.dirty)) || !fieldData.email.valid, 'outline-blue-300 dark:outline-slate-700': (email.valid || (!email.touched && !email.dirty)) && fieldData.email.valid}"
+            id="email"
+            name="email"
+            autocomplete="email"
+            [(ngModel)]="fieldData.email.value"
+            (ngModelChange)="fieldData.email.valid = true"
+            #email="ngModel"
+            [pattern]="fieldData.email.pattern"
+            required
+          />
+        </div>
+        <div
+          *ngIf="email.invalid && (email.touched || email.dirty) || !fieldData.email.valid"
+          class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+        >
+          <div *ngIf="email.errors?.['required']">
+            <p>Az email cím megadása kötelező!</p>
+          </div>
+          <div *ngIf="email.errors?.['pattern']">
+            <p>Az email cím formátuma nem helyes!</p>
+          </div>
+        </div>
+        <div class="form-group flex flex-col gap-3">
+          <label for="password" class="text-white">Jelszó</label>
+          <div class="relative flex gap-4">
+            <input
+              [type]="getPasswordVisible('password')"
+              class="form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+              [ngClass]="{'outline outline-red-700': (password.invalid && (password.touched || password.dirty)) || !fieldData.password.valid, 'outline-blue-300 dark:outline-slate-700': (password.valid || (!password.touched && !password.dirty)) && fieldData.password.valid}"
+              id="password"
+              name="password"
+              autocomplete="new-password"
+              [(ngModel)]="fieldData.password.value"
+              (ngModelChange)="fieldData.password.valid = true"
+              #password="ngModel"
+              [pattern]="fieldData.password.pattern"
+              required
+            />
+            <button
+              type="button"
+              class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center focus-visible:outline outline-2 outline-gray-500 outline-offset-1"
+              (click)="changeVisibility('password')"
+            >
+              <img [src]="fieldData.password.icon" class="dark:invert" />
+            </button>
+          </div>
+          <div
+            *ngIf="password.invalid && (password.touched || password.dirty) || !fieldData.password.valid"
+            class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+          >
+            <div *ngIf="password.errors?.['required']">
+              <p>A jelszó megadása kötelező!</p>
+            </div>
+            <div *ngIf="password.errors?.['pattern']">
+              <p>A jelszó formátuma nem helyes!</p>
+              <hr class="border-slate-500 my-2" />
+              <p class="text-left mb-1">A jelszónak legalább:</p>
+              <ul class="flex flex-col list-inside pl-6 text-left gap-1">
+                <li
+                  *ngIf="!fieldData.password.value.match(fieldData.password.hasLowercasePattern)"
+                >
+                  Egy kisbetűt kell tartalmaznia
+                </li>
+                <li
+                  *ngIf="!fieldData.password.value.match(fieldData.password.hasUppercasePattern)"
+                >
+                  Egy nagybetűt kell tartalmaznia
+                </li>
+                <li
+                  *ngIf="!fieldData.password.value.match(fieldData.password.hasNumbersPattern)"
+                >
+                  Egy számot kell tartalmaznia
+                </li>
+                <li
+                  *ngIf="!fieldData.password.value.match(fieldData.password.lengthPattern)"
+                >
+                  8-16 karaktert kell tartalmaznia
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group flex flex-col gap-3">
+            <label for="password-again" class="text-white">Jelszó újra</label>
+            <div class="relative flex gap-4">
+              <input
+                [type]="getPasswordVisible('passwordAgain')"
+                class="form-control rounded-full shadow-lg shadow-blue-300 dark:shadow-slate-700 pl-4 pr-9 w-full py-1 focus:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-slate-700"
+                [ngClass]="{'outline outline-red-700': (passwordAgain.invalid && (passwordAgain.touched || passwordAgain.dirty)) || !fieldData.passwordAgain.valid, 'outline-blue-300 dark:outline-slate-700': (passwordAgain.valid || (!passwordAgain.touched && !passwordAgain.dirty)) && fieldData.passwordAgain.valid}"
+                id="password-again"
+                name="password-again"
+                autocomplete="new-password"
+                [(ngModel)]="fieldData.passwordAgain.value"
+                (ngModelChange)="fieldData.passwordAgain.valid = true"
+                #passwordAgain="ngModel"
+                required
+              />
+              <button
+                type="button"
+                class="absolute right-2 top-1 rounded-full h-6 aspect-square flex justify-center items-center focus-visible:outline outline-2 outline-gray-500 outline-offset-1"
+                (click)="changeVisibility('passwordAgain')"
+              >
+                <img [src]="fieldData.passwordAgain.icon" class="dark:invert" />
+              </button>
+            </div>
+          </div>
+          <div
+            *ngIf="passwordAgain.invalid && (passwordAgain.touched || passwordAgain.dirty) || fieldData.passwordAgain.value !== fieldData.password.value && !fieldData.passwordAgain.valid"
+            class="alert bg-white dark:bg-slate-200 bg-opacity-50 dark:bg-opacity-35 px-3 py-2 rounded-lg text-center text-red-800 font-semibold"
+          >
+            <div *ngIf="passwordAgain.errors?.['required']; else isSame">
+              <p>A jelszó megismétlése kötelező!</p>
+            </div>
+            <ng-template #isSame>
+              <div>
+                <p>A jelszó nem egyezik!</p>
+              </div>
+            </ng-template>
+          </div>
+          <input
+            value="Regisztráció"
+            type="submit"
+            class="flex self-center bg-blue-700 shadow-blue-700 bg-opacity-80 focus-visible:outline outline-2 outline-white outline-offset-2 shadow-lg text-white w-fit py-2 px-4 mt-2 rounded-lg"
+          />
+        </div>
+        <div
+          class="text-center flex flex-col items-center text-white font-semibold my-4"
+        >
+          <p class="px-2 rounded-md">Már felhasználó?</p>
+          <p class="w-fitpx-2 rounded-b-md pb-1">
+            Itt tud
+            <a
+              routerLink="/login"
+              class="underline outline-none focus-visible:bg-white focus-visible:text-blue-700 focus-visible:rounded-lg focus-visible:px-2 focus-visible:py-1"
+              >bejelentkezni</a
+            >.
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

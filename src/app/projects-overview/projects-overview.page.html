@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true">
+  <div class="flex flex-1 flex-col h-full">
+    <header class="flex items-center justify-between">
+      <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
+      <span
+        class="fixed top-4 right-4 block w-max backdrop-blur-sm"
+        *ngIf="projects.length > 0"
+      >
+        <button
+          class="shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
+          routerLink="/tabs/projects/create-project"
+          id="add-button"
+        >
+          <p class="overflow-hidden text-nowrap">Projekt hozzáadása</p>
+          <img
+            class="h-4/6 aspect-square dark:invert"
+            src="/assets/add.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+      </span>
+    </header>
+    <main
+      class="gap-4 pb-32 h-full px-4"
+      id="projects-container"
+      [ngClass]="{ 'justify-center items-center': projects.length === 0, 'content-start items-start': projects.length > 0 }"
+    >
+      <div
+        class="flex flex-1 flex-col justify-center items-center w-full"
+        *ngIf="projects.length === 0"
+      >
+        <span class="mb-10">
+          <p class="text-center text-neutral-300 mb-2">
+            Nincsenek elérhető projektek.
+          </p>
+          <p class="text-center text-neutral-300">Hozzon létre egyet most!</p>
+        </span>
+
+        <button
+          class="bg-blue-200 shadow-lg shadow-neutral-300 dark:shadow-neutral-950 rounded-xl dark:bg-neutral-800 flex justify-center items-center w-20 aspect-square"
+          routerLink="/tabs/projects/create-project"
+        >
+          <img
+            class="h-4/6 aspect-square dark:invert"
+            src="/assets/add.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+      </div>
+      <app-project-card
+        class="flex flex-1 w-full"
+        *ngFor="let project of projects"
+        [project]="project"
+      ></app-project-card>
+    </main>
+  </div>
+</ion-content>

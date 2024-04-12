@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-avatar
+    class="fixed top-1 right-1 p-3 z-10"
+    routerLink="/tabs/settings/account"
+  >
+    <img
+      class="shadow-gray-400 dark:shadow-zinc-900 shadow-md"
+      alt="Profile"
+      src="assets/profile_icon.svg"
+    />
+  </ion-avatar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="flex items-start justify-center h-full" id="overlay">
+    <h1
+      class="text-black dark:text-white relative top-1/2 -translate-y-1/2 pt-4 w-2/3 text-xl text-center"
+      id="title"
+    >
+      Üdvözlünk a
+      <span
+        class="font-semibold from-sky-500 to-blue-700 bg-gradient-to-br text-transparent bg-clip-text"
+        >CollaboraCode</span
+      ><br />verzió követőjében!
+    </h1>
+  </div>
+</ion-content>

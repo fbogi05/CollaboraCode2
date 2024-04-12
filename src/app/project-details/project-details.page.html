@@ -1,0 +1,82 @@
+<ion-content [fullscreen]="true">
+  <div class="flex flex-1 flex-col h-full">
+    <header class="flex items-center justify-between">
+      <button
+        class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
+        routerLink="/tabs/projects"
+        routerDirection="back"
+      >
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
+      <h1 class="py-6 pl-16 text-2xl text-left w-4/6">
+        {{ currentProjectName }}
+      </h1>
+      <span
+        class="fixed top-4 right-4 flex w-max backdrop-blur-sm"
+        *ngIf="files.length > 0"
+      >
+        <button
+          class="relative right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-center items-center h-11 aspect-square"
+          [routerLink]="'/tabs/projects/details/' + currentProjectName + '/project-settings'"
+          id="settings-button"
+        >
+          <img
+            class="w-4/6 aspect-square dark:invert"
+            src="/assets/settings.svg"
+            alt="Projekt beállítások"
+          />
+        </button>
+        <button
+          class="relative top-0 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
+          routerLink="/tabs/projects/create-file"
+          id="add-button"
+        >
+          <p class="overflow-hidden text-nowrap">Fájl hozzáadása</p>
+          <img
+            class="h-4/6 aspect-square dark:invert"
+            src="/assets/add.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+      </span>
+    </header>
+    <main
+      class="gap-4 pb-32 h-full px-4"
+      id="projects-container"
+      [ngClass]="{ 'justify-center items-center': files.length === 0, 'content-start items-start': files.length > 0 }"
+    >
+      <div
+        class="flex flex-1 flex-col justify-center items-center w-full"
+        *ngIf="files.length === 0"
+      >
+        <span class="mb-10">
+          <p class="text-center text-neutral-300 mb-2">
+            Nincsenek elérhető fájlok.
+          </p>
+          <p class="text-center text-neutral-300">Hozzon létre egyet most!</p>
+        </span>
+
+        <button
+          class="bg-blue-200 shadow-lg shadow-neutral-300 dark:shadow-neutral-950 rounded-xl dark:bg-neutral-800 flex justify-center items-center w-20 aspect-square"
+          routerLink="/tabs/projects/create-file"
+        >
+          <img
+            class="h-4/6 aspect-square dark:invert"
+            src="/assets/add.svg"
+            alt="Projekt hozzáadása"
+          />
+        </button>
+      </div>
+      <app-file-card
+        class="flex flex-1 w-full"
+        *ngFor="let file of files"
+        [file]="file"
+      ></app-file-card>
+    </main>
+  </div>
+  <app-show-file-changes
+    *ngIf="lastEditInformation"
+    [lastEditInformation]="lastEditInformation"
+    [currentProjectName]="currentProjectName"
+  ></app-show-file-changes>
+</ion-content>

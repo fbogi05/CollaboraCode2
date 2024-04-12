@@ -1,0 +1,29 @@
+#user-search {
+  border-radius: 1rem;
+  transition: all 0.1s 0.15s ease-in-out;
+}
+
+#user-search:focus {
+  border-radius: 1rem 1rem 0.375rem 0.375rem;
+  transition: all 0.1s ease-in-out;
+}
+
+#user-search-results {
+  height: 0;
+  transition: all 0.1s ease-out;
+}
+
+#user-search-container {
+  gap: 0;
+  transition: gap 0.1s 0.1s ease-in-out;
+}
+
+#user-search-container:has(#user-search:focus) {
+  gap: 0.25rem;
+  transition: gap 0.1s ease-in-out;
+}
+
+#user-search-container:has(#user-search:focus) > #user-search-results {
+  height: 10rem;
+  transition: all 0.1s 0.15s ease-out;
+}

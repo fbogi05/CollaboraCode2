@@ -1,0 +1,15 @@
+.selected {
+  animation: buttonSelected 500ms ease-in-out;
+}
+
+@keyframes buttonSelected {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(80%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}

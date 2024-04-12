@@ -1,0 +1,39 @@
+.content {
+  background: url("../../assets/background.jpg") center no-repeat;
+  background-size: 200% 200%;
+  background-position: top left;
+  animation: resizeBackground 10s ease-in-out alternate infinite,
+    moveBackgroundX 20s ease-in-out alternate infinite,
+    moveBackgroundY 20s ease-in-out alternate infinite;
+}
+
+form {
+  backdrop-filter: blur(30px) contrast(1.5);
+}
+
+@keyframes resizeBackground {
+  from {
+    background-size: 200% 200%;
+  }
+  to {
+    background-size: 150% 150%;
+  }
+}
+
+@keyframes moveBackgroundX {
+  from {
+    background-position-x: left;
+  }
+  to {
+    background-position-x: right;
+  }
+}
+
+@keyframes moveBackgroundY {
+  from {
+    background-position-y: top;
+  }
+  to {
+    background-position-y: bottom;
+  }
+}

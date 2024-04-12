@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <button
+    class="absolute top-5 left-4 h-9 aspect-square rounded-lg bg-blue-600 bg-opacity-30 flex items-center justify-center"
+    routerLink="/tabs/settings"
+    routerDirection="back"
+  >
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </button>
+  <h1 class="py-6 pl-16 text-2xl text-left">Téma beállítások</h1>
+  <main class="flex-1 justify-center items-center" id="container">
+    <ul class="flex flex-col gap-6 w-full sm:w-2/3 mx-auto px-4">
+      <li class="bg-neutral-200 dark:bg-neutral-800 rounded-lg pr-3">
+        <ion-select
+          class="w-full py-1 px-5 bg-transparent"
+          cancelText="Mégsem"
+          okText="Kiválasztás"
+          aria-label="Témák"
+          interface="action-sheet"
+          placeholder="Válasszon témát"
+          (ionChange)="setTheme($event)"
+          [value]="currentTheme()"
+          #themeSelector
+        >
+          <ion-select-option
+            class="bg-neutral-200 dark:bg-neutral-800"
+            value="auto"
+            >Automatikus</ion-select-option
+          >
+          <ion-select-option
+            class="bg-neutral-200 dark:bg-neutral-800"
+            value="dark"
+            >Sötét</ion-select-option
+          >
+          <ion-select-option
+            class="bg-neutral-200 dark:bg-neutral-800"
+            value="light"
+            >Világos</ion-select-option
+          >
+        </ion-select>
+        <!-- <select
+          class="w-full p-3 bg-transparent"
+          (change)="setTheme($event)"
+          #themeSelector
+        >
+          <option class="bg-neutral-200 dark:bg-neutral-800" value="auto">
+            Automatikus
+          </option>
+          <option class="bg-neutral-200 dark:bg-neutral-800" value="dark">
+            Sotét
+          </option>
+          <option class="bg-neutral-200 dark:bg-neutral-800" value="light">
+            Világos
+          </option>
+        </select> -->
+      </li>
+    </ul>
+  </main>
+</ion-content>

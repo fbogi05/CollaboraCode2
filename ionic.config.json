@@ -1,0 +1,7 @@
+{
+  "name": "CollaboraCode",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

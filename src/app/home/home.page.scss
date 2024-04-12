@@ -1,0 +1,28 @@
+#overlay {
+  animation: overlayTransition 1200ms ease-out forwards;
+}
+
+#title {
+  animation: floatTitle 900ms 300ms ease-in-out forwards;
+}
+
+@keyframes overlayTransition {
+  from {
+    backdrop-filter: blur(10px);
+    background-color: rgb(29 78 216 / 60%);
+  }
+  to {
+    backdrop-filter: blur(0px);
+    background-color: rgb(29 78 216 / 0%);
+  }
+}
+
+@keyframes floatTitle {
+  from {
+    top: 50%;
+  }
+  to {
+    top: 0;
+    transform: translateY(0);
+  }
+}
