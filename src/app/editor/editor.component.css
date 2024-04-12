@@ -1,0 +1,30 @@
+body, html {
+    height: 100%;
+}
+
+.hatter{
+    background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
+}
+.logo{
+    margin: 0 auto;
+}
+
+.editor{
+    box-sizing: border-box !important;
+    padding-top: 15px;
+    padding-left: 20px;
+    width: 83%;
+    height: 100%;
+}
+
+.monaco{
+    padding-top: 10px;
+}
+
+a{
+    text-align: center;
+}
+
+app-nav-after{
+    z-index: 1
+}

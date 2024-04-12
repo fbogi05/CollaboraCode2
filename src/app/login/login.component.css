@@ -1,0 +1,29 @@
+body,html {
+    width: 100%;
+}
+  
+.hatter{
+    background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
+}
+
+nav{
+    background-color: black;
+    opacity: .7;
+    margin-left: 0;
+}
+
+.logo{
+    margin: 0 auto;
+}
+
+form{
+    margin: 0 auto;
+    width: 25%;
+}
+
+.foot{
+    position: absolute;
+    bottom: 0;
+    background-color: #0c1733;
+    opacity: .9;
+}

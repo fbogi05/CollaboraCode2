@@ -1,0 +1,34 @@
+body, html {
+    height: 100%;
+}
+
+.hatter{
+    background-image: linear-gradient(to bottom right, #3057D3, #73aad1);
+}
+
+.logo{
+    margin: 0 auto;
+}
+
+table {
+    background-color: #152443de;
+    width: 95%;
+    margin-left: 40px;
+}
+
+table th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+table tr {
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+
+.foot{
+    position: absolute;
+    bottom: 0;
+    background-color: #0c1733;
+    opacity: .9;
+}
