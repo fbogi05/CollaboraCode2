@@ -19,21 +19,29 @@
             </div>
             <div *ngIf="isLanguageDropdownOpen" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
               <div class="py-1" role="menu">
-                <a (click)="changeLanguage('python'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Python (Alapértelmezett)</a>
-                <a (click)="changeLanguage('javascript'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">JavaScript</a>
-                <a (click)="changeLanguage('typescript'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">TypeScript</a>
-                <a (click)="changeLanguage('java'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Java</a>
-                <a (click)="changeLanguage('html'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">HTML</a>
-                <a (click)="changeLanguage('css'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">CSS</a>
-                <a (click)="changeLanguage('c#'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">C#</a>
-                <a (click)="changeLanguage('sql'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">SQL</a>
-                <a (click)="changeLanguage('php'); closeLanguageDropdown()" class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">PHP</a>
+                <a (click)="changeLanguage('python'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Python
+                  (Alapértelmezett)</a>
+                <a (click)="changeLanguage('javascript'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">JavaScript</a>
+                <a (click)="changeLanguage('markdown'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">Markdown</a>
+                <a (click)="changeLanguage('clike'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">C-like</a>
+                <a (click)="changeLanguage('htmlmixed'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">HTML</a>
+                <a (click)="changeLanguage('css'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">CSS</a>
+                <a (click)="changeLanguage('sql'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">SQL</a>
+                <a (click)="changeLanguage('php'); closeLanguageDropdown()"
+                  class="block px-4 py-4 text-sm text-blue-900 hover:bg-blue-200" role="menuitem">PHP</a>
               </div>
             </div>
           </div>
         </div>
-        <div style="height: 93%">
-          <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="fileContent" class="monaco"></ngx-monaco-editor>
+        <div class="code">
+          <textarea id="codemirror" class="w-full h-full resize-none"></textarea>
         </div>
       </div>
     </div>

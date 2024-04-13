@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { AppRoutingModule } from './app-routing.module';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 import { AppComponent } from './app.component';
 import { AddPeopleComponent } from './add-people/add-people.component';
@@ -20,6 +20,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { NavAfterComponent } from './nav-after/nav-after.component';
 import { FilesComponent } from './files/files.component';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,8 @@ import { FilesComponent } from './files/files.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MonacoEditorModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    CodemirrorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
