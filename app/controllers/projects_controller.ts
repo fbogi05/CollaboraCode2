@@ -37,18 +37,28 @@ export default class ProjectsController {
 
       if (data['id']) {
         queryResult = await Project.query()
+          .select('id', 'name', 'ownerId')
           .where('projects.id', data['id'])
           .preload('owner', (query) =>
             query.select('id', 'first_name', 'last_name', 'email', 'is_moderator')
           )
-          .select('id', 'name', 'ownerId')
+          .preload('members', (query) =>
+            query
+              .select('id', 'first_name', 'last_name', 'email', 'is_moderator')
+              .where('user_id', '!=', authResult.user!.id)
+          )
       } else if (data['name']) {
         queryResult = await Project.query()
+          .select('id', 'name', 'ownerId')
           .where('projects.name', data['name'])
           .preload('owner', (query) =>
             query.select('id', 'first_name', 'last_name', 'email', 'is_moderator')
           )
-          .select('id', 'name', 'ownerId')
+          .preload('members', (query) =>
+            query
+              .select('id', 'first_name', 'last_name', 'email', 'is_moderator')
+              .where('user_id', '!=', authResult.user!.id)
+          )
       } else {
         throw new Error('Nincs megadva az id vagy a név!')
       }
@@ -80,19 +90,28 @@ export default class ProjectsController {
 
       const user = await User.query().where('email', data['user_email']).firstOrFail()
 
-      const queryResult = await Project.query()
+      const owns = await Project.query().select('id', 'name').where('ownerId', user.id)
+
+      const memberQueryResult = await Project.query()
         .select('id', 'name', 'ownerId')
-        .where('ownerId', user.id)
+        .whereHas('members', (query) => {
+          query.where('user_id', user.id).where('user_id', '!=', authResult.user!.id)
+        })
         .preload('owner', (query) =>
           query.select('id', 'first_name', 'last_name', 'email', 'is_moderator')
         )
 
-      const projects = queryResult.map((item) => {
-        const { ownerId, ...rest } = item.toJSON()
+      const memberOf = memberQueryResult.map((project) => {
+        const { ownerId, ...rest } = project.toJSON()
         return rest
       })
 
-      response.status(200).json(projects)
+      const result = {
+        owns: owns,
+        memberOf: memberOf,
+      }
+
+      response.status(200).json(result)
     } catch (error) {
       response.status(422).send(error)
       console.log(error)
