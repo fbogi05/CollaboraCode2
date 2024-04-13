@@ -64,7 +64,9 @@ export class ProjectSettingsPage implements OnInit {
 
   deleteProject() {
     if (this.project.id) {
-      this.baseService.deleteProject(this.project.id).subscribe();
+      this.baseService.deleteProject(this.project.id).subscribe(() => {
+        this.router.navigate(['/tabs/projects']);
+      });
     }
   }
 
