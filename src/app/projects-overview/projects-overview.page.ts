@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
+import { ProjectDetailsPage } from '../project-details/project-details.page';
 
 @Component({
   selector: 'app-projects-overview',
   templateUrl: './projects-overview.page.html',
   styleUrls: ['./projects-overview.page.scss'],
+  providers: [ProjectDetailsPage]
 })
 export class ProjectsOverviewPage implements OnInit {
   getProjects = () => {

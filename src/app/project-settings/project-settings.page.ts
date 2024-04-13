@@ -3,11 +3,13 @@ import { BaseService } from '../services/base.service';
 import { Router } from '@angular/router';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { Subscription } from 'rxjs';
+import { ProjectsOverviewPage } from '../projects-overview/projects-overview.page';
 
 @Component({
   selector: 'app-project-settings',
   templateUrl: './project-settings.page.html',
   styleUrls: ['./project-settings.page.scss'],
+  providers: [ProjectsOverviewPage],
 })
 export class ProjectSettingsPage implements OnInit {
   fieldData = {
@@ -18,7 +20,7 @@ export class ProjectSettingsPage implements OnInit {
   project: any;
   currentProjectName: string = this.baseService.currentProjectName;
 
-  constructor(private baseService: BaseService, private router: Router) {}
+  constructor(private projectsOverview: ProjectsOverviewPage, private baseService: BaseService, private router: Router) {}
 
   ngOnInit() {
     if (
@@ -65,6 +67,9 @@ export class ProjectSettingsPage implements OnInit {
   deleteProject() {
     if (this.project.id) {
       this.baseService.deleteProject(this.project.id).subscribe(() => {
+        this.baseService.currentProjectName = '';
+        this.baseService.currentProjectId = undefined;
+        this.projectsOverview.getUserProjects();
         this.router.navigate(['/tabs/projects']);
       });
     }

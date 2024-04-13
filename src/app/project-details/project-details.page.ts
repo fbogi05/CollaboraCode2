@@ -8,7 +8,6 @@ import { ProjectsOverviewPage } from '../projects-overview/projects-overview.pag
   selector: 'app-project-details',
   templateUrl: './project-details.page.html',
   styleUrls: ['./project-details.page.scss'],
-  providers: [ProjectsOverviewPage],
 })
 export class ProjectDetailsPage implements OnInit {
   currentProjectName = '';
@@ -21,7 +20,6 @@ export class ProjectDetailsPage implements OnInit {
   };
 
   constructor(
-    private projectsOverview: ProjectsOverviewPage,
     private baseService: BaseService,
     private router: Router
   ) {}
@@ -83,7 +81,6 @@ export class ProjectDetailsPage implements OnInit {
   }
 
   goBack() {
-    this.projectsOverview.getProjects();
     this.router.navigate([`/tabs/projects`]);
   }
 }

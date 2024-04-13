@@ -2,13 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { Router } from '@angular/router';
-import { ProjectsOverviewPage } from '../projects-overview/projects-overview.page';
 
 @Component({
   selector: 'app-file-settings',
   templateUrl: './file-settings.page.html',
   styleUrls: ['./file-settings.page.scss'],
-  providers: [ProjectDetailsPage, ProjectsOverviewPage],
+  providers: [ProjectDetailsPage],
 })
 export class FileSettingsPage implements OnInit {
   fieldData = {
@@ -60,7 +59,12 @@ export class FileSettingsPage implements OnInit {
   deleteFile() {
     if (this.file.id) {
       this.baseService.deleteFile(this.file.id).subscribe(() => {
-        this.router.navigate(['/tabs/projects/details', this.currentProjectName]);
+        this.projectDetails.hideFileChanges();
+        this.projectDetails.getProjectFiles();
+        this.router.navigate([
+          '/tabs/projects/details',
+          this.currentProjectName,
+        ]);
       });
     }
   }

@@ -7,6 +7,7 @@ import { ProjectDetailsPage } from '../project-details/project-details.page';
   selector: 'app-create-file',
   templateUrl: './create-file.page.html',
   styleUrls: ['./create-file.page.scss'],
+  providers: [ProjectDetailsPage],
 })
 export class CreateFilePage implements OnInit {
   fieldData = {
@@ -45,6 +46,7 @@ export class CreateFilePage implements OnInit {
     this.baseService
       .createFile(this.fieldData.fileName.value)
       .subscribe((file: any) => {
+        this.projectDetails.getProjectFiles();
         this.router.navigate([
           `/tabs/projects/details/${this.currentProjectName}`,
         ]);

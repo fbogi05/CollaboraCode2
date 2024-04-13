@@ -1,3 +1,12 @@
+#buttons-container {
+  gap: 1rem;
+  transition: gap 0.2s ease-in-out;
+}
+
+#buttons-container:has(#add-button:hover) {
+  gap: 0.5rem;
+}
+
 #add-button {
   width: 2.75rem;
   padding-right: 0.5rem;
