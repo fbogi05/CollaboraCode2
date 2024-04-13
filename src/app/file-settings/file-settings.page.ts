@@ -52,7 +52,7 @@ export class FileSettingsPage implements OnInit {
     if (this.file.id) {
       this.baseService
         .updateFile(this.file.id, this.fieldData.fileName.value)
-        .subscribe((fileData: any) => {});
+        .subscribe();
     }
   }
 

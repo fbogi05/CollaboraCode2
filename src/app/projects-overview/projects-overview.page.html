@@ -4,7 +4,7 @@
       <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
       <span
         class="fixed top-4 right-4 block w-max backdrop-blur-sm"
-        *ngIf="projects.length > 0"
+        *ngIf="getProjects().length > 0"
       >
         <button
           class="shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
@@ -23,11 +23,11 @@
     <main
       class="gap-4 pb-32 h-full px-4"
       id="projects-container"
-      [ngClass]="{ 'justify-center items-center': projects.length === 0, 'content-start items-start': projects.length > 0 }"
+      [ngClass]="{ 'justify-center items-center': getProjects().length === 0, 'content-start items-start': getProjects().length > 0 }"
     >
       <div
         class="flex flex-1 flex-col justify-center items-center w-full"
-        *ngIf="projects.length === 0"
+        *ngIf="getProjects().length === 0"
       >
         <span class="mb-10">
           <p class="text-center text-neutral-300 mb-2">
@@ -49,7 +49,7 @@
       </div>
       <app-project-card
         class="flex flex-1 w-full"
-        *ngFor="let project of projects"
+        *ngFor="let project of getProjects()"
         [project]="project"
       ></app-project-card>
     </main>

@@ -8,7 +8,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./projects-overview.page.scss'],
 })
 export class ProjectsOverviewPage implements OnInit {
-  projects: any[] = [];
+  getProjects = () => {
+    return this.baseService.projects;
+  }
 
   constructor(private baseService: BaseService) {}
 
@@ -23,6 +25,10 @@ export class ProjectsOverviewPage implements OnInit {
       document.documentElement.classList.remove('dark');
     }
 
+    this.getUserProjects();
+  }
+
+  getUserProjects() {
     let retryCount = 0;
     let getUserProjects: Subscription;
 
@@ -30,8 +36,8 @@ export class ProjectsOverviewPage implements OnInit {
       getUserProjects = this.baseService
         .getUserProjects()
         .subscribe((projects) => {
-          this.projects = projects;
-          if (this.projects) {
+          this.baseService.projects = projects;
+          if (this.getProjects()) {
             clearInterval(retries);
             getUserProjects.unsubscribe();
           }

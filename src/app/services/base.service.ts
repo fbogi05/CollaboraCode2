@@ -14,7 +14,8 @@ export class BaseService {
     },
   };
   url = 'https://collaboracode-backend.onrender.com/';
-  currentProjectId: number | null = null;
+  projects: any[] = [];
+  currentProjectId?: number;
   currentProjectName: string = '';
   selectedFile: any;
   projectFiles: any[] = [];
@@ -228,7 +229,31 @@ export class BaseService {
     });
   }
 
-  deleteProject(id: number) {}
+  updateProject(id: number, projectName: string) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.put(
+      `${this.url}project/modify`,
+      {
+        id: id,
+        name: projectName,
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  deleteProject(id: number) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.delete(`${this.url}project/delete`, {
+      body: { id: id },
+      headers: headers,
+    });
+  }
 
   getLastEditInformation(fileId: number) {
     const headers = new HttpHeaders(

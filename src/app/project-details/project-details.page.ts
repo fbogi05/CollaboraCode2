@@ -2,23 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ProjectsOverviewPage } from '../projects-overview/projects-overview.page';
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.page.html',
   styleUrls: ['./project-details.page.scss'],
+  providers: [ProjectsOverviewPage],
 })
 export class ProjectDetailsPage implements OnInit {
   currentProjectName = '';
   selectedFile: any;
   getFiles = () => {
     return this.baseService.projectFiles;
-  }
+  };
   getLastEditInformation = () => {
     return this.baseService.lastEditInformation;
-  }
+  };
 
-  constructor(private baseService: BaseService, private router: Router) {}
+  constructor(
+    private projectsOverview: ProjectsOverviewPage,
+    private baseService: BaseService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     if (
@@ -74,5 +80,10 @@ export class ProjectDetailsPage implements OnInit {
 
   hideFileChanges() {
     this.baseService.lastEditInformation = null;
+  }
+
+  goBack() {
+    this.projectsOverview.getProjects();
+    this.router.navigate([`/tabs/projects`]);
   }
 }

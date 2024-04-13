@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { BaseService } from '../services/base.service';
 import { Router } from '@angular/router';
+import { ProjectDetailsPage } from '../project-details/project-details.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-settings',
@@ -15,11 +16,9 @@ export class ProjectSettingsPage implements OnInit {
     },
   };
   project: any;
-  currentProjectName: string = this.baseService.currentProjectName!;
+  currentProjectName: string = this.baseService.currentProjectName;
 
-  constructor(
-    private baseService: BaseService,
-    private router: Router  ) {}
+  constructor(private baseService: BaseService, private router: Router) {}
 
   ngOnInit() {
     if (
@@ -36,32 +35,42 @@ export class ProjectSettingsPage implements OnInit {
   }
 
   setFieldValues() {
-    this.currentProjectName = this.router.url.split('/')[4];
+    let retryCount = 0;
 
-    if (this.project.name) {
+    let retries = setInterval(() => {
       this.baseService
-        .getProjectInfoWithName(this.project.name)
+        .getProjectInfoWithName(this.currentProjectName)
         .subscribe((projectData: any) => {
-          console.log(projectData);
-          this.fieldData.projectName.value = projectData.fileName;
-          this.project.id = projectData.id;
+          this.project = projectData[0];
+          this.fieldData.projectName.value = projectData[0].name;
         });
-    }
+      retryCount++;
+      if (this.project) {
+        clearInterval(retries);
+      } else if (retryCount >= 30) {
+        clearInterval(retries);
+      }
+    }, 100);
   }
 
   updateProject() {
-    if (this.project.id) {
-      this.baseService
-        .updateFile(this.project.id, this.fieldData.projectName.value)
-        .subscribe((fileData: any) => {
-          console.log(fileData);
-        });
-    }
+    this.baseService
+      .updateProject(this.project.id, this.fieldData.projectName.value)
+      .subscribe((projectData: any) => {
+        this.project = projectData;
+        this.baseService.currentProjectName = projectData.name;
+      });
   }
 
   deleteProject() {
     if (this.project.id) {
-      this.baseService.deleteFile(this.project.id).subscribe();
+      this.baseService.deleteProject(this.project.id).subscribe();
     }
+  }
+
+  goBack() {
+    this.router.navigate([
+      `/tabs/projects/details/${this.baseService.currentProjectName}`,
+    ]);
   }
 }
