@@ -2,7 +2,6 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ProjectService } from '../project.service';
 import { BackendService } from '../backend.service';
-
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/clike/clike';
 import 'codemirror/mode/css/css';
@@ -24,6 +23,7 @@ export class EditorComponent implements AfterViewInit {
   codeMirror: any;
   code: any;
   options = { lineNumbers: true, theme: '3024-night', mode: 'python', autocomplete: true }
+  output: string = '';
 
   constructor(private auth: AuthService, private projectService: ProjectService, private backendService: BackendService) { }
 

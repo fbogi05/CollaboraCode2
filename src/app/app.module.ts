@@ -4,7 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 import { AppComponent } from './app.component';
 import { AddPeopleComponent } from './add-people/add-people.component';
@@ -45,7 +44,7 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CodemirrorModule
+    CodemirrorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

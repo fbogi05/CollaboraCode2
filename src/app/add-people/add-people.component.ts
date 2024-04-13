@@ -22,17 +22,19 @@ export class AddPeopleComponent {
     });
   }
 
-  addUser(){
-    const token: string = this.auth.getToken()!;
-    let projectName = this.projectService.getProjectNameFromUrl(); 
-      this.backendService.addUser(this.emailForm.get('user_email')!.value, projectName, token).subscribe({
-        next: response => {
-          alert("Szerkesztő sikeresen hozzáadva");
-          console.log("Szerkesztő sikeresen hozzáadva: ", response);
-        },
-        error: error => {
-          console.error("Szerkesztő hozzáadása sikertelen: ", error)
-        }
-      });
-  }
+  addUser() {
+  const token: string = this.auth.getToken()!;
+  let projectName = this.projectService.getProjectNameFromUrl();
+
+  this.backendService.addUser(this.emailForm.get('user_email')!.value, projectName, token)
+    .subscribe({
+      next: response => {
+        alert("Szerkesztő sikeresen hozzáadva");
+        console.log("Szerkesztő sikeresen hozzáadva: ", response);
+      },
+      error: error => {
+        console.error("Szerkesztő hozzáadása sikertelen: ", error)
+      }
+    });
+}
 }
