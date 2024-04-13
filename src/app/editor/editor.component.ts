@@ -23,7 +23,7 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('codemirror')
   codeMirror: any;
   code: any;
-  options = { lineNumbers: true, theme: '3024-night', mode: 'python' }
+  options = { lineNumbers: true, theme: '3024-night', mode: 'python', autocomplete: true }
 
   constructor(private auth: AuthService, private projectService: ProjectService, private backendService: BackendService) { }
 
@@ -49,8 +49,9 @@ export class EditorComponent implements AfterViewInit {
   }
 
   changeLanguage(mode: string) {
-    this.options = { ...this.options, mode };
-  }
+  this.options = { ...this.options, mode };
+  this.codeMirror.setOption('mode', mode);
+}
 
   openFile(fileName: string) {
     this.backendService.openFile(fileName, this.auth.getToken()!)
