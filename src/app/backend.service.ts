@@ -54,17 +54,17 @@ export class BackendService {
 
   
   openFile(fileName: string, auth_token: string): Observable<any> {
-    console.log('Fetching file info for:', fileName);
+    console.log('Fájlinformációk lekérése a következő fájlhoz:', fileName);
   
     return this.http.post(`${environment.apiUrl}/file/info`, { name: fileName }, { headers: this.getHeaders(auth_token) }).pipe(
       switchMap((fileInfo: any) => {
         if (fileInfo && fileInfo[0].id) {
-          console.log('Attempting to retrieve file content for:', fileName);
+          console.log('Tartalom lekérése a következő fájlhoz:', fileName);
   
           return this.http.post<string>(`${environment.apiUrl}/file/content`, { id: fileInfo[0].id }).pipe(
-            map((content: string) => {
-              console.log('File content retrieved for:', fileName);
-              return { fileInfo, content };
+            map((result: any) => {
+              console.log('Tartalom sikeresen lekérve a következő fájlhoz:', fileName);
+              return { fileInfo, content:result.content };
             }),
             catchError((contentError: any) => {
               console.error('Error retrieving file content for:', fileName, contentError);
