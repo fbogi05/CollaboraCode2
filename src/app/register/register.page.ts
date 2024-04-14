@@ -82,8 +82,6 @@ export class RegisterPage implements OnInit {
   }
 
   checkCredentials() {
-    let allowRegister = false;
-
     if (this.fieldData.firstName.value !== '')
       this.fieldData.firstName.valid = true;
     else this.fieldData.firstName.valid = false;
@@ -109,7 +107,7 @@ export class RegisterPage implements OnInit {
       this.fieldData.passwordAgain.valid = true;
     else this.fieldData.passwordAgain.valid = false;
 
-    this.authService
+    let allowRegister = new Promise((resolve, reject) => this.authService
       .register(
         this.fieldData.firstName.value,
         this.fieldData.lastName.value,
@@ -122,22 +120,23 @@ export class RegisterPage implements OnInit {
           const body: any = data.body;
           if (body.token) {
             this.authService.setToken(body.token);
-            allowRegister = true;
+            this.allowRegister = true;
           } else {
-            allowRegister = false;
+            this.allowRegister = false;
           }
         },
         error: (error) => {
           console.log(error.error.messages);
-          allowRegister = false;
+          this.allowRegister = false;
         },
-      });
+      })
+      .add(() => resolve(this.allowRegister)));
 
     return allowRegister;
   }
 
-  register(form: NgForm) {
-    const authenticated = this.checkCredentials();
+  async register(form: NgForm) {
+    const authenticated = await this.checkCredentials().then((allowRegister) => allowRegister);
     if (form.valid && authenticated) {
       this.router.navigate(['tabs/home']);
     }

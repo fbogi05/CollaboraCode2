@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   renewToken() {
-    const token = this.getToken();
+    const token = this.getToken(); 
     this.http
       .post(
         this.url + 'token/renew',
@@ -80,7 +80,7 @@ export class AuthService {
       .subscribe({
         next: (data) => {
           const body: any = data.body;
-          this.setToken(body.token);
+          this.setToken(body.token);         
         },
         error: (error) => {
           console.log(error);

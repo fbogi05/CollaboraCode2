@@ -64,14 +64,14 @@ export class LoginPage implements OnInit {
     this.allowLogIn = true;
   }
 
-  async checkCredentials() {
+  checkCredentials() {
     if (this.fieldData.email.value === '') this.fieldData.email.valid = false;
     else this.fieldData.email.valid = true;
     if (this.fieldData.password.value === '')
       this.fieldData.password.valid = false;
     else this.fieldData.password.valid = true;
 
-    await this.authService
+    let allowLogIn = new Promise((resolve, reject) => this.authService
       .login(this.fieldData.email.value, this.fieldData.password.value)
       .subscribe({
         next: (data) => {
@@ -88,7 +88,9 @@ export class LoginPage implements OnInit {
           console.log(error.error.message);
           this.allowLogIn = false;
         },
-      });
+      })
+      .add(() => resolve(this.allowLogIn)));
+      
 
     if (this.fieldData.email.valid && this.fieldData.password.valid) {
       if (!this.allowLogIn) {
@@ -97,12 +99,12 @@ export class LoginPage implements OnInit {
       }
     }
 
-    return this.allowLogIn;
+    return allowLogIn;
   }
 
   async login(form: NgForm) {
-    const authenticated = this.checkCredentials();
-    if (form.valid && (await authenticated)) {
+    const authenticated = await this.checkCredentials().then((allowLogIn) => allowLogIn);
+    if (form.valid && authenticated) {
       this.router
         .navigate(['tabs/home'])
         .then(() => {})

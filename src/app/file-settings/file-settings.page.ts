@@ -2,12 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { Router } from '@angular/router';
+import { ShowFileChangesComponent } from '../show-file-changes/show-file-changes.component';
+import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
 
 @Component({
   selector: 'app-file-settings',
   templateUrl: './file-settings.page.html',
   styleUrls: ['./file-settings.page.scss'],
-  providers: [ProjectDetailsPage],
+  providers: [ProjectDetailsPage, ShowFileChangesComponent, HungarianDatePipe],
 })
 export class FileSettingsPage implements OnInit {
   fieldData = {
@@ -20,6 +22,7 @@ export class FileSettingsPage implements OnInit {
 
   constructor(
     private projectDetails: ProjectDetailsPage,
+    private showFileChanges: ShowFileChangesComponent,
     private baseService: BaseService,
     private router: Router
   ) {}
@@ -69,10 +72,9 @@ export class FileSettingsPage implements OnInit {
     }
   }
 
-  goBack() {
+  goBack() {    
     this.projectDetails.hideFileChanges();
     this.projectDetails.getProjectFiles();
-    this.projectDetails.selectedFile = null;
     this.router.navigate(['/tabs/projects/details', this.currentProjectName]);
   }
 }

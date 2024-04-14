@@ -12,9 +12,17 @@ import { ProjectDetailsPage } from '../project-details/project-details.page';
 })
 export class FileCardComponent implements OnInit {
   @Input() file: any;
+  showFileChanges = () => {
+    this.projectDetails.showFileChanges(this.file);
+  };
+  getLastEditTime = () => {
+    return '-';
+  };
 
-  constructor(private projectDetails: ProjectDetailsPage) {
-  }
+  constructor(
+    private projectDetails: ProjectDetailsPage,
+    private baseService: BaseService
+  ) {}
 
   ngOnInit() {
     if (
@@ -26,9 +34,5 @@ export class FileCardComponent implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }
-
-  showFileChanges() {
-    this.projectDetails.showFileChanges(this.file);
   }
 }

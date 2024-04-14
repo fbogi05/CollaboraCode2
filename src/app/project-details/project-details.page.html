@@ -73,8 +73,8 @@
     </main>
   </div>
   <app-show-file-changes
-    *ngIf="getLastEditInformation()"
     [lastEditInformation]="getLastEditInformation()"
     [currentProjectName]="currentProjectName"
+    [fileChangesOpened]="fileChangesOpened"
   ></app-show-file-changes>
 </ion-content>

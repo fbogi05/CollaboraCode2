@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
-import { ProjectDetailsPage } from '../project-details/project-details.page';
 
 @Component({
   selector: 'app-projects-overview',
   templateUrl: './projects-overview.page.html',
   styleUrls: ['./projects-overview.page.scss'],
-  providers: [ProjectDetailsPage]
 })
 export class ProjectsOverviewPage implements OnInit {
-  getProjects = () => {
-    return this.baseService.projects;
-  }
+  getOwnedProjects = () => {
+    return this.baseService.projects.owns;
+  };
+  getMemberOfProjects = () => {
+    return this.baseService.projects.memberOf;
+  };
+  getProjectsLength = () => {
+    return (
+      this.baseService.projects.owns?.length +
+      this.baseService.projects.memberOf?.length
+    );
+  };
 
   constructor(private baseService: BaseService) {}
 
@@ -34,12 +41,11 @@ export class ProjectsOverviewPage implements OnInit {
     let retryCount = 0;
     let getUserProjects: Subscription;
 
-    const retries = setInterval(() => {
-      getUserProjects = this.baseService
-        .getUserProjects()
-        .subscribe((projects) => {
+    const retries = setInterval(async () => {
+      getUserProjects = (await this.baseService.getUserProjects()).subscribe(
+        (projects: any) => {
           this.baseService.projects = projects;
-          if (this.getProjects()) {
+          if (this.baseService.projects) {
             clearInterval(retries);
             getUserProjects.unsubscribe();
           }
@@ -48,7 +54,8 @@ export class ProjectsOverviewPage implements OnInit {
             clearInterval(retries);
             getUserProjects.unsubscribe();
           }
-        });
+        }
+      );
     }, 100);
   }
 }

@@ -22,6 +22,10 @@ export class ProjectCardComponent implements OnInit {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    this.baseService.getProjectInfoWithId(this.project.id).subscribe((project: any) => {
+      this.project = project[0];
+    })
   }
 
   openProject(project: any) {

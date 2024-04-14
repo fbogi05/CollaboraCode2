@@ -1,0 +1,65 @@
+.show-file-changes {
+  animation: filechangesAppear forwards,
+    showFileChanges 0.2s ease-in-out forwards;
+}
+
+.hide-file-changes {
+  animation: hideFileChanges 0.2s ease-in-out forwards,
+    fileChangesDisappear 0.2s forwards;
+}
+
+.show-file-changes-card {
+  animation: showFileChangesCard 0.2s ease-in-out forwards;
+}
+
+.hide-file-changes-card {
+  animation: hideFileChangesCard 0.2s ease-in-out forwards;
+}
+
+@keyframes showFileChanges {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hideFileChanges {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fileChangesAppear {
+  to {
+    display: block;
+  }
+}
+
+@keyframes fileChangesDisappear {
+  to {
+    display: none;
+  }
+}
+
+@keyframes showFileChangesCard {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0%;
+  }
+}
+
+@keyframes hideFileChangesCard {
+  from {
+    bottom: 0%;
+  }
+  to {
+    bottom: -100%;
+  }
+}

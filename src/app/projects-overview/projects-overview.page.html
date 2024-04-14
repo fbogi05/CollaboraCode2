@@ -4,7 +4,7 @@
       <h1 class="py-6 pl-6 text-2xl text-left">Projektek</h1>
       <span
         class="fixed top-4 right-4 block w-max backdrop-blur-sm"
-        *ngIf="getProjects().length > 0"
+        *ngIf="getProjectsLength() > 0"
       >
         <button
           class="shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-end items-center h-11 aspect-square"
@@ -21,13 +21,12 @@
       </span>
     </header>
     <main
-      class="gap-4 pb-32 h-full px-4"
-      id="projects-container"
-      [ngClass]="{ 'justify-center items-center': getProjects().length === 0, 'content-start items-start': getProjects().length > 0 }"
+      class="grid gap-4 pb-32 h-full px-4"
+      [ngClass]="{ 'justify-center items-center': getProjectsLength() === 0, 'content-start items-start': getProjectsLength() > 0 }"
     >
       <div
         class="flex flex-1 flex-col justify-center items-center w-full"
-        *ngIf="getProjects().length === 0"
+        *ngIf="getProjectsLength() === 0"
       >
         <span class="mb-10">
           <p class="text-center text-neutral-300 mb-2">
@@ -47,11 +46,28 @@
           />
         </button>
       </div>
-      <app-project-card
-        class="flex flex-1 w-full"
-        *ngFor="let project of getProjects()"
-        [project]="project"
-      ></app-project-card>
+      <div class="flex flex-1 flex-col gap-4" *ngIf="getProjectsLength() > 0">
+        <ng-container *ngIf="getOwnedProjects()?.length > 0">
+          <h2 class="text-lg">Saját projektek:</h2>
+          <div class="projects-container gap-4">
+            <app-project-card
+              class="flex flex-1 w-full"
+              *ngFor="let project of getOwnedProjects()"
+              [project]="project"
+            ></app-project-card>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="getMemberOfProjects()?.length > 0">
+          <h2>Projektek tagja:</h2>
+          <div class="projects-container gap-4">
+            <app-project-card
+              class="flex flex-1 w-full"
+              *ngFor="let project of getMemberOfProjects()"
+              [project]="project"
+            ></app-project-card>
+          </div>
+        </ng-container>
+      </div>
     </main>
   </div>
 </ion-content>

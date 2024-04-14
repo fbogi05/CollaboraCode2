@@ -1,9 +1,17 @@
 <main
   class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-end items-center w-screen h-screen bg-black bg-opacity-80 pb-32"
+  [ngClass]="{
+    'show-file-changes': fileChangesOpened,
+    'hide-file-changes': !fileChangesOpened
+  }"
 >
   <div class="h-full w-full" (click)="hideFileChanges()"></div>
   <div
-    class="flex flex-col justify-start items-center w-11/12 lg:w-4/6 rounded-xl bg-neutral-100 dark:bg-neutral-800"
+    class="relative flex flex-col justify-start items-center w-11/12 lg:w-4/6 rounded-xl bg-neutral-100 dark:bg-neutral-800"
+    [ngClass]="{
+      'show-file-changes-card': fileChangesOpened,
+      'hide-file-changes-card': !fileChangesOpened
+    }"
   >
     <header class="relative flex items-center justify-between w-full pt-6 pb-4">
       <button
@@ -14,7 +22,7 @@
         <ion-icon name="arrow-back-outline"></ion-icon>
       </button>
       <h1 class="pl-16 text-2xl text-left w-5/6">
-        {{ lastEditInformation.name }}
+        {{ lastEditInformation?.name }}
       </h1>
       <button
         class="absolute top-4 right-4 shadow-lg rounded-lg bg-blue-200 dark:bg-blue-700 bg-opacity-60 dark:bg-opacity-60 flex gap-2 justify-center items-center h-11 aspect-square"
@@ -32,9 +40,11 @@
       class="flex flex-1 justify-start items-center w-full px-4 pb-4"
       id="projects-container"
     >
-      <p class="pr-2">{{ lastEditInformation.lastEditedUser }}</p>
-      <span class="text-xl">·</span>
-      <p class="pl-2">{{ lastEditInformation.lastEditedTime }}</p>
+    <span class="flex flex-col gap-2 w-full">
+      <p>{{ lastEditInformation?.lastEditedUser }}</p>
+      <hr class="border-1 border-neutral-300 dark:border-neutral-700">
+      <p>{{ lastEditInformation?.lastEditedTime }}</p>
+    </span>
     </div>
   </div>
 </main>

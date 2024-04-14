@@ -4,14 +4,14 @@
   (click)="showFileChanges()"
 >
   <h1
-    class="w-full text-left pl-1 mb-2 border-l-4 border-neutral-100 dark:border-neutral-700"
+    class="w-full text-left pl-1 mb-4"
   >
     {{ file.name }}
   </h1>
   <div
     class="bg-neutral-100 dark:bg-neutral-700 w-full h-full flex flex-col rounded-md p-2"
   >
-    <h1 class="w-full text-left pb-2">Szerkesztők</h1>
-    <div class="flex flex-col gap-2 w-full h-full"></div>
+    <h1 class="w-full text-left pb-2">Utoljára szerkesztve:</h1>
+    <p class="w-full text-left"> {{ getLastEditTime() }} </p>
   </div>
 </button>

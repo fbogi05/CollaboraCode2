@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseService } from '../services/base.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { ProjectsOverviewPage } from '../projects-overview/projects-overview.page';
+import { ShowFileChangesComponent } from '../show-file-changes/show-file-changes.component';
 
 @Component({
   selector: 'app-project-details',
@@ -10,8 +10,10 @@ import { ProjectsOverviewPage } from '../projects-overview/projects-overview.pag
   styleUrls: ['./project-details.page.scss'],
 })
 export class ProjectDetailsPage implements OnInit {
+  @ViewChild(ShowFileChangesComponent) fileChanges!: ShowFileChangesComponent;
   currentProjectName = '';
   selectedFile: any;
+  fileChangesOpened = false;
   getFiles = () => {
     return this.baseService.projectFiles;
   };
@@ -19,10 +21,7 @@ export class ProjectDetailsPage implements OnInit {
     return this.baseService.lastEditInformation;
   };
 
-  constructor(
-    private baseService: BaseService,
-    private router: Router
-  ) {}
+  constructor(private baseService: BaseService, private router: Router) {}
 
   ngOnInit() {
     if (
@@ -73,11 +72,16 @@ export class ProjectDetailsPage implements OnInit {
     this.baseService.selectedFile = file;
     this.baseService.getLastEditInformation(file.id).subscribe((info) => {
       this.baseService.lastEditInformation = info;
+      this.fileChangesOpened = true;
     });
   }
 
   hideFileChanges() {
-    this.baseService.lastEditInformation = null;
+    this.fileChangesOpened = false;
+    setTimeout(() => {
+      this.selectedFile = null;
+      this.baseService.lastEditInformation = null;
+    }, 200);
   }
 
   goBack() {

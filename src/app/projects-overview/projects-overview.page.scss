@@ -16,7 +16,7 @@
   animation: showButton 0.2s ease-in-out forwards;
 }
 
-#projects-container {
+.projects-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
 }

@@ -14,11 +14,11 @@ export class BaseService {
     },
   };
   url = 'https://collaboracode-backend.onrender.com/';
-  projects: any[] = [];
+  projects: any = [];
   currentProjectId?: number;
   currentProjectName: string = '';
   selectedFile: any;
-  projectFiles: any[] = [];
+  projectFiles: any = [];
   lastEditInformation: any;
 
   constructor(
@@ -33,7 +33,7 @@ export class BaseService {
   }
 
   getAccountInformation() {
-    const userToken = localStorage.getItem('token');
+    const userToken = this.authService.getToken();
     return this.httpClient.get(`${this.url}account/info`, {
       headers: { Authorization: `Bearer ${userToken}` },
     });
@@ -102,23 +102,20 @@ export class BaseService {
     );
   }
 
-  getUserProjects(): Observable<any[]> {
+  getUserProjects(): Observable<any> {
     const headers = new HttpHeaders(
       `Authorization: Bearer ${this.authService.getToken()}`
     );
     return this.getAccountInformation().pipe(
       switchMap((accountData: any) => {
         const userEmail = accountData.email;
-        return this.httpClient.post<any[]>(
+        return this.httpClient.post<any>(
           `${this.url}user/projects`,
           {
             user_email: userEmail,
           },
           { headers: headers }
         );
-      }),
-      catchError((error) => {
-        return [];
       })
     );
   }
