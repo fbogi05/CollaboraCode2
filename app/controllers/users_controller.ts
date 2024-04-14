@@ -182,7 +182,7 @@ export default class UsersController {
 
     await authResult.user.delete()
 
-    response.status(200).josn({message: 'Fiók sikeresen törölve!'})
+    response.status(200).json({message: 'Fiók sikeresen törölve!'})
   }
 
   private async authenticateUser(auth: Authenticator<Authenticators>) {
