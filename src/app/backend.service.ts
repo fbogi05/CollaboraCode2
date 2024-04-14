@@ -119,7 +119,7 @@ export class BackendService {
       }),
       switchMap((project: any) => {
         if (project && project[0].id) {
-          return this.http.post(`${environment.apiUrl}/project/member/add`, {user_email, project_id:project[0].id}, {headers: this.getHeaders(auth_token)}).pipe(
+          return this.http.post(`${environment.apiUrl}/project/member/add`, {user_email:user_email, project_id:project[0].id}, {headers: this.getHeaders(auth_token)}).pipe(
             catchError((addError: any) => {
               console.error('Hiba a szerkesztő hozzáadása közben:', addError);
               return throwError(addError);
@@ -194,4 +194,40 @@ export class BackendService {
         tap(response => console.log('Fiók sikeresen törölve:', response))
       );
   }
+
+  getUserProjects(auth_token: string): Observable<any> {
+    console.log('Fetching account information');
+
+    return this.http.get(`${environment.apiUrl}/account/info`, { headers: this.getHeaders(auth_token) })
+      .pipe(
+        switchMap((accountInfo: any) => {
+          if (accountInfo && accountInfo.email) {
+            const email = accountInfo.email;
+            console.log('Fetching user projects for email:', email);
+
+            return this.http.post(`${environment.apiUrl}/user/projects`, { user_email: email }, { headers: this.getHeaders(auth_token) })
+              .pipe(
+                tap((projects: any) => {
+                  console.log('User projects fetched for email:', email, projects);
+                }),
+                catchError((error: any) => {
+                  console.error('Error fetching user projects for email:', email, error);
+                  return throwError(error);
+                })
+              );
+          } else {
+            console.error('Email not found in account information');
+            return throwError('Email not found in account information');
+          }
+        }),
+        catchError((error: any) => {
+          console.error('Error fetching account information:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+
+
+
 }

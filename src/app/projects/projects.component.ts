@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { BackendService } from '../backend.service';
 import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
-export class ProjectsComponent {
+export class ProjectsComponent{
 
-  projects: any[] = [];
+  owns: any[] = [];
+  memberOf: any[] = [];
   showInput: boolean = false;
   projectName: string = "";
 
@@ -27,19 +27,28 @@ export class ProjectsComponent {
         
         user_email = user.email
 
-        this.http.post(`${environment.apiUrl}/user/projects`, {user_email}, {headers: headers}).subscribe((response: any) => {
-          this.projects = [...response.owns, ...response.memberOf];
+        this.backendService.getUserProjects(user_email).subscribe({
+          next:(response: any) => {
+            console.log('Owned Projects:', response.owns);
+            console.log('Member Projects:', response.memberOf);
+            this.owns = response.owns;
+            this.memberOf = response.memberOf;
+          },
+          error: (error) => {
+            console.error('Error fetching projects:', error);
+          }
         });
       }
     )
   }
+
 
   createProject() {
     const token: string = this.auth.getToken()!;
     this.backendService.createProject(this.projectName, token).subscribe({
       next: response => {
         console.log('Projekt létrehozva:', response);
-        this.projects.push(response);
+        this.owns.push(response);
       },
       error: error => {
         console.error('Hiba történt a projekt létrehozása közben:', error);
