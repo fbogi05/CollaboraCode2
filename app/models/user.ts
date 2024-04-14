@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { withAuthFinder } from '@adonisjs/auth'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, beforeDelete, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeDelete, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Project from './project.js'
@@ -42,15 +42,20 @@ export default class User extends compose(BaseModel, AuthFinder) {
   })
   declare projects: HasMany<typeof Project>
 
+  @manyToMany(() => Project, {
+    pivotTable: 'project_members',
+  })
   declare projectMembers: ManyToMany<typeof Project>
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
   @beforeDelete()
   static async deleteUser(user: User) {
+    await user.related('projectMembers').detach()
     const projects = await user.related('projects').query().exec()
 
     for (const project of projects) {
+      await project.related('members').detach()
       project.delete()
     }
   }
