@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ProfilComponent implements OnInit {
 
-  first_name: string = '';
-  last_name: string = '';
+  firstName: string = '';
+  lastName: string = '';
+  password: string = '';
 
   constructor(private backendService: BackendService, private auth:AuthService, private userService: UserService, private router: Router) { }
 
@@ -20,8 +21,8 @@ export class ProfilComponent implements OnInit {
     const token: string = this.auth.getToken()!;
     this.userService.getUserData(token).subscribe({
       next: (user:any) => {
-        this.first_name = user.firstName;
-        this.last_name = user.lastName;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
       },
       error: (error: any) => {
         console.error('Hiba a felhasználói adatok lekérése közben: ', error);
@@ -29,13 +30,30 @@ export class ProfilComponent implements OnInit {
       });
   }
 
+  saveUserData() {
+    const updateData = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      password: this.password
+    };
+    this.backendService.modifyUser(updateData, this.auth.getToken()!)
+      .subscribe(response => {
+        console.log('Felhasználói adatok sikeresen frissítve: ', response);
+        alert('Adatok sikeresen frissítve!');
+      }, error => {
+        console.error('Hiba az adatok frissítése közben:', error);
+        alert('Az adatok frissítése sikertelen!');
+      });
+  }
+
+
   deleteAccount(){
     const token: string = this.auth.getToken()!;
     if(confirm('Biztosan törölni akarja a fiókját?')){
       this.backendService.deleteAccount(token).subscribe({
         next: (response) => {
           console.log('Fiók sikeresen törölve: ', response);
-          this.router.navigate(['/']);
+          window.location.replace('/');
         }
       });
     }
