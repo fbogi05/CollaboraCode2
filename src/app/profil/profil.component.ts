@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../backend.service';
 import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profil',
@@ -15,11 +13,11 @@ export class ProfilComponent implements OnInit {
   lastName: string = '';
   password: string = '';
 
-  constructor(private backendService: BackendService, private auth:AuthService, private userService: UserService, private router: Router) { }
+  constructor(private backendService: BackendService, private auth:AuthService) { }
 
   ngOnInit(): void {
     const token: string = this.auth.getToken()!;
-    this.userService.getUserData(token).subscribe({
+    this.backendService.getAccountInfo(token).subscribe({
       next: (user:any) => {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
