@@ -48,10 +48,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @beforeDelete()
   static async deleteUser(user: User) {
-    const projects = await user.related('projects').query()
+    const projects = await user.related('projects').query().exec()
 
     for (const project of projects) {
-      Project.deleteProject(project)
+      project.delete()
     }
   }
 }
