@@ -31,17 +31,17 @@ export class ProfilComponent implements OnInit {
   }
 
   saveUserData() {
-    const updateData = {
+    let user = {
       firstName: this.firstName,
       lastName: this.lastName,
       password: this.password
     };
-    this.backendService.modifyUser(updateData, this.auth.getToken()!)
+    this.backendService.modifyUser(user, this.auth.getToken()!)
       .subscribe(response => {
         console.log('Felhasználói adatok sikeresen frissítve: ', response);
         alert('Adatok sikeresen frissítve!');
       }, error => {
-        console.error('Hiba az adatok frissítése közben:', error);
+        console.error('Hiba az adatok frissítése közben: ', error);
         alert('Az adatok frissítése sikertelen!');
       });
   }

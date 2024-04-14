@@ -176,12 +176,12 @@ export class BackendService {
     );
   }
 
-  modifyUser(updateData: any, auth_token: string): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/account/modify`, updateData, { headers: this.getHeaders(auth_token) })
+  modifyUser(user: any, auth_token: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/account/modify`, user, { headers: this.getHeaders(auth_token) })
       .pipe(
-        tap(response => console.log('User data updated successfully!', response)),
+        tap(response => console.log('Felhasználói adatok sikeresen frissítve: ', response)),
         catchError(error => {
-          console.error('Error updating user data:', error);
+          console.error('Hiba az adatok frissítése közben: ', error);
           return throwError(error);
         })
       );
