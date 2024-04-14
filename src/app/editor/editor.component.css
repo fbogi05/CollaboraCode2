@@ -13,7 +13,8 @@ body, html {
     box-sizing: border-box !important;
     padding-top: 15px;
     padding-left: 20px;
-    width: 83%;
+    padding-right: 20px;
+    width: 100%;
     height: 100% !important;
 }
 
@@ -27,4 +28,8 @@ a{
 
 app-nav-after{
     z-index: 1
+}
+
+.output{
+    border-radius: 10px;
 }

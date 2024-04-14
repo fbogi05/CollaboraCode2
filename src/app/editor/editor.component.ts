@@ -22,11 +22,16 @@ export class EditorComponent implements AfterViewInit {
   isLanguageDropdownOpen: boolean = false;
   @ViewChild('codemirror')
   codeMirror: any;
-  code: any;
+  source_code: any;
   options = { lineNumbers: true, theme: '3024-night', mode: 'python' }
   output: string = '';
 
-  constructor(private auth: AuthService, private projectService: ProjectService, private backendService: BackendService, private compileService: CompileService) { }
+  constructor(
+    private auth: AuthService, 
+    private projectService: ProjectService, 
+    private backendService: BackendService, 
+    private compileService: CompileService
+  ) { }
 
   ngAfterViewInit(): void {
     let textarea = document.getElementById('codemirror') as HTMLTextAreaElement;
@@ -36,7 +41,7 @@ export class EditorComponent implements AfterViewInit {
     if (token) {
       this.openFile(this.projectService.getFileNameFromUrl());
     } else {
-      console.error('No token available. Cannot open file.');
+      console.error('Nincs token. Nem lehet a fájlt megnyitni. ');
     }
   }
 
@@ -50,9 +55,33 @@ export class EditorComponent implements AfterViewInit {
   }
 
   changeLanguage(mode: string) {
-  this.options = { ...this.options, mode };
-  this.codeMirror.setOption('mode', mode);
-}
+    const language_id = this.getlanguage_id(mode);
+
+    if (!language_id) {
+      console.error('Error: Unsupported language:', mode);
+      return;
+    }
+
+    this.options = { ...this.options, mode };
+    this.codeMirror.setOption('mode', mode);
+  }
+
+  getlanguage_id(mode: string): number | undefined {
+    const languageMap = {
+      python: 71,
+      javascript: 93,
+      clike: 75,
+      sql: 82,
+      php: 68
+    };
+
+    const language_id = languageMap[mode as keyof typeof languageMap];
+    if (language_id === null) {
+      console.error('Error: Unsupported language:', mode);
+      return undefined;
+    }
+    return language_id;
+  }
 
   openFile(fileName: string) {
     this.backendService.openFile(fileName, this.auth.getToken()!)
@@ -91,15 +120,72 @@ export class EditorComponent implements AfterViewInit {
     });
   }
 
-  // compileAndRun() {
-  //   let code = this.codeMirror.getValue();
-  //   this.compileService.compile(code).subscribe(
-  //     wasmModule => {
-  //       // WASM module received from the server, execute it here
-  //       console.log('WASM Module:', wasmModule);
-  //       // Call exported functions from the WASM module and handle results
-  //     }, error => {
-  //       console.error('Compilation Error:', error);
-  //     });
-  // }
+  compileAndRun() {
+    let source_code = this.codeMirror.getValue();
+    const language = this.options.mode;
+
+
+    let language_id: number | undefined;
+    switch (language) {
+      case 'python':
+        language_id = 71;
+        break;
+      case 'javascript':
+        language_id = 93;
+        break;
+      case 'clike':
+        language_id = 75;
+        break;
+      case 'sql':
+        language_id = 82;
+        break;
+      case 'php':
+        language_id = 68;
+        break;
+      default:
+        console.error('Error: Unsupported language:', language);
+        return;
+    }
+
+    if (!language_id) {
+      return; 
+    }
+
+    this.compileService.createSubmission(language_id, source_code)
+      .subscribe({
+        next: (response) => {
+          const createResponse = response as { token?: string };
+          if (!createResponse.token) {
+            console.error('Error: Missing token in Create Submission response');
+            return;
+          }
+
+          const token = createResponse.token;
+
+          this.compileService.getSubmission(token).subscribe({
+            next: (submissionResponse) => {
+              const judge0Response = submissionResponse as { stdout?: string, stderr?: string };
+              let output = '';
+              if (judge0Response.stdout) {
+                output = judge0Response.stdout;
+              } else if (judge0Response.stderr) {
+                output = judge0Response.stderr;
+              }
+              console.log('Judge0 Output:', output);
+              this.output = output;
+            },
+            error: (error:any) => {
+              console.error('Error: Get Submission failed:', error);
+              this.output = 'Error: Get Submission failed';
+            }
+            });
+        },
+        error: (error) => {
+          console.error('Error: Create Submission failed:', error);
+          this.output = 'Error: Create Submission failed';
+        }
+      });
+  }
+
+
 }
