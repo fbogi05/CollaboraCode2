@@ -4,7 +4,6 @@ import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { ProjectService } from '../project.service';
-import { ContentsService } from '../contents.service';
 
 @Component({
   selector: 'app-files',
@@ -17,7 +16,7 @@ export class FilesComponent {
   showInput: boolean = false;
   fileName: string = "";
 
-  constructor(private backendService: BackendService, private auth: AuthService, private http: HttpClient, private projectService: ProjectService, private contentService: ContentsService) {  
+  constructor(private backendService: BackendService, private auth: AuthService, private http: HttpClient, private projectService: ProjectService) {  
     let projectName = this.projectService.getProjectNameFromUrl();
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

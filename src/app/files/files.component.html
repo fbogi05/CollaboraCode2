@@ -23,7 +23,7 @@
                 <input class="shadow appearance-none border rounded-lg w-full min-w-full py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline focus:bg-white" *ngIf="showInput" type="text" [(ngModel)]="fileName" (keyup.enter)="createFile(); showInput = false">
                 <app-add-people></app-add-people>
                 <button (click)="deleteProject()" 
-                    class="mt-4 transition ease-in-out bg-red-50 hover:-translate-y-1 hover:scale-105 hover:bg-red-100 text-red-900 font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-2">
+                    class="mt-4 transition ease-in-out bg-red-600 hover:-translate-y-1 hover:scale-105 hover:bg-red-100 hover:text-red-900 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mb-2">
                     Projekt törlése
                 </button>
             </div>

@@ -27,8 +27,8 @@ export class ProjectsComponent {
         
         user_email = user.email
 
-        this.http.post(`${environment.apiUrl}/user/projects`, {user_email}, {headers: headers}).subscribe((projects: any) => {
-          this.projects = projects;
+        this.http.post(`${environment.apiUrl}/user/projects`, {user_email}, {headers: headers}).subscribe((response: any) => {
+          this.projects = [...response.owns, ...response.memberOf];
         });
       }
     )

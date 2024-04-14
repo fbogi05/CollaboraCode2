@@ -175,4 +175,23 @@ export class BackendService {
       })
     );
   }
+
+  modifyUser(updateData: any, auth_token: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/account/modify`, updateData, { headers: this.getHeaders(auth_token) })
+      .pipe(
+        tap(response => console.log('User data updated successfully!', response)),
+        catchError(error => {
+          console.error('Error updating user data:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+  deleteAccount(auth_token: string): Observable<any> {
+    console.log('Kísérlet a fiók törlésére');
+    return this.http.delete(`${environment.apiUrl}/account/delete/`, { headers: this.getHeaders(auth_token) })
+      .pipe(
+        tap(response => console.log('Fiók sikeresen törölve:', response))
+      );
+  }
 }

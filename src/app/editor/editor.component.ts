@@ -11,6 +11,7 @@ import 'codemirror/mode/markdown/markdown';
 import 'codemirror/mode/php/php';
 import 'codemirror/mode/python/python';
 import 'codemirror/mode/sql/sql';
+import { CompileService } from '../compile.service';
 
 @Component({
   selector: 'app-editor',
@@ -22,10 +23,10 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('codemirror')
   codeMirror: any;
   code: any;
-  options = { lineNumbers: true, theme: '3024-night', mode: 'python', autocomplete: true }
+  options = { lineNumbers: true, theme: '3024-night', mode: 'python' }
   output: string = '';
 
-  constructor(private auth: AuthService, private projectService: ProjectService, private backendService: BackendService) { }
+  constructor(private auth: AuthService, private projectService: ProjectService, private backendService: BackendService, private compileService: CompileService) { }
 
   ngAfterViewInit(): void {
     let textarea = document.getElementById('codemirror') as HTMLTextAreaElement;
@@ -89,4 +90,16 @@ export class EditorComponent implements AfterViewInit {
       }
     });
   }
+
+  // compileAndRun() {
+  //   let code = this.codeMirror.getValue();
+  //   this.compileService.compile(code).subscribe(
+  //     wasmModule => {
+  //       // WASM module received from the server, execute it here
+  //       console.log('WASM Module:', wasmModule);
+  //       // Call exported functions from the WASM module and handle results
+  //     }, error => {
+  //       console.error('Compilation Error:', error);
+  //     });
+  // }
 }
