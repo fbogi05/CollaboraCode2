@@ -95,8 +95,9 @@ export default class ProjectsController {
       const memberQueryResult = await Project.query()
         .select('id', 'name', 'ownerId')
         .whereHas('members', (query) => {
-          query.where('user_id', user.id).where('user_id', '!=', authResult.user!.id)
+          query.where('user_id', user.id)
         })
+        .whereNot('ownerId', authResult.user!.id)
         .preload('owner', (query) =>
           query.select('id', 'first_name', 'last_name', 'email', 'is_moderator')
         )
