@@ -19,18 +19,13 @@
             <tr *ngFor="let project of owns">
               <td><a routerLink="/files/{{ project.name }}">{{ project.name }}</a></td>
             </tr>
-          </table>
-          
-          <table class="table-fixed border-collapse rounded-md">
-            <tr>
+            <tr class="pt-1">
               <th>Megosztott Projektek</th>
             </tr>
             <tr *ngFor="let project of memberOf">
               <td><a routerLink="/files/{{ project.name }}">{{ project.name }}</a></td>
             </tr>
           </table>
-        
-
         </div>
     </div>
     <div class="flex justify-center text-white font-medium bg-black p-2 foot w-full">
