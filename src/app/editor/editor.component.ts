@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ProjectService } from '../project.service';
 import { BackendService } from '../backend.service';
+import { CompileService } from '../compile.service';
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/clike/clike';
 import 'codemirror/mode/css/css';
@@ -11,7 +12,9 @@ import 'codemirror/mode/markdown/markdown';
 import 'codemirror/mode/php/php';
 import 'codemirror/mode/python/python';
 import 'codemirror/mode/sql/sql';
-import { CompileService } from '../compile.service';
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/edit/closetag';
+import 'codemirror/addon/hint/anyword-hint';
 
 @Component({
   selector: 'app-editor',
@@ -23,7 +26,7 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('codemirror')
   codeMirror: any;
   source_code: any;
-  options = { lineNumbers: true, theme: '3024-night', mode: 'python' }
+  options = { lineNumbers: true, theme: '3024-night', mode: 'python', autoCloseBrackets: true, autoCloseTags: true, showHint: true }
   output: string = '';
 
   constructor(
