@@ -168,7 +168,7 @@ export default class UsersController {
 
       await authResult.user.merge(data).save()
 
-      response.status(200).send('Adatok sikeresen módosítva!')
+      response.status(200).json({message: 'Adatok sikeresen módosítva!'})
     } catch (error) {
       response.status(422).send(error)
     }
@@ -182,7 +182,7 @@ export default class UsersController {
 
     await authResult.user.delete()
 
-    response.status(200).send('Fiók sikeresen törölve!')
+    response.status(200).json({message: 'Fiók sikeresen törölve!'})
   }
 
   private async authenticateUser(auth: Authenticator<Authenticators>) {
