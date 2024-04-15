@@ -29,8 +29,8 @@ export class ProjectsComponent{
 
         this.backendService.getUserProjects(user_email).subscribe({
           next:(response: any) => {
-            console.log('Owned Projects:', response.owns);
-            console.log('Member Projects:', response.memberOf);
+            console.log('Saját projektek:', response.owns);
+            console.log('Megosztott projektek:', response.memberOf);
             this.owns = response.owns;
             this.memberOf = response.memberOf;
           },
