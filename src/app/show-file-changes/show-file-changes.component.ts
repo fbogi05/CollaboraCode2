@@ -16,6 +16,12 @@ export class ShowFileChangesComponent implements OnInit {
   hideFileChanges = () => {
     this.projectDetails.hideFileChanges();
   };
+  getLastEditedTime = () => {
+    if (!this.lastEditInformation) return '';
+    else {
+      return this.datePipe.transform(this.lastEditInformation.lastEditedTime);
+    }
+  };
 
   constructor(
     private router: Router,
@@ -32,12 +38,6 @@ export class ShowFileChangesComponent implements OnInit {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
-    }    
-
-    if (this.lastEditInformation?.lastEditedTime) {
-      this.lastEditInformation.lastEditedTime = this.datePipe.transform(
-        this.lastEditInformation.lastEditedTime
-      );
     }
   }
 

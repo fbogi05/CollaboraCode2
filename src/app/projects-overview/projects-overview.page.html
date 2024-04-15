@@ -48,7 +48,7 @@
       </div>
       <div class="flex flex-1 flex-col gap-4" *ngIf="getProjectsLength() > 0">
         <ng-container *ngIf="getOwnedProjects()?.length > 0">
-          <h2 class="text-lg">Saját projektek:</h2>
+          <h2 class="text-lg text-neutral-800 dark:text-neutral-200">Saját projektek:</h2>
           <div class="projects-container gap-4">
             <app-project-card
               class="flex flex-1 w-full"
@@ -58,7 +58,7 @@
           </div>
         </ng-container>
         <ng-container *ngIf="getMemberOfProjects()?.length > 0">
-          <h2>Projektek tagja:</h2>
+          <h2 class="text-lg text-neutral-800 dark:text-neutral-200">Projektek tagja:</h2>
           <div class="projects-container gap-4">
             <app-project-card
               class="flex flex-1 w-full"

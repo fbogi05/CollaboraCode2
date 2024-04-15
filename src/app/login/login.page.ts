@@ -80,6 +80,11 @@ export class LoginPage implements OnInit {
           if (body.token) {
             this.authService.setToken(body.token);
             this.allowLogIn = true;
+            this.baseService.getUserProjects().subscribe((projects: any) => {
+              if (projects) {
+                this.baseService.projects = projects;
+              }
+            });
           } else {
             this.allowLogIn = false;
           }

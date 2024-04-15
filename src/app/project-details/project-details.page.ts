@@ -55,6 +55,13 @@ export class ProjectDetailsPage implements OnInit {
         .getProjectFiles()
         .subscribe((files) => {
           this.baseService.projectFiles = files;
+          files.forEach((file) => {
+            this.baseService
+              .getLastEditInformation(file.id)
+              .subscribe((info) => {
+                file.lastEditInformation = info;
+              });
+          });
           if (this.getFiles()!) {
             clearInterval(retries);
             getProjectFiles.unsubscribe();

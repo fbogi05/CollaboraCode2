@@ -107,36 +107,45 @@ export class RegisterPage implements OnInit {
       this.fieldData.passwordAgain.valid = true;
     else this.fieldData.passwordAgain.valid = false;
 
-    let allowRegister = new Promise((resolve, reject) => this.authService
-      .register(
-        this.fieldData.firstName.value,
-        this.fieldData.lastName.value,
-        this.fieldData.email.value,
-        this.fieldData.password.value,
-        this.fieldData.passwordAgain.value
-      )
-      .subscribe({
-        next: (data) => {
-          const body: any = data.body;
-          if (body.token) {
-            this.authService.setToken(body.token);
-            this.allowRegister = true;
-          } else {
+    let allowRegister = new Promise((resolve, reject) =>
+      this.authService
+        .register(
+          this.fieldData.firstName.value,
+          this.fieldData.lastName.value,
+          this.fieldData.email.value,
+          this.fieldData.password.value,
+          this.fieldData.passwordAgain.value
+        )
+        .subscribe({
+          next: (data) => {
+            const body: any = data.body;
+            if (body.token) {
+              this.authService.setToken(body.token);
+              this.allowRegister = true;
+              this.baseService.getUserProjects().subscribe((projects: any) => {
+                if (projects) {
+                  this.baseService.projects = projects;
+                }
+              });
+            } else {
+              this.allowRegister = false;
+            }
+          },
+          error: (error) => {
+            console.log(error.error.messages);
             this.allowRegister = false;
-          }
-        },
-        error: (error) => {
-          console.log(error.error.messages);
-          this.allowRegister = false;
-        },
-      })
-      .add(() => resolve(this.allowRegister)));
+          },
+        })
+        .add(() => resolve(this.allowRegister))
+    );
 
     return allowRegister;
   }
 
   async register(form: NgForm) {
-    const authenticated = await this.checkCredentials().then((allowRegister) => allowRegister);
+    const authenticated = await this.checkCredentials().then(
+      (allowRegister) => allowRegister
+    );
     if (form.valid && authenticated) {
       this.router.navigate(['tabs/home']);
     }

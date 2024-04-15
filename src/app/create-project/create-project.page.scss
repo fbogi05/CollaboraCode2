@@ -24,6 +24,6 @@
 }
 
 #user-search-container:has(#user-search:focus) > #user-search-results {
-  height: 10rem;
+  height: 100%;
   transition: all 0.1s 0.15s ease-out;
 }

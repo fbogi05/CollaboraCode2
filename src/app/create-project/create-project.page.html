@@ -26,7 +26,7 @@
         />
       </div>
       <div class="form-group flex flex-col gap-3">
-        <!-- <label for="user-search" class="">Felhasználók hozzáadása</label>
+        <label for="user-search" class="">Felhasználók hozzáadása</label>
         <div
           class="flex flex-col rounded-2xl shadow-lg shadow-neutral-400 dark:shadow-neutral-950 has-[#user-search:focus]:outline outline-offset-2 outline-2 outline-blue-300 dark:outline-blue-900"
           id="user-search-container"
@@ -41,10 +41,20 @@
             required
           />
           <div
-            class="bg-neutral-200 dark:bg-neutral-700 rounded-2xl rounded-tl-md rounded-tr-md h-32 w-full"
+            class="flex flex-col overflow-y-hidden bg-neutral-200 dark:bg-neutral-700 rounded-2xl rounded-tl-md rounded-tr-md h-32 w-full"
             id="user-search-results"
-          ></div>
-        </div> -->
+          >
+            <div class="flex flex-col flex-1 gap-4 max-h-40 overflow-y-scroll px-4 py-2">
+              <p *ngFor="let user of users">{{ user }}</p>
+            </div>
+            <button
+              class="bg-blue-100 dark:bg-neutral-800 flex rounded-2xl rounded-tl-md rounded-tr-md justify-center p-2 m-1"
+              (click)="addUser()"
+            >
+              Hozzáadás
+            </button>
+          </div>
+        </div>
         <button
           type="button"
           class="flex self-center bg-blue-700 dark:bg-opacity-80 focus-visible:outline outline-2 outline-white outline-offset-2 shadow-lg shadow-blue-300 dark:shadow-neutral-950 text-white w-fit py-2 px-4 mt-8 rounded-lg"

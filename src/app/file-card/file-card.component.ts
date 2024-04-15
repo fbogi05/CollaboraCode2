@@ -2,13 +2,15 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from '../services/base.service';
 import { Method } from 'ionicons/dist/types/stencil-public-runtime';
-import { Observable, Subscription } from 'rxjs';
+import { last, Observable, Subscription } from 'rxjs';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
+import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
 
 @Component({
   selector: 'app-file-card',
   templateUrl: './file-card.component.html',
   styleUrls: ['./file-card.component.scss'],
+  providers: [HungarianDatePipe],
 })
 export class FileCardComponent implements OnInit {
   @Input() file: any;
@@ -16,11 +18,35 @@ export class FileCardComponent implements OnInit {
     this.projectDetails.showFileChanges(this.file);
   };
   getLastEditTime = () => {
-    return '-';
+    if (!this.file.lastEditInformation) return '';
+    else {
+      let editedTime = new Date(
+        this.file.lastEditInformation.lastEditedTime
+      ).getTime();
+      let currentTime = new Date().getTime();
+      let lastEditTime = currentTime - editedTime;
+      let hours = Math.floor((lastEditTime / 1000 / 60 / 60) % 24);
+      let minutes = Math.floor((lastEditTime / 1000 / 60) % 60);
+      let seconds = Math.floor((lastEditTime / 1000) % 60);
+      if (hours < 24) {
+        return `${hours > 0 ? hours + ' órával' : ''}${
+          hours > 0 && minutes > 0 ? ', ' : ''
+        }${minutes > 0 ? minutes + ' perccel' : ''}${
+          minutes < 1 && seconds > 0 ? ', ' : ''
+        }${
+          minutes < 1 && seconds > 0 ? seconds + ' másodperccel' : ''
+        } ezelőtt`;
+      } else {
+        return this.datePipe.transform(
+          this.file.lastEditInformation.lastEditedTime
+        );
+      }
+    }
   };
 
   constructor(
     private projectDetails: ProjectDetailsPage,
+    private datePipe: HungarianDatePipe,
     private baseService: BaseService
   ) {}
 

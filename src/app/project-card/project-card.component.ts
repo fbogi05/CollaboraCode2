@@ -9,6 +9,11 @@ import { BaseService } from '../services/base.service';
 })
 export class ProjectCardComponent implements OnInit {
   @Input() project: any;
+  getProjectMembers = () => {
+    if (this.project)
+      return this.project.members ? this.project.members : [];
+    else return [];
+  };
 
   constructor(private baseService: BaseService, private router: Router) {}
 
@@ -23,9 +28,11 @@ export class ProjectCardComponent implements OnInit {
       document.documentElement.classList.remove('dark');
     }
 
-    this.baseService.getProjectInfoWithId(this.project.id).subscribe((project: any) => {
-      this.project = project[0];
-    })
+    this.baseService
+      .getProjectInfoWithId(this.project.id)
+      .subscribe((project: any) => {
+        this.project = project[0];
+      });
   }
 
   openProject(project: any) {

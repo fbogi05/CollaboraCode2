@@ -8,10 +8,10 @@
   <div
     class="bg-neutral-100 dark:bg-neutral-700 w-full h-full justify-center flex flex-col rounded-md p-2"
   >
-    <ng-container *ngIf="project?.members?.length > 0; else noMembers">
+    <ng-container *ngIf="getProjectMembers()?.length > 0; else noMembers">
       <h1 class="w-full text-left pb-2">Szerkesztők:</h1>
       <div class="flex flex-wrap gap-2 w-full h-full">
-        <p class="text-left pl-8 w-full" *ngFor="let member of project.members">
+        <p class="text-left pl-8 w-full" *ngFor="let member of getProjectMembers()">
           {{ member.firstName }} {{ member.lastName }}
         </p>
       </div>
