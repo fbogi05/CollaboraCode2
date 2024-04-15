@@ -67,17 +67,17 @@ export class BackendService {
               return { fileInfo, content:result.content };
             }),
             catchError((contentError: any) => {
-              console.error('Error retrieving file content for:', fileName, contentError);
+              console.error('Hiba a tartalom lekérésében a következő fájlhoz:', fileName, contentError);
               return throwError(contentError);
             })
           );
         } else {
-          console.error('File id not found for:', fileName);
-          return throwError('File id not found for:' + fileName);
+          console.error('Fájl azonosító nem létezik a következő fájlhoz:', fileName);
+          return throwError('Fájl azonosító nem létezik a következő fájlhoz: ' + fileName);
         }
       }),
       catchError((error: any) => {
-        console.error('Error fetching file info for:', fileName, error);
+        console.error('Hiba a következő fájl adatainak lekérésében:', fileName, error);
         return throwError(error);
       })
     );
@@ -89,24 +89,21 @@ export class BackendService {
     return this.http.post(`${environment.apiUrl}/file/info`, { name: fileName }, { headers: this.getHeaders(auth_token) }).pipe(
       switchMap((fileInfo: any) => {
         if (fileInfo && fileInfo[0].id) {
-          console.log('File info retrieved for:', fileName, fileInfo);
+          console.log('Fájlinformációk sikeresen lekérve a következő fájlhoz:', fileName, fileInfo);
   
           return this.http.put(`${environment.apiUrl}/file/edit`, { id: fileInfo[0].id, content }, { headers: this.getHeaders(auth_token) }).pipe(
             tap((response: any) => {
-              console.log('File saved:', response);
+              console.log('Fájl mentve:', response);
             }),
             catchError((error: any) => {
-              console.error('Error saving file:', error);
+              console.error('Hiba a fájl mentése közben:', error);
               return throwError(error);
             })
           );
-        } else {
-          console.error('File id not found for:', fileName);
-          return throwError('File id not found for:' + fileName);
         }
       }),
       catchError((error: any) => {
-        console.error('Error fetching file info for:', fileName, error);
+        console.error('Hiba a következő fájl adatainak lekérésében:', fileName, error);
         return throwError(error);
       })
     );
@@ -196,32 +193,29 @@ export class BackendService {
   }
 
   getUserProjects(auth_token: string): Observable<any> {
-    console.log('Fetching account information');
+    console.log('Fiókinformációk lekérése');
 
     return this.http.get(`${environment.apiUrl}/account/info`, { headers: this.getHeaders(auth_token) })
       .pipe(
         switchMap((accountInfo: any) => {
           if (accountInfo && accountInfo.email) {
             const email = accountInfo.email;
-            console.log('Fetching user projects for email:', email);
+            console.log('Fiókinformációk lekérése a következő e-mail címhez:', email);
 
             return this.http.post(`${environment.apiUrl}/user/projects`, { user_email: email }, { headers: this.getHeaders(auth_token) })
               .pipe(
                 tap((projects: any) => {
-                  console.log('User projects fetched for email:', email, projects);
+                  console.log('Projektek lekérve a következő e-mail címhez:', email, projects);
                 }),
                 catchError((error: any) => {
-                  console.error('Error fetching user projects for email:', email, error);
+                  console.error('Hiba a következő e-mail cím projektjeinek lekérése közben:', email, error);
                   return throwError(error);
                 })
               );
-          } else {
-            console.error('Email not found in account information');
-            return throwError('Email not found in account information');
           }
         }),
         catchError((error: any) => {
-          console.error('Error fetching account information:', error);
+          console.error('Hiba a fiók információinak lekérdezése közben:', error);
           return throwError(error);
         })
       );
