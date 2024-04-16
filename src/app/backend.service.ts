@@ -100,6 +100,9 @@ export class BackendService {
               return throwError(error);
             })
           );
+        } else{
+          console.error('A fájlazonosító nem található a következőhöz:', fileName);
+          return throwError('A fájlazonosító nem található a következőhöz:' + fileName);
         }
       }),
       catchError((error: any) => {
@@ -212,6 +215,9 @@ export class BackendService {
                   return throwError(error);
                 })
               );
+          } else{
+            console.error('Az e-mail cím nem található a fiókadatok között');
+            return throwError('Az e-mail cím nem található a fiókadatok között');
           }
         }),
         catchError((error: any) => {
