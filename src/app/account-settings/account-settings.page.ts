@@ -67,7 +67,6 @@ export class AccountSettingsPage implements OnInit {
       .updateAccountInformation(
         this.fieldData.firstName.value,
         this.fieldData.lastName.value,
-        this.fieldData.email.value,
         this.fieldData.password.value
       )
       .subscribe();

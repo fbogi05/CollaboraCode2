@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -42,14 +42,12 @@ export class BaseService {
   updateAccountInformation(
     firstName: string,
     lastName: string,
-    email: string,
     password: string
   ) {
     const userToken = localStorage.getItem('token');
     let values: {
       first_name?: string;
       last_name?: string;
-      email?: string;
       password?: string;
     } = {};
     if (firstName != '') {
@@ -57,9 +55,6 @@ export class BaseService {
     }
     if (lastName != '') {
       values.last_name = lastName;
-    }
-    if (email != '') {
-      values.email = email;
     }
     if (password != '') {
       values.password = password;

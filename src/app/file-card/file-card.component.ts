@@ -1,8 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { BaseService } from '../services/base.service';
-import { Method } from 'ionicons/dist/types/stencil-public-runtime';
-import { last, Observable, Subscription } from 'rxjs';
 import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
 
@@ -26,13 +23,12 @@ export class FileCardComponent implements OnInit {
       let editedDate = new Date(this.file.lastEditInformation.lastEditedTime);
       let currentDate = new Date();
       let daysSinceLastEdit = this.daysBetween(editedDate, currentDate);
-      console.log(daysSinceLastEdit);
-
       let currentTime = new Date().getTime();
       let lastEditTime = currentTime - editedTime;
       let hours = Math.floor((lastEditTime / 1000 / 60 / 60) % 24);
       let minutes = Math.floor((lastEditTime / 1000 / 60) % 60);
       let seconds = Math.floor((lastEditTime / 1000) % 60);
+
       if (daysSinceLastEdit < 1) {
         return `${hours > 0 ? hours + ' órával' : ''}${
           hours > 0 && minutes > 0 ? ', ' : ''
@@ -55,9 +51,7 @@ export class FileCardComponent implements OnInit {
 
   constructor(
     private projectDetails: ProjectDetailsPage,
-    private datePipe: HungarianDatePipe,
-    private baseService: BaseService
-  ) {}
+    private datePipe: HungarianDatePipe  ) {}
 
   ngOnInit() {
     if (
