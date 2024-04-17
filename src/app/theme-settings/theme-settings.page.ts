@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSelect } from '@ionic/angular';
 import { ThemeService } from '../services/theme.service';
 
 @Component({
