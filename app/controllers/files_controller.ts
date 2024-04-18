@@ -215,7 +215,10 @@ export default class FilesController {
 
       const project = await Project.query()
         .where('id', file.projectId)
-        .whereHas('members', (query) => {
+        .orWhereHas('owner', (query) => {
+          query.where('users.id', authResult.user!.id)
+        })
+        .orWhereHas('members', (query) => {
           query.where('users.id', authResult.user!.id)
         })
         .first()
