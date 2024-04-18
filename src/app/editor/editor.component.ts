@@ -14,6 +14,7 @@ import 'codemirror/mode/python/python';
 import 'codemirror/mode/sql/sql';
 import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/edit/closetag';
+import 'codemirror/theme/ayu-dark'
 
 @Component({
   selector: 'app-editor',
