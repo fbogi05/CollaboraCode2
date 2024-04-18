@@ -16,7 +16,7 @@ export class AuthService {
     this.authenticationClient.login(email, password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
-        window.location.replace('/projects');
+        window.location.replace('/home');
       },
       error: (error) => {
       console.error('Login error:', error.error.message);
@@ -30,7 +30,7 @@ export class AuthService {
       next: (response: any) => {
           localStorage.setItem(this.tokenKey, response.token);
           alert('Sikeres regisztráció.');
-          window.location.replace('/projects');
+          window.location.replace('/home');
       },
       error: (error) => {
         console.error('Hiba történt a regisztráció során:', error);
