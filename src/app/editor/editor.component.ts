@@ -14,7 +14,6 @@ import 'codemirror/mode/python/python';
 import 'codemirror/mode/sql/sql';
 import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/edit/closetag';
-import 'codemirror/theme/ayu-dark'
 
 @Component({
   selector: 'app-editor',
@@ -26,7 +25,7 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('codemirror')
   codeMirror: any;
   source_code: any;
-  options = { lineNumbers: true, theme: 'ayu-dark', mode: 'python', autoCloseBrackets: true, autoCloseTags: true}
+  options = { lineNumbers: true, theme: '3024-night', mode: 'python', autoCloseBrackets: true, autoCloseTags: true}
   output: string = '';
 
   constructor(
