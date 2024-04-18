@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -100,7 +100,7 @@ export class BaseService {
   getUserProjects(): Observable<any> {
     const headers = new HttpHeaders(
       `Authorization: Bearer ${this.authService.getToken()}`
-    );
+    );    
     return this.getAccountInformation().pipe(
       switchMap((accountData: any) => {
         const userEmail = accountData.email;
@@ -111,7 +111,7 @@ export class BaseService {
           },
           { headers: headers }
         );
-      })
+      }),
     );
   }
 
@@ -245,6 +245,33 @@ export class BaseService {
       body: { id: id },
       headers: headers,
     });
+  }
+
+  getFileContent(fileId: number) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.post(
+      `${this.url}file/content`,
+      {
+        id: fileId,
+      },
+      { headers: headers }
+    );
+  }
+
+  editFileContent(fileId: number, content: string) {
+    const headers = new HttpHeaders(
+      `Authorization: Bearer ${this.authService.getToken()}`
+    );
+    return this.httpClient.put(
+      `${this.url}file/edit`,
+      {
+        id: fileId,
+        content: content,
+      },
+      { headers: headers }
+    );
   }
 
   getLastEditInformation(fileId: number) {

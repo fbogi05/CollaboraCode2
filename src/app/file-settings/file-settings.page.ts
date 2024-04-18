@@ -22,7 +22,6 @@ export class FileSettingsPage implements OnInit {
 
   constructor(
     private projectDetails: ProjectDetailsPage,
-    private showFileChanges: ShowFileChangesComponent,
     private baseService: BaseService,
     private router: Router
   ) {}
@@ -72,8 +71,7 @@ export class FileSettingsPage implements OnInit {
     }
   }
 
-  goBack() {    
-    this.projectDetails.hideFileChanges();
+  goBack() {
     this.projectDetails.getProjectFiles();
     this.router.navigate(['/tabs/projects/details', this.currentProjectName]);
   }

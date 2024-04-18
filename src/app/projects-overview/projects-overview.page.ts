@@ -42,7 +42,7 @@ export class ProjectsOverviewPage implements OnInit {
     let getUserProjects: Subscription;
 
     const retries = setInterval(async () => {
-      getUserProjects = (await this.baseService.getUserProjects()).subscribe(
+      getUserProjects = (this.baseService.getUserProjects()).subscribe(
         (projects: any) => {
           this.baseService.projects = projects;
           if (this.baseService.projects) {

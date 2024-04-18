@@ -78,7 +78,7 @@ export class ProjectDetailsPage implements OnInit {
   showFileChanges(file: any) {
     this.baseService.selectedFile = file;
     this.baseService.getLastEditInformation(file.id).subscribe((info) => {
-      this.baseService.lastEditInformation = info;
+      this.baseService.lastEditInformation = info;      
       this.fileChangesOpened = true;
     });
   }

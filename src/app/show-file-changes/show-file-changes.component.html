@@ -1,13 +1,33 @@
 <main
-  class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-end items-center w-screen h-screen bg-black bg-opacity-80 pb-32"
+  class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-end items-center gap-4 w-screen h-screen bg-black bg-opacity-80 pb-32 p-4"
   [ngClass]="{
     'show-file-changes': fileChangesOpened,
     'hide-file-changes': !fileChangesOpened
   }"
 >
-  <div class="h-full w-full" (click)="hideFileChanges()"></div>
   <div
-    class="relative flex flex-col justify-start items-center w-11/12 lg:w-4/6 rounded-xl bg-neutral-100 dark:bg-neutral-800"
+    class="bg-neutral-100 dark:bg-neutral-800 flex flex-grow flex-col w-full rounded-xl overflow-hidden overflow-y-scroll"
+    [ngClass]="{
+      'show-file-changes-card': fileChangesOpened,
+      'hide-file-changes-card': !fileChangesOpened
+    }"
+  >
+    <textarea id="codeEditor"></textarea>
+  </div>
+  <select
+    class="bg-neutral-100 dark:bg-neutral-800 flex w-full rounded-xl py-4 px-4"
+    name="languages"
+    id="languages"
+    (change)="changeLanguage($event)"
+  >
+    <option value="python">Python</option>
+    <option selected value="javascript">Javascript</option>
+    <option value="typescript">Typescript</option>
+    <option value="html">HTML</option>
+    <option value="css">CSS</option>
+  </select>
+  <div
+    class="relative flex flex-col justify-start items-center w-full lg:w-4/6 rounded-xl bg-neutral-100 dark:bg-neutral-800"
     [ngClass]="{
       'show-file-changes-card': fileChangesOpened,
       'hide-file-changes-card': !fileChangesOpened
@@ -40,11 +60,11 @@
       class="flex flex-1 justify-start items-center w-full px-4 pb-4"
       id="projects-container"
     >
-    <span class="flex flex-col gap-2 w-full">
-      <p>{{ lastEditInformation?.lastEditedUser }}</p>
-      <hr class="border-1 border-neutral-300 dark:border-neutral-700">
-      <p>{{ getLastEditedTime() }}</p>
-    </span>
+      <span class="flex flex-col gap-2 w-full">
+        <p>{{ lastEditInformation?.lastEditedUser }}</p>
+        <hr class="border-1 border-neutral-300 dark:border-neutral-700" />
+        <p>{{ getLastEditedTime() }}</p>
+      </span>
     </div>
   </div>
 </main>
