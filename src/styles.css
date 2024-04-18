@@ -1,5 +1,5 @@
 @import 'codemirror/lib/codemirror.css';
-@import 'codemirror/theme/3024-night.css';
+@import 'codemirror/theme/ayu-dark.css';
 
 @tailwind base;
 @tailwind components;
