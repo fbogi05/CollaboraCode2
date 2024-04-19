@@ -114,7 +114,6 @@ export class ShowFileChangesComponent implements OnInit, AfterViewInit {
             .getLastEditInformation(this.lastEditInformation!.id)
             .subscribe((info: any) => {
               this.lastEditInformation = info;
-              editor.setValue(info.content);
               editor.refresh();
             });
         });
@@ -123,8 +122,8 @@ export class ShowFileChangesComponent implements OnInit, AfterViewInit {
     // Real time content update
     this.baseService
       .getFileContent(this.lastEditInformation!.id)
-      .subscribe((content: any) => {
-        editor.setValue(content as string);
+      .subscribe((data: any) => {
+        editor.setValue(data.content as string);
         editor.refresh();
       });
   }
