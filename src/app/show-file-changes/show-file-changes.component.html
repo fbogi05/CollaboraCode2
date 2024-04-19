@@ -18,13 +18,16 @@
     class="bg-neutral-100 dark:bg-neutral-800 flex w-full rounded-xl py-4 px-4"
     name="languages"
     id="languages"
-    (change)="changeLanguage($event)"
+    (change)="changeLanguage()"
   >
-    <option value="python">Python</option>
-    <option selected value="javascript">Javascript</option>
-    <option value="typescript">Typescript</option>
+    <option selected value="python">Python</option>
+    <option value="javascript">Javascript</option>
+    <option value="markdown">Markdown</option>
+    <option value="clike">C-like</option>
     <option value="html">HTML</option>
     <option value="css">CSS</option>
+    <option value="sql">SQL</option>
+    <option value="php">PHP</option>
   </select>
   <div
     class="relative flex flex-col justify-start items-center w-full lg:w-4/6 rounded-xl bg-neutral-100 dark:bg-neutral-800"

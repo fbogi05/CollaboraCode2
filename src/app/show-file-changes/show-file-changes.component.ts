@@ -12,7 +12,16 @@ import { ProjectDetailsPage } from '../project-details/project-details.page';
 import { HungarianDatePipe } from '../pipes/hungarian-date.pipe';
 import { Router } from '@angular/router';
 import * as CodeMirror from 'codemirror';
+
+import 'codemirror/mode/python/python';
 import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/mode/clike/clike';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/sql/sql';
+import 'codemirror/mode/php/php';
+import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/edit/closetag';
 import 'codemirror/addon/edit/matchbrackets';
@@ -31,14 +40,6 @@ export class ShowFileChangesComponent implements OnInit, AfterViewInit {
   @Input() currentProjectName?: string;
   @Input() fileChangesOpened = false;
   codeMirror: CodeMirror.EditorFromTextArea | null = null;
-  selectedLanguage: string = 'python';
-  languages = [
-    { name: 'Python', value: 'python' },
-    { name: 'Javascript', value: 'javascript' },
-    { name: 'Typescript', value: 'typescript' },
-    { name: 'HTML', value: 'html' },
-    { name: 'CSS', value: 'css' },
-  ];
   hideFileChanges = () => {
     this.projectDetails.hideFileChanges();
   };
@@ -85,13 +86,14 @@ export class ShowFileChangesComponent implements OnInit, AfterViewInit {
       document.getElementById('codeEditor') as HTMLTextAreaElement,
       {
         lineNumbers: true,
-        mode: 'javascript',
+        mode: 'python',
         theme: 'ayu-dark',
         autoCloseBrackets: true,
         autoCloseTags: true,
         matchBrackets: true,
         matchTags: true,
         showCursorWhenSelecting: true,
+        showHint: true,
       }
     );
 
@@ -114,6 +116,7 @@ export class ShowFileChangesComponent implements OnInit, AfterViewInit {
             .getLastEditInformation(this.lastEditInformation!.id)
             .subscribe((info: any) => {
               this.lastEditInformation = info;
+              editor.setValue(info.content);
               editor.refresh();
             });
         });
@@ -122,15 +125,16 @@ export class ShowFileChangesComponent implements OnInit, AfterViewInit {
     // Real time content update
     this.baseService
       .getFileContent(this.lastEditInformation!.id)
-      .subscribe((data: any) => {
-        editor.setValue(data.content as string);
+      .subscribe((content: any) => {
+        editor.setValue(content as string);
         editor.refresh();
       });
   }
 
-  changeLanguage(event: Event) {
+  changeLanguage() {
     if (!this.codeMirror) return;
-    const mode = (event.target as HTMLSelectElement).value;
+    const mode = (document.getElementById('languages') as HTMLSelectElement)
+      .value;
     this.codeMirror!.setOption('mode', mode);
     this.codeMirror!.refresh();
   }
